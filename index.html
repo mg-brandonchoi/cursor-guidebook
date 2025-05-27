@@ -403,7 +403,11 @@
             animation: modernFadeIn 0.6s 2.8s forwards;
         }
         .css-screencast-container.semantic-search-animation .chat-input-simulation {
-            animation: modernTypeIn 2.2s ease-out 0.1s forwards;
+            animation: modernTypeIn 0.3s ease-out 0.1s forwards;
+        }
+
+        .css-screencast-container.semantic-search-animation .chat-input-simulation .typing-text {
+            animation: typeText 2.2s ease-out 0.4s forwards;
         }
 
         .css-screencast-container.generate-rules-animation .user-bubble {
@@ -413,7 +417,11 @@
             animation: modernFadeIn 0.6s 2.2s forwards; 
         }
         .css-screencast-container.generate-rules-animation .chat-input-simulation {
-            animation: modernTypeInShort 1.8s ease-out 0.1s forwards;
+            animation: modernTypeInShort 0.3s ease-out 0.1s forwards;
+        }
+
+        .css-screencast-container.generate-rules-animation .chat-input-simulation .typing-text {
+            animation: typeTextShort 1.8s ease-out 0.4s forwards;
         }
 
         .chat-input-simulation {
@@ -425,10 +433,18 @@
             color: #000000;
             overflow: hidden;
             white-space: nowrap;
-            width: 0;
+            width: 100%; /* Fixed width */
             opacity: 0;
             font-size: 0.9em;
             position: relative;
+            min-height: 20px; /* Ensure consistent height */
+        }
+
+        .chat-input-simulation .typing-text {
+            display: inline-block;
+            width: 0;
+            overflow: hidden;
+            white-space: nowrap;
         }
 
         .chat-input-simulation::after {
@@ -441,6 +457,9 @@
             height: 16px;
             background-color: #007AFF;
             opacity: 0;
+        }
+
+        .chat-input-simulation.typing::after {
             animation: blinkCursor 1s infinite;
         }
 
@@ -457,37 +476,43 @@
 
         @keyframes modernTypeIn {
             0% { 
-                width: 0; 
                 opacity: 1; 
             }
             5% {
                 opacity: 1;
             }
-            95% { 
-                width: calc(100% - 40px); 
-                opacity: 1; 
-            }
             100% { 
-                width: calc(100% - 40px); 
                 opacity: 1; 
             }
         }
 
         @keyframes modernTypeInShort {
             0% { 
-                width: 0; 
                 opacity: 1; 
             }
             5% {
                 opacity: 1;
             }
-            95% { 
-                width: calc(100% - 40px); 
+            100% { 
                 opacity: 1; 
             }
+        }
+
+        @keyframes typeText {
+            0% { 
+                width: 0; 
+            }
             100% { 
-                width: calc(100% - 40px); 
-                opacity: 1; 
+                width: 100%; 
+            }
+        }
+
+        @keyframes typeTextShort {
+            0% { 
+                width: 0; 
+            }
+            100% { 
+                width: 100%; 
             }
         }
 
@@ -750,7 +775,9 @@ void processOrder(Order order, User user, PaymentDetails details) {
                             <div class="css-screencast-container semantic-search-animation">
                                 <div class="chat-bubble user-bubble">Where's the code for user authentication?</div>
                                 <div class="chat-bubble cursor-bubble">src/services/auth.js (AuthService.authenticate)</div>
-                                <div class="chat-input-simulation">Where's the code for user authentication?</div>
+                                <div class="chat-input-simulation">
+                                    <span class="typing-text">Where's the code for user authentication?</span>
+                                </div>
                             </div>
                         </li>
                         <li><strong>Leverage AI for Documentation & Rule Generation:</strong>
@@ -759,7 +786,9 @@ void processOrder(Order order, User user, PaymentDetails details) {
                              <div class="css-screencast-container generate-rules-animation">
                                 <div class="chat-bubble user-bubble">/Generate Cursor Rules</div>
                                 <div class="chat-bubble cursor-bubble">OK, analyzing selection to create rules...</div>
-                                <div class="chat-input-simulation">/Generate Cursor Rules</div>
+                                <div class="chat-input-simulation">
+                                    <span class="typing-text">/Generate Cursor Rules</span>
+                                </div>
                              </div>
                         </li>
                         <li><strong>Project Consistency with Rules (<code>.cursorrule</code>):</strong>
