@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Korean Development Environment Rules
+
+## Language Guidelines
+
+### Communication
+- **Assistant responses**: Always respond in Korean (한국어)
+- **Code and technical content**: Write in English for consistency
+- **Comments in code**: Use English for better international collaboration
+- **Commit messages**: Use English following conventional commit format
+- **Documentation**: Korean for user-facing content, English for technical docs
+
+### Content Localization
+- Use proper Korean typography and spacing
+- Consider Korean text length differences when designing layouts
+- Ensure proper font support for Korean characters
+- Test text wrapping and line breaks with Korean content
+
+## Code Standards
+
+### Naming Conventions
+- **Variables and functions**: Use English names with camelCase
+- **Classes**: Use English names with PascalCase  
+- **Constants**: Use English names with UPPER_SNAKE_CASE
+- **File names**: Use English with kebab-case for web assets
+
+### Comments and Documentation
+```javascript
+// Good: English comments for code
+function calculateDiscount(price, rate) {
+    // Apply discount rate to the original price
+    return price * (1 - rate);
+}
+
+// Avoid: Korean comments in code
+function calculateDiscount(price, rate) {
+    // 원래 가격에 할인율을 적용
+    return price * (1 - rate);
+}
+```
+
+### Git Workflow
+- **Commit messages**: English only
+- **Branch names**: English with descriptive names
+- **Pull request titles**: English for consistency
+- **Issue descriptions**: Korean for user-facing issues, English for technical issues
+
+## Project-Specific Guidelines
+
+### HTML Content
+- Use `lang="ko"` attribute for Korean content
+- Ensure proper meta tags for Korean SEO
+- Consider Korean text rendering in different browsers
+
+### CSS Considerations
+- Account for Korean text being typically wider than English
+- Use appropriate line-height for Korean characters (1.6-1.8)
+- Test font fallbacks for Korean characters
+
+### Responsive Design
+- Korean text may require different breakpoints
+- Consider mobile Korean input methods
+- Test with Korean virtual keyboards
+
+## AI Assistant Behavior
+
+### When Helping with Korean Projects
+1. **Always respond in Korean** unless specifically asked for English
+2. **Explain technical concepts** in Korean but keep code in English
+3. **Provide Korean examples** for user-facing content
+4. **Maintain English** for all code, variable names, and technical identifiers
+5. **Consider Korean UX patterns** when suggesting interface changes
+
+### Code Generation
+- Generate code with English identifiers
+- Add Korean comments only when specifically requested
+- Suggest Korean text for UI elements when appropriate
+- Consider Korean text length in layout calculations
+
+## Best Practices
+
+### Internationalization
+- Use proper Unicode handling for Korean characters
+- Consider RTL/LTR text direction (Korean is LTR)
+- Plan for text expansion/contraction during translation
+- Use proper date/time formatting for Korean locale
+
+### Accessibility
+- Ensure screen readers work well with Korean content
+- Provide Korean alt text for images
+- Consider Korean keyboard navigation patterns
+- Test with Korean assistive technologies
+
+### Performance
+- Optimize Korean font loading
+- Consider Korean text compression
+- Test with Korean input methods
+- Monitor performance with Korean character sets

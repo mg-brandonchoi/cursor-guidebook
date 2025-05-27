@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,18 +24,18 @@
         }
 
         .slide {
-            width: 95%;
-            max-width: 1200px;
+            width: 98%;
+            max-width: 1400px;
             height: 95%;
             min-height: 500px;
             background-color: #FFFFFF;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 20px 25px;
             box-sizing: border-box;
             display: none; /* Hidden by default */
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: flex-start; /* Align content to top */
             align-items: center;
             text-align: center;
             overflow-y: auto; /* Allow scrolling for content-heavy slides */
@@ -47,62 +47,71 @@
 
         .slide h1 {
             color: #004D40; /* Dark Teal */
-            font-size: 2.2em;
+            font-size: 2.4em; /* Slightly larger */
             margin-bottom: 15px;
-            margin-top: 10px;
+            margin-top: 15px; /* Adjusted for better spacing */
         }
 
         .slide h2 {
             color: #00796B; /* Medium Teal */
-            font-size: 1.6em;
-            margin-top: 20px;
-            margin-bottom: 10px;
+            font-size: 1.8em; /* Slightly larger */
+            margin-top: 25px; /* Increased top margin */
+            margin-bottom: 15px;
         }
         
         .slide h3 {
-            color: #00C49A; /* Bright Teal Accent */
-            font-size: 1.3em;
-            margin-bottom: 8px;
+            color: #00897B; /* Slightly brighter teal for h3 */
+            font-size: 1.4em; /* Slightly larger */
+            margin-bottom: 10px;
+            margin-top: 5px; /* Added top margin for consistency */
         }
 
         .slide p, .slide li {
-            font-size: 1em;
-            line-height: 1.5;
+            font-size: 1.05em; /* Slightly larger for readability */
+            line-height: 1.6; /* Increased line height */
             text-align: left;
-            max-width: 90%;
+            max-width: 95%;
             margin: 8px auto;
         }
-
-        .slide ul {
+        
+        .slide ul, .slide ol { /* Applied to ol as well */
             list-style-position: inside;
             padding-left: 20px;
             text-align: left;
-            max-width: 90%;
+            max-width: 95%;
             margin: 8px auto;
         }
+        
+        .slide ul li p, .slide ol li p { /* Reduce margin for p inside li */
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
 
         .slide code {
-            background-color: #EAEAEA; /* Code Background */
-            padding: 0.2em 0.4em;
+            background-color: #E0F2F1; /* Light Teal Background */
+            padding: 0.2em 0.5em;
             margin: 0 0.2em;
             border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-            color: #D81B60; /* Code Text Color */
+            font-family: 'Consolas', 'Courier New', Courier, monospace; /* Preferred monospace fonts */
+            color: #004D40; /* Dark Teal text for code */
+            font-size: 0.95em;
         }
 
         .slide pre {
-            background-color: #2d2d2d; /* Darker Code Background for Blocks */
-            color: #f8f8f2; /* Light text for dark background */
+            background-color: #263238; /* Dark Blue Grey */
+            color: #ECEFF1; /* Light Grey text */
             padding: 15px;
             border-radius: 8px;
             text-align: left;
             overflow-x: auto;
-            max-width: 90%;
-            margin: 10px auto;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.85em;
-            white-space: pre-wrap; /* Allow wrapping */
-            word-wrap: break-word; /* Break long words */
+            max-width: 95%;
+            margin: 12px auto;
+            font-family: 'Consolas', 'Courier New', Courier, monospace;
+            font-size: 0.9em; /* Adjusted for balance */
+            white-space: pre-wrap; 
+            word-wrap: break-word;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
         .slide pre code {
@@ -110,50 +119,78 @@
             color: inherit;
             padding: 0;
             margin: 0;
+            font-size: 1em; /* Ensure pre code inherits size correctly */
         }
 
-        .placeholder-image, .placeholder-video {
-            width: 70%;
-            max-width: 400px;
-            height: 200px;
-            background-color: #E0E0E0;
+        /* --- New Professional Placeholder Styles --- */
+        .professional-visual-placeholder, .generic-logo-placeholder {
+            width: 80%;
+            max-width: 500px;
+            min-height: 150px; /* Adjusted min-height */
+            background-color: #E0E7E9; /* Softer placeholder color */
             border: 2px dashed #00796B; /* Medium Teal */
             display: flex;
+            flex-direction: column; /* Allow icon and text */
             justify-content: center;
             align-items: center;
             text-align: center;
             margin: 15px auto;
             font-style: italic;
-            color: #555;
+            color: #004D40; /* Dark Teal for text */
             border-radius: 8px;
-            font-size: 0.9em;
+            font-size: 0.95em;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .professional-visual-placeholder .icon, .generic-logo-placeholder .icon {
+            font-size: 2.5em; /* Larger icon */
+            margin-bottom: 10px;
+            color: #004D40;
+        }
+        .video-placeholder-content { /* Style for text within video placeholders */
+             font-style: normal;
+             font-weight: bold;
+             color: #004D40;
+             font-size: 1em;
+        }
+        .professional-visual-placeholder img { /* Style for actual images within placeholders */
+            max-width: 100%;
+            max-height: 180px; /* Limit image height */
+            height: auto;
+            border-radius: 6px;
+            margin-top: 10px;
         }
 
-        .logo-placeholder {
-            width: 150px;
-            height: 50px;
-            background-color: #E0E0E0;
-            border: 1px solid #CCC;
+
+        .logo-placeholder { /* For the main logo on title/end slides */
+            width: 180px; /* Slightly larger */
+            height: 60px;
+            background-color: #E0E7E9;
+            border: 2px solid #00796B; /* Solid border for distinction */
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            margin: 0 auto 20px auto;
-            font-size: 0.9em;
-            color: #555;
+            margin: 0 auto 25px auto; /* Increased bottom margin */
+            font-size: 1em;
+            font-weight: bold;
+            color: #004D40;
+            border-radius: 6px;
         }
+        /* --- End New Placeholder Styles --- */
+
 
         .slide .subtitle {
             font-style: italic;
-            color: #555;
-            margin-top: -15px;
+            color: #424242; /* Darker gray for subtitle */
+            margin-top: -10px;
             margin-bottom: 30px;
-            font-size: 1em;
+            font-size: 1.1em; /* Slightly larger subtitle */
         }
 
         .slide .presenter-info {
-            margin-top: 10px;
-            font-size: 0.9em;
+            margin-top: 15px;
+            font-size: 0.95em;
             color: #004D40;
         }
 
@@ -169,146 +206,293 @@
             background-color: #00796B; /* Medium Teal */
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 28px; /* Slightly more padding */
             margin: 0 10px;
             border-radius: 25px;
             cursor: pointer;
             font-size: 1em;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .navigation button:hover {
+        .navigation button:hover:not(:disabled) {
             background-color: #004D40; /* Dark Teal */
+            transform: translateY(-2px); /* Subtle lift effect */
         }
         .navigation button:disabled {
             background-color: #BDBDBD; /* Disabled color */
             cursor: not-allowed;
+            box-shadow: none;
         }
 
-        /* Pain/Cure specific styling */
         .pain-cure-container {
             display: flex;
-            flex-direction: row;
+            flex-direction: row; /* Default to side-by-side */
             justify-content: space-around;
-            align-items: flex-start;
+            align-items: flex-start; 
             width: 100%;
-            gap: 20px;
+            gap: 25px; 
             margin-top: 20px;
         }
         .pain-column, .cure-column {
-            flex: 1;
-            padding: 15px;
-            border-radius: 8px;
+            flex: 1; /* Allow columns to take equal space */
+            padding: 20px; 
+            border-radius: 10px; 
+            transition: box-shadow 0.3s ease;
+            min-height: 250px; 
         }
+        .pain-column:hover, .cure-column:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
         .pain-column {
-            background-color: #FFF0F0; /* Light red for pain */
+            background-color: #FFEBEE; /* Lighter Red */
             border: 1px solid #FFCDD2;
+            box-shadow: 0 4px 6px rgba(200, 0, 0, 0.05);
         }
         .cure-column {
-            background-color: #E0F2F1; /* Light teal for cure */
+            background-color: #E0F2F1; /* Lighter Teal */
             border: 1px solid #B2DFDB;
+            box-shadow: 0 4px 6px rgba(0, 100, 100, 0.05);
         }
         .pain-column h3, .cure-column h3 {
             margin-top: 0;
+            padding-bottom: 10px; 
+            border-bottom: 2px solid; 
             text-align: center;
         }
-        .pain-column h3 { color: #C62828; } /* Darker red */
-        .cure-column h3 { color: #00695C; } /* Darker teal */
+        .pain-column h3 { color: #C62828; border-color: #EF9A9A; } 
+        .cure-column h3 { color: #00695C; border-color: #80CBC4;} 
 
         .slide .key-takeaway-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            gap: 20px; 
             width: 100%;
-            max-width: 800px;
+            max-width: 1100px; 
             margin-top: 20px;
         }
         .slide .key-takeaway-item {
-            background-color: #E8F5E9; /* Light green */
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #C8E6C9;
+            background-color: #E8F5E9; 
+            padding: 20px; 
+            border-radius: 10px; 
+            border: 1px solid #A5D6A7; 
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+         .slide .key-takeaway-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
         .slide .key-takeaway-item h3 {
-            color: #2E7D32; /* Dark Green */
+            color: #2E7D32; 
             margin-top: 0;
+            margin-bottom: 10px; 
+            border-bottom: 2px solid #A5D6A7;
+            padding-bottom: 8px;
         }
 
-        /* Footer for slide numbers */
         .slide-footer {
             position: absolute;
             bottom: 20px;
             right: 30px;
             font-size: 0.9em;
-            color: #777;
+            color: #757575; 
         }
 
-        /* Responsive Design */
+        /* --- Code Comparison Styles for Slide 4 --- */
+        .code-comparison-container {
+            display: flex;
+            flex-direction: column; /* Stack on small screens by default */
+            gap: 20px;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        @media screen and (min-width: 768px) { /* Side-by-side on larger screens */
+            .code-comparison-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+        }
+
+        .code-block-wrapper {
+            flex: 1;
+            border: 1px solid #DDD;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #FAFAFA;
+        }
+        .code-block-wrapper h3 {
+            font-size: 1.1em;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .code-block-wrapper pre {
+            margin: 0; 
+            max-height: 200px; 
+            font-size: 0.8em;
+        }
+        .code-block-wrapper.has-errors pre code .error-line {
+            background-color: #FFEBEE; 
+            color: #C62828; 
+            font-weight: bold;
+            display: block; 
+            margin: 0 -18px; 
+            padding: 0 18px;
+        }
+        /* --- End Code Comparison Styles --- */
+
+        /* --- CSS Animation for Screencasts --- */
+        .css-screencast-container {
+            background-color: #ECEFF1; /* Light grey background */
+            border: 1px solid #CFD8DC; /* Slightly darker border */
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px auto;
+            width: 90%;
+            max-width: 380px; /* Max width for the animation box */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: left;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9em;
+            min-height: 120px; /* Min height for visual consistency */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Aligns bubbles to the top first */
+        }
+
+        .chat-bubble {
+            padding: 8px 12px;
+            border-radius: 15px; /* Standard bubble radius */
+            margin-bottom: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+            opacity: 0; /* Start hidden */
+            transform: translateY(10px); /* Start slightly lower */
+            animation-fill-mode: forwards; /* Keep end state */
+            animation-timing-function: ease-out; /* Smoother appearance */
+        }
+
+        .user-bubble {
+            background-color: #00796B; /* Medium Teal */
+            color: white;
+            align-self: flex-end; /* Align to the right */
+            border-bottom-right-radius: 5px; /* Typical chat bubble tail effect */
+        }
+
+        .cursor-bubble {
+            background-color: #CFD8DC; /* Grey for Cursor response */
+            color: #263238; /* Dark text */
+            align-self: flex-start; /* Align to the left */
+            border-bottom-left-radius: 5px; /* Typical chat bubble tail effect */
+        }
+        
+        /* Specific animation timings for semantic search */
+        .css-screencast-container.semantic-search-animation .user-bubble {
+            animation: fadeInSlideUp 0.5s 2.3s forwards;
+        }
+        .css-screencast-container.semantic-search-animation .cursor-bubble {
+            animation: fadeInSlideUp 0.5s 3.0s forwards;
+        }
+        .css-screencast-container.semantic-search-animation .chat-input-simulation {
+             animation: typeInSemantic 2s steps(40, end) 0.2s forwards;
+        }
+
+        /* Specific animation timings for generate rules */
+         .css-screencast-container.generate-rules-animation .user-bubble {
+            animation: fadeInSlideUp 0.5s 1.8s forwards;
+        }
+        .css-screencast-container.generate-rules-animation .cursor-bubble { /* This is command-ack */
+             animation: fadeInSlideUp 0.5s 2.5s forwards; 
+        }
+        .css-screencast-container.generate-rules-animation .chat-input-simulation {
+            animation: typeInGenerateRules 1.5s steps(22, end) 0.2s forwards; /* Adjusted steps */
+        }
+
+
+        .chat-input-simulation {
+            border: 1px solid #B0BEC5;
+            background-color: white;
+            padding: 8px 10px;
+            border-radius: 20px; /* Rounded input field */
+            margin-top: auto; /* Pushes to bottom of flex container */
+            color: #333; /* Actual text color */
+            overflow: hidden; /* Hide text until revealed by width animation */
+            white-space: nowrap; /* Prevent text wrapping during animation */
+            width: 0; /* Start with no width, text is hidden */
+            opacity: 0; /* Start fully transparent */
+        }
+
+        @keyframes fadeInSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes typeInSemantic { /* For "Where's the code for user authentication?" */
+            0% { width: 0; opacity: 1; border-right: 2px solid #00796B; }
+            99.9% { width: calc(100% - 2px); opacity: 1; border-right: 2px solid #00796B; } /* Keep cursor during typing */
+            100% { width: calc(100% - 2px); opacity: 1; border-right: none; } /* Full text, no cursor */
+        }
+        @keyframes typeInGenerateRules { /* For "/Generate Cursor Rules" */
+            0% { width: 0; opacity: 1; border-right: 2px solid #00796B; }
+            99.9% { width: calc(100% - 2px); opacity: 1; border-right: 2px solid #00796B; }
+            100% { width: calc(100% - 2px); opacity: 1; border-right: none; }
+        }
+        /* --- End CSS Animation Styles --- */
+
+
+        /* Responsive Design Adjustments */
         @media screen and (max-height: 800px) {
             .slide {
-                padding: 15px;
+                padding: 20px; 
                 height: 98%;
             }
-            .slide h1 {
-                font-size: 1.8em;
-                margin-bottom: 10px;
-                margin-top: 5px;
-            }
-            .slide h2 {
-                font-size: 1.4em;
-                margin-top: 15px;
-                margin-bottom: 8px;
-            }
-            .slide h3 {
-                font-size: 1.2em;
-                margin-bottom: 6px;
-            }
-            .placeholder-image, .placeholder-video {
-                height: 150px;
-                margin: 10px auto;
-            }
+            .slide h1 { font-size: 2em; margin-bottom: 12px; margin-top: 10px; }
+            .slide h2 { font-size: 1.5em; margin-top: 20px; margin-bottom: 10px; }
+            .slide h3 { font-size: 1.25em; margin-bottom: 8px; }
+            .professional-visual-placeholder, .generic-logo-placeholder { min-height: 150px; margin: 15px auto; }
+            .css-screencast-container { max-width: 340px; font-size: 0.85em; min-height: 110px;}
+
         }
 
-        @media screen and (max-height: 600px) {
-            .slide {
-                padding: 10px;
-            }
-            .slide h1 {
-                font-size: 1.5em;
-                margin-bottom: 8px;
-                margin-top: 5px;
-            }
-            .slide h2 {
-                font-size: 1.2em;
-                margin-top: 10px;
-                margin-bottom: 6px;
-            }
-            .slide h3 {
-                font-size: 1.1em;
-                margin-bottom: 4px;
-            }
-            .slide p, .slide li {
-                font-size: 0.9em;
-                margin: 6px auto;
-            }
-            .placeholder-image, .placeholder-video {
-                height: 120px;
-                margin: 8px auto;
-            }
-            .navigation {
-                bottom: 15px;
-            }
+        @media screen and (max-height: 650px) { 
+            .slide { padding: 15px; }
+            .slide h1 { font-size: 1.8em; margin-bottom: 10px; margin-top: 8px; }
+            .slide h2 { font-size: 1.3em; margin-top: 15px; margin-bottom: 8px; }
+            .slide h3 { font-size: 1.15em; margin-bottom: 6px; }
+            .slide p, .slide li { font-size: 0.95em; margin: 8px auto; }
+            .professional-visual-placeholder, .generic-logo-placeholder { min-height: 100px; margin: 10px auto; } /* Reduced height */
+            .professional-visual-placeholder img { max-height: 90px; } /* Adjust image height in placeholder */
+            .navigation { bottom: 15px; }
+            .navigation button { padding: 10px 20px; font-size: 0.9em; }
+            .pain-cure-container { flex-direction: column; gap: 15px; } 
+            .pain-column, .cure-column { width: 90%; max-width: none; } /* Ensure full width when stacked */
+            .css-screencast-container { max-width: 300px; font-size: 0.8em; min-height: 100px;}
         }
 
         @media screen and (max-width: 768px) {
             .pain-cure-container {
-                flex-direction: column;
-                gap: 15px;
+                flex-direction: column; /* Stack columns */
+                gap: 15px; 
+            }
+            .pain-column, .cure-column {
+                 width: 90%; /* Adjust width for stacked layout */
+                 max-width: none; /* Remove max-width constraint when stacked */
             }
             .slide {
                 width: 98%;
                 padding: 15px;
+            }
+            .slide h1 { font-size: 1.9em; }
+            .slide h2 { font-size: 1.4em; }
+            .slide h3 { font-size: 1.2em; }
+            .slide .key-takeaway-grid {
+                grid-template-columns: 1fr; 
             }
         }
 
@@ -319,7 +503,7 @@
     <div class="presentation-container">
 
         <section class="slide active">
-            <div class="logo-placeholder">[Match Group Logo Placeholder Image]</div>
+            <div class="logo-placeholder">Match Group</div>
             <h1>Cursor Chaos to Coding Zen</h1>
             <p class="subtitle">Taming Your AI Assistant for Dev Superpowers!</p>
             <p class="subtitle"><em>(Or, how I stopped worrying and learned to love the <code>@</code> symbol)</em></p>
@@ -332,7 +516,9 @@
 
         <section class="slide">
             <h1>Ever Felt Like This With an LLM? 🤯</h1>
-            <img src="assets/frustrated-dev.png" alt="Frustrated developer looking confused" style="width: 70%; max-width: 400px; height: auto; margin: 15px auto; display: block; border-radius: 8px;">
+            <div class="professional-visual-placeholder">
+                <span class="icon">🤔</span> <p>Visual representing developer confusion or a common LLM challenge</p>
+            </div>
             <ul>
                 <li>"You ask for a simple refactor, it rewrites your entire app... into COBOL."</li>
                 <li>"You whisper 'fix this bug,' it introduces three more exotic ones."</li>
@@ -353,7 +539,10 @@
             <div class="pain-cure-container">
                 <div class="pain-column">
                     <h3>The Pain: "Just Fix It!"</h3>
-                    <img src="assets/blurry-prompt.png" alt="Blurry instruction leading to messy code" style="width: 70%; max-width: 400px; height: auto; margin: 15px auto; display: block; border-radius: 8px;">
+                     <div class="professional-visual-placeholder">
+                         <span class="icon">🌫️</span>
+                         <p>Visual: Abstract representation of a blurry/vague instruction</p>
+                    </div>
                     <p><strong>You:</strong> "Cursor, fix this broken <code>processOrder</code> function."</p>
                     <pre><code>// Messy, uncommented code snippet here
 void processOrder(Order order, User user, PaymentDetails details) {
@@ -367,10 +556,10 @@ void processOrder(Order order, User user, PaymentDetails details) {
                 </div>
                 <div class="cure-column">
                     <h3>The Cursor Cure: Precision is Power!</h3>
-                     <div class="image-container">
-                         <img src="assets/drag-context.gif" alt="Clear prompt with @ symbols" style="width: 70%; max-width: 400px; height: auto; margin: 15px auto; display: block; border-radius: 8px;">
-                         <p class="pro-tip" style="font-style: italic; color: #666; margin-top: 8px;">Pro Tip: You can also drag and drop files directly into the chat to add context! 🎯</p>
-                     </div>
+                    <div class="professional-visual-placeholder">
+                        <img src="assets/drag-context.gif" alt="Demonstration of dragging files into Cursor chat for context" onerror="this.alt='GIF showing drag and drop for context'; this.src='https://placehold.co/400x200/E0E7E9/004D40?text=Image+Failed+to+Load';">
+                        <small style="display:block; margin-top: 8px; font-style:normal;">Pro Tip: You can also drag and drop files directly into the chat to add context!</small>
+                    </div>
                     <p><strong>The Winning Formula:</strong></p>
                     <p><code>[@Target(s)]</code> + <code>[Clear Goal]</code> + <code>[Step-by-Step Specs/Constraints]</code> + <code>[Maybe Exclusions?]</code></p>
                     <p><strong>Example:</strong></p>
@@ -397,7 +586,10 @@ void processOrder(Order order, User user, PaymentDetails details) {
             <div class="pain-cure-container">
                 <div class="pain-column">
                     <h3>The Pain: AI Gone Rogue!</h3>
-                    <img src="assets/ai-malfunction.png" alt="AI malfunctioning or going off rails" style="width: 70%; max-width: 400px; height: auto; margin: 15px auto; display: block; border-radius: 8px;">
+                    <div class="professional-visual-placeholder">
+                        <span class="icon">🤖💥</span>
+                        <p>Visual: Abstract representation of AI malfunction or unexpected output</p>
+                    </div>
                     <p>You've been chatting with Cursor, it was going great... then BAM! It starts suggesting nonsense, repeating itself, or forgetting previous instructions.</p>
                     <p>"It was supposed to write Python, why is it giving me JavaScript mixed with a shopping list?!"</p>
                     <p><strong>Why it hurts:</strong> Breaks your flow, frustrating, like your brilliant intern suddenly lost it.</p>
@@ -407,14 +599,40 @@ void processOrder(Order order, User user, PaymentDetails details) {
                     <ol>
                         <li><strong>The Panic Button (But Calmer):</strong> <code>Cmd+Shift+L</code> (Mac) or <code>Ctrl+Shift+L</code> (Win/Linux) for New Chat, or type <code>/clear</code>.
                             <p><em>"Fresh start! Don't let it dwell on its mistakes."</em></p>
-                            <div class="placeholder-video">[Placeholder: Short screencast of using Cmd+Shift+L or /clear in Cursor]</div>
+                            <p style="font-size:0.9em; color: #37474F;"><strong>Why?</strong> LLMs generate text token by token based on preceding context. If the LLM has made an error, that erroneous context can negatively influence subsequent generations, leading to further mistakes. Starting a new chat provides a clean slate.</p>
+                             <div class="placeholder-video professional-visual-placeholder">
+                                <span class="icon">🎬</span>
+                                <p class="video-placeholder-content">[Screencast: Using Cmd+Shift+L or /clear in Cursor]</p>
+                            </div>
                         </li>
                         <li><strong>Context Check!</strong> Are your <code>@</code> references still relevant?
                             <p><em>"Did you accidentally tell it to look at <code>node_modules</code>? Oops."</em> Use <code>.cursorignore</code> for files/folders to exclude.</p>
                         </li>
                         <li><strong>Prompt Tune-Up:</strong> "Was my last instruction a bit... ambitious? Let's break it down."</li>
                         <li><strong>Clean Code is Happy Code (Linter Love):</strong> Red/yellow squigglies = LLM Kryptonite. Lint *before* asking Cursor!
-                            <img src="assets/linter.png" alt="Code with linter errors vs clean code" style="width: 70%; max-width: 400px; height: auto; margin: 15px auto; display: block; border-radius: 8px;">
+                             <p style="font-size:0.9em; color: #37474F;"><strong>Why?</strong> Linter errors in your code become part of the context. The LLM might focus on these syntax issues or misunderstand your intent, leading to inaccurate suggestions. Clean code lets the LLM focus on the actual task.</p>
+                            <div class="code-comparison-container">
+                                <div class="code-block-wrapper has-errors">
+                                    <h3>Before Linter</h3>
+                                    <pre><code>// function greet(name) {
+//  console.logg("Hello " + name); <span class="error-line">// Typo: console.logg</span>
+// }
+// greet(Alice); <span class="error-line">// Error: 'Alice' is not defined</span>
+// if (x = 5) { <span class="error-line">// Error: Assignment in conditional</span>
+//  // ...
+// }</code></pre>
+                                </div>
+                                <div class="code-block-wrapper">
+                                    <h3>After Linter</h3>
+                                    <pre><code>// function greet(name) {
+//  console.log("Hello " + name);
+// }
+// greet("Alice");
+// if (x === 5) {
+//  // ...
+// }</code></pre>
+                                </div>
+                            </div>
                         </li>
                     </ol>
                 </div>
@@ -427,14 +645,18 @@ void processOrder(Order order, User user, PaymentDetails details) {
              <div class="pain-cure-container">
                 <div class="pain-column">
                     <h3>The Pain: The "Boil the Ocean" Request</h3>
-                    <img src="assets/elephant.png" alt="Person trying to eat a whole elephant" style="width: 70%; max-width: 400px; height: auto; margin: 15px auto; display: block; border-radius: 8px;">
+                    <div class="professional-visual-placeholder">
+                        <img src="assets/elephant.png" alt="Elephant representing an overwhelmingly large task">
+                    </div>
                     <p><strong>You:</strong> "Cursor, generate the entire microservice for auth, payments, and notifications. And make it snappy."</p>
                     <p><strong>Cursor:</strong> (Spits out a novel, buggy code... or times out).</p>
                     <p><em>Later:</em> "That amazing AI function from yesterday... where did it go? What did I even ask?"</p>
                 </div>
                 <div class="cure-column">
                     <h3>The Cursor Cures: Think Small, Commit Often!</h3>
-                    <img src="assets/elephant2.png" alt="Person methodically eating elephant piece by piece" style="width: 70%; max-width: 400px; height: auto; margin: 15px auto; display: block; border-radius: 8px;">
+                    <div class="professional-visual-placeholder">
+                        <img src="assets/elephant2.png" alt="Elephant representing an overwhelmingly large task">
+                    </div>
                     <ol>
                         <li><strong>You're the Architect, Cursor's the Builder (for components):</strong>
                             <p>Developer: Defines architecture, interfaces.</p>
@@ -442,7 +664,10 @@ void processOrder(Order order, User user, PaymentDetails details) {
                         </li>
                         <li><strong>One Bite at a Time (Sequential & Verify):</strong> Ask for smaller chunks.
                             <p><strong>Crucial:</strong> Verify each piece! "Cursor, <code>/test</code> generate JUnit5 tests for <code>@calculateDiscount</code>."</p>
-                             <div class="placeholder-video">[Placeholder: Screencast of using /test for a small function]</div>
+                             <div class="placeholder-video professional-visual-placeholder">
+                                <span class="icon">🎬</span>
+                                <p class="video-placeholder-content">[Screencast: Using /test for a small function]</p>
+                             </div>
                         </li>
                         <li><strong>Your AI Safety Net: <code>git commit</code> Early & Often!</strong>
                             <pre><code>git commit -m "WIP: Cursor drafted PaymentProcessor"</code></pre>
@@ -459,29 +684,52 @@ void processOrder(Order order, User user, PaymentDetails details) {
             <div class="pain-cure-container">
                 <div class="pain-column">
                     <h3>The Pain: Black Box Code & Anarchy</h3>
-                    <img src="assets/tangled.png" alt="Tangled wires representing messy code" style="width: 70%; max-width: 400px; height: auto; margin: 15px auto; display: block; border-radius: 8px;">
+                     <div class="professional-visual-placeholder">
+                        <span class="icon">🕸️</span> <p>Visual: Abstract of messy, unmanageable code or inconsistent styles</p>
+                    </div>
                     <p>Cursor generates clever code. You: "Uhhh... I *think* it works? But how?"</p>
                     <p>Different team members use Cursor, get slightly different styles. Your codebase starts to look... eclectic.</p>
                 </div>
                 <div class="cure-column">
                     <h3>The Cursor Cures: X-Ray Goggles & House Rules!</h3>
                     <ol>
-                        <li><strong>Understand Thy AI's Mind (Code Lens & Explain):</strong>
-                            <p>Use Cursor's Code Lens (inline actions) or select code: "Explain this."</p>
-                            <div class="placeholder-video">[Placeholder: Screencast of Cursor's "Explain Code" Code Lens feature]</div>
-                            <p><code>@symbolName</code> + Go to Definition/References for navigation.</p>
+                        <li><strong>Find Your Code with Semantic Search:</strong>
+                            <p>Cursor indexes your codebase. If you're looking for functionality but don't recall the exact file/function, ask in chat! E.g., "Where's the code for user authentication?"</p>
+                            <div class="css-screencast-container semantic-search-animation">
+                                <div class="chat-bubble user-bubble">Where's the code for user authentication?</div>
+                                <div class="chat-bubble cursor-bubble">src/services/auth.js (AuthService.authenticate)</div>
+                                <div class="chat-input-simulation">Where's the code for user authentication?</div>
+                            </div>
                         </li>
-                        <li><strong>Document As You Go (With AI Help!):</strong>
-                            <p>Select function: "Cursor, <code>/doc</code> generate Javadoc comments."</p>
-                             <div class="placeholder-video">[Placeholder: Screencast of using /doc to generate comments]</div>
+                        <li><strong>Leverage AI for Documentation & Rule Generation:</strong>
+                            <p>Select a function and prompt: "Generate Javadoc comments for this function."</p>
+                            <p>Cursor also has features like <code>/Generate Cursor Rules</code> (typed in chat) to help create project-specific LLM guidelines based on your code or instructions.</p>
+                             <div class="css-screencast-container generate-rules-animation">
+                                <div class="chat-bubble user-bubble">/Generate Cursor Rules</div>
+                                <div class="chat-bubble cursor-bubble">OK, analyzing selection to create rules...</div>
+                                <div class="chat-input-simulation">/Generate Cursor Rules</div>
+                             </div>
                         </li>
                         <li><strong>Project Consistency with Rules (<code>.cursorrule</code>):</strong>
-                            <p>Define project LLM behavior (e.g., "All Java comments in Javadoc style."). Like a style guide for your AI!</p>
-                            <div class="placeholder-image">[Placeholder: Example of a simple .cursorrule file content]</div>
+                            <p>Define project LLM behavior. This file acts like a style guide for your AI! Files are typically located at <code>projectroot/.cursor/rules/rule-name.mdc</code> and are in Markdown format. You can also specify conditions for when a rule is included in the chat.</p>
+                            <pre><code class="language-markdown"># My Project Coding Style Guide
+
+## General Principles
+- Keep functions short and focused.
+- Prefer immutable data structures.
+
+## Java Specific
+- All public methods must have Javadoc.
+- Use `final` for all parameters that are not reassigned.
+
+---
+# Rule Conditions (Example - syntax may vary by tool)
+# apply_when:
+#  language: java
+#  context_contains: "refactor"</code></pre>
                         </li>
-                        <li><strong>More Context Providers (MCPs):</strong>
-                            <p><code>@context7 [library_name]</code>: "Consult Spring Boot docs for <code>@RestController</code>."</p>
-                            <p><code>@obsidian</code>: "Use my Obsidian notes."</p>
+                        <li><strong>Utilize Context Providers (MCPs):</strong>
+                            <p>Simply mentioning a library name (e.g., "How do I use Spring Boot for this...") can often allow Cursor to automatically find and use relevant documentation as context.</p>
                         </li>
                     </ol>
                 </div>
@@ -491,11 +739,14 @@ void processOrder(Order order, User user, PaymentDetails details) {
 
         <section class="slide">
             <h1>Your Brain: Still The Most Valuable Processor 🧠</h1>
-            <img src="assets/copillot.png" alt="Captain confidently steering ship with AI co-pilot" style="width: 70%; max-width: 400px; height: auto; margin: 15px auto; display: block; border-radius: 8px;">
-            <ul style="max-width: 700px;">
+            <div class="professional-visual-placeholder">
+                <span class="icon">🧑‍✈️+🤖</span>
+                <p>Visual: Human developer confidently leading/collaborating with AI tool</p>
+            </div>
+            <ul style="max-width: 900px; margin: 12px auto;"> 
                 <li><strong>Code Review is NON-NEGOTIABLE!</strong>
                     <ul><li>AI code is a DRAFT. Check for conventions, readability, security, correctness, side effects.</li>
-                    <li>"Cursor's 'Explain Code' can help prep for reviews!"</li></ul>
+                    <li>"Cursor's 'Explain Code' (if available for selected code) can help prep for reviews!"</li></ul>
                 </li>
                 <li><strong>The "Cognitive Offloading" Trap:</strong>
                     <ul><li>Don't let skills get rusty! Understand the core logic. Use AI to learn, not just to do.</li></ul>
@@ -513,7 +764,10 @@ void processOrder(Order order, User user, PaymentDetails details) {
 
         <section class="slide">
             <h1>The Future is Collaborative: Developer + AI</h1>
-            <img src="assets/hands-shaking.png" alt="Two hands shaking – one human, one robotic/AI-styled" style="width: 70%; max-width: 400px; height: auto; margin: 15px auto; display: block; border-radius: 8px;">
+            <div class="professional-visual-placeholder">
+                <span class="icon">🤝</span>
+                <p>Visual: Modern, abstract representation of human-AI collaboration</p>
+            </div>
             <p><strong>LLMs like Cursor aren't a threat; they're a massive force multiplier.</strong></p>
             <ul>
                 <li>They handle the tedious, you focus on the creative and complex.</li>
@@ -546,7 +800,7 @@ void processOrder(Order order, User user, PaymentDetails details) {
 
         <section class="slide">
             <h1>Questions? Ideas? AI Therapy Session?</h1>
-            <div class="logo-placeholder">[Thank You Placeholder Image / Match Group Logo]</div>
+            <div class="logo-placeholder">Match Group</div>
             <p>Let's discuss how we can make AI work smarter for <em>us</em> at Match Group!</p>
             <p style="margin-top: 30px; font-size: 1.5em; color: #004D40;">Thank You!</p>
             <div class="slide-footer">9 / 9</div>
@@ -577,14 +831,11 @@ void processOrder(Order order, User user, PaymentDetails details) {
         }
 
         function changeSlide(direction) {
-            currentSlide += direction;
-            if (currentSlide < 0) {
-                currentSlide = 0;
+            const newSlideIndex = currentSlide + direction;
+            if (newSlideIndex >= 0 && newSlideIndex < totalSlides) {
+                currentSlide = newSlideIndex;
+                showSlide(currentSlide);
             }
-            if (currentSlide >= totalSlides) {
-                currentSlide = totalSlides - 1;
-            }
-            showSlide(currentSlide);
         }
 
         function updateNavButtons() {
@@ -593,12 +844,13 @@ void processOrder(Order order, User user, PaymentDetails details) {
         }
         
         document.addEventListener('keydown', function(event) {
-            if (event.key === 'ArrowRight' || event.key === ' ') { // Space for next too
-                if (currentSlide < totalSlides - 1) {
+            if (event.key === 'ArrowRight' || event.key === ' ') { 
+                if (!nextButton.disabled) { 
                   changeSlide(1);
+                  event.preventDefault(); 
                 }
             } else if (event.key === 'ArrowLeft') {
-                 if (currentSlide > 0) {
+                 if (!prevButton.disabled) { 
                   changeSlide(-1);
                 }
             }

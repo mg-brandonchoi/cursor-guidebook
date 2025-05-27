@@ -1,0 +1,93 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Cursor Guidebook Presentation Project Rules
+
+## Project Overview
+This is a single-page HTML presentation about "Cursor Chaos to Coding Zen" - a guide for developers on effectively using AI coding assistants. The project consists of:
+
+- **Main file**: [index.html](mdc:index.html) - Complete presentation with embedded CSS and JavaScript
+- **Assets**: [assets/](mdc:assets) directory containing images and GIFs for visual elements
+
+## Code Style Guidelines
+
+### HTML Structure
+- Use semantic HTML5 elements for better accessibility
+- Maintain consistent indentation (4 spaces)
+- Keep slide content within `.slide` containers
+- Use meaningful class names that describe functionality, not appearance
+
+### CSS Styling
+- Follow BEM-like naming convention for CSS classes
+- Use CSS custom properties (variables) for consistent theming
+- Maintain the established color palette:
+  - Primary: `#004D40` (Dark Teal)
+  - Secondary: `#00796B` (Medium Teal) 
+  - Background: `#F4F7F6` (Light Gray)
+  - Accent: `#E0F2F1` (Light Teal)
+
+### Responsive Design
+- Mobile-first approach with progressive enhancement
+- Use flexbox and CSS Grid for layouts
+- Implement proper breakpoints:
+  - Small screens: `max-width: 768px`
+  - Short screens: `max-height: 650px` and `max-height: 800px`
+
+### JavaScript
+- Use vanilla JavaScript for simplicity
+- Implement keyboard navigation (arrow keys, spacebar)
+- Maintain accessibility with proper button states
+
+## Content Guidelines
+
+### Slide Structure
+- Each slide should have a clear hierarchy: h1 → h2 → h3 → content
+- Use consistent spacing and margins
+- Include slide numbers in footer (format: "X / Y")
+
+### Visual Elements
+- Use placeholder images with descriptive alt text
+- Maintain consistent icon usage (emoji or font icons)
+- Ensure proper contrast ratios for accessibility
+
+### Code Examples
+- Use syntax highlighting with the established color scheme
+- Keep code blocks concise and focused
+- Include proper error highlighting for comparison examples
+
+## Development Workflow
+
+### When Making Changes
+1. Test responsiveness across different screen sizes
+2. Verify keyboard navigation functionality
+3. Check color contrast and accessibility
+4. Validate HTML structure
+5. Test slide transitions and animations
+
+### Asset Management
+- Store all images in [assets/](mdc:assets) directory
+- Use descriptive filenames for assets
+- Optimize images for web delivery
+- Provide fallback content for missing images
+
+## AI Assistant Guidelines
+
+### When Working with This Project
+- Focus on maintaining the established design system
+- Preserve the presentation's educational flow and structure
+- Keep accessibility in mind for all modifications
+- Test changes across different viewport sizes
+- Maintain the professional, developer-focused tone
+
+### Common Tasks
+- **Layout adjustments**: Always consider both desktop and mobile views
+- **Content updates**: Maintain the slide's educational progression
+- **Styling changes**: Use existing CSS variables and follow the color scheme
+- **New features**: Ensure they work with keyboard navigation
+
+## File References
+- Main presentation: [index.html](mdc:index.html)
+- Visual assets: [assets/](mdc:assets)
+- Project documentation: This rules file
