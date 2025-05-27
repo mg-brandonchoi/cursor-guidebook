@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursor Chaos to Coding Zen</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F4F7F6; /* Light Gray */
+            color: #333333; /* Dark Gray */
+            overflow: hidden; /* Hide scrollbars during presentation mode */
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .slide {
+            width: 90%;
+            max-width: 1000px;
+            height: 90%;
+            max-height: 700px;
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            box-sizing: border-box;
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow-y: auto; /* Allow scrolling for content-heavy slides */
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide h1 {
+            color: #004D40; /* Dark Teal */
+            font-size: 2.8em;
+            margin-bottom: 20px;
+        }
+
+        .slide h2 {
+            color: #00796B; /* Medium Teal */
+            font-size: 2em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .slide h3 {
+            color: #00C49A; /* Bright Teal Accent */
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-align: left;
+            max-width: 800px;
+            margin: 10px auto;
+        }
+
+        .slide ul {
+            list-style-position: inside;
+            padding-left: 20px;
+            text-align: left;
+            max-width: 760px;
+            margin: 10px auto;
+        }
+
+        .slide code {
+            background-color: #EAEAEA; /* Code Background */
+            padding: 0.2em 0.4em;
+            margin: 0 0.2em;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #D81B60; /* Code Text Color */
+        }
+
+        .slide pre {
+            background-color: #2d2d2d; /* Darker Code Background for Blocks */
+            color: #f8f8f2; /* Light text for dark background */
+            padding: 20px;
+            border-radius: 8px;
+            text-align: left;
+            overflow-x: auto;
+            max-width: 800px;
+            margin: 15px auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95em;
+            white-space: pre-wrap; /* Allow wrapping */
+            word-wrap: break-word; /* Break long words */
+        }
+        
+        .slide pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+            margin: 0;
+        }
+
+        .placeholder-image, .placeholder-video {
+            width: 80%;
+            max-width: 500px;
+            height: 300px;
+            background-color: #E0E0E0;
+            border: 2px dashed #00796B; /* Medium Teal */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 20px auto;
+            font-style: italic;
+            color: #555;
+            border-radius: 8px;
+        }
+
+        .logo-placeholder {
+            width: 150px;
+            height: 50px;
+            background-color: #E0E0E0;
+            border: 1px solid #CCC;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 0 auto 20px auto;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .slide .subtitle {
+            font-style: italic;
+            color: #555;
+            margin-top: -15px;
+            margin-bottom: 30px;
+            font-size: 1em;
+        }
+
+        .slide .presenter-info {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #004D40;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        .navigation button {
+            background-color: #00796B; /* Medium Teal */
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin: 0 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .navigation button:hover {
+            background-color: #004D40; /* Dark Teal */
+        }
+        .navigation button:disabled {
+            background-color: #BDBDBD; /* Disabled color */
+            cursor: not-allowed;
+        }
+
+        /* Pain/Cure specific styling */
+        .pain-cure-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: flex-start;
+            width: 100%;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .pain-column, .cure-column {
+            flex: 1;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .pain-column {
+            background-color: #FFF0F0; /* Light red for pain */
+            border: 1px solid #FFCDD2;
+        }
+        .cure-column {
+            background-color: #E0F2F1; /* Light teal for cure */
+            border: 1px solid #B2DFDB;
+        }
+        .pain-column h3, .cure-column h3 {
+            margin-top: 0;
+            text-align: center;
+        }
+        .pain-column h3 { color: #C62828; } /* Darker red */
+        .cure-column h3 { color: #00695C; } /* Darker teal */
+
+        .slide .key-takeaway-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+        .slide .key-takeaway-item {
+            background-color: #E8F5E9; /* Light green */
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #C8E6C9;
+        }
+        .slide .key-takeaway-item h3 {
+            color: #2E7D32; /* Dark Green */
+            margin-top: 0;
+        }
+
+        /* Footer for slide numbers */
+        .slide-footer {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 0.9em;
+            color: #777;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="presentation-container">
+
+        <section class="slide active">
+            <div class="logo-placeholder">[Match Group Logo Placeholder Image]</div>
+            <h1>Cursor Chaos to Coding Zen</h1>
+            <p class="subtitle">Taming Your AI Assistant for Dev Superpowers!</p>
+            <p class="subtitle"><em>(Or, how I stopped worrying and learned to love the <code>@</code> symbol)</em></p>
+            <div class="presenter-info">
+                <p>Brandon Choi / MGAI Dev team</p>
+                <p>Match Group Developers</p>
+            </div>
+            <div class="slide-footer">1 / 9</div>
+        </section>
+
+        <section class="slide">
+            <h1>Ever Felt Like This With an LLM? 🤯</h1>
+            <div class="placeholder-image">[Placeholder: GIF/meme of a confused developer, or hilariously wrong code, or someone talking to a brick wall]</div>
+            <ul>
+                <li>"You ask for a simple refactor, it rewrites your entire app... into COBOL."</li>
+                <li>"You whisper 'fix this bug,' it introduces three more exotic ones."</li>
+                <li>"You pour in context, it gives you... a recipe for banana bread."</li>
+            </ul>
+            <p><strong>The Promise:</strong> "Today, we're turning those 'ARGH!' moments into 'AHA!' moments. Let's make Cursor your ultimate dev sidekick, not a mischievous gremlin."</p>
+            <h2>What We'll Actually Cover:</h2>
+            <ul>
+                <li>Common LLM facepalms & Cursor Cures</li>
+                <li>Real-world wins (once you know the tricks!)</li>
+                <li>Keeping your sanity (and your job) in the age of AI</li>
+            </ul>
+            <div class="slide-footer">2 / 9</div>
+        </section>
+
+        <section class="slide">
+            <h1>The Vague Plea vs. The Laser-Guided Command 🎯</h1>
+            <div class="pain-cure-container">
+                <div class="pain-column">
+                    <h3>The Pain: "Just Fix It!"</h3>
+                    <div class="placeholder-image">[Placeholder: Blurry instruction "Fix function" leading to messy code/question mark]</div>
+                    <p><strong>You:</strong> "Cursor, fix this broken <code>processOrder</code> function."</p>
+                    <pre><code>// Messy, uncommented code snippet here
+void processOrder(Order order, User user, PaymentDetails details) {
+    if(user.isVal() && order.itemCount() > 0){
+        // ... lots of nested logic ...
+        paymentService.charge(details.getCard(), order.getTotal());
+    }
+}</code></pre>
+                    <p><strong>Cursor:</strong> (Generates something wild or useless) "Is this what you meant? 🤷"</p>
+                    <p><strong>Why it hurts:</strong> Wasted time, frustration, loss of faith in AI.</p>
+                </div>
+                <div class="cure-column">
+                    <h3>The Cursor Cure: Precision is Power!</h3>
+                     <div class="placeholder-image">[Placeholder: Clear prompt with @ symbols leading to clean, desired output]</div>
+                    <p><strong>The Winning Formula:</strong></p>
+                    <p><code>[@Target(s)]</code> + <code>[Clear Goal]</code> + <code>[Step-by-Step Specs/Constraints]</code> + <code>[Maybe Exclusions?]</code></p>
+                    <p><strong>Example:</strong></p>
+                    <pre><code>@OrderService.java please refactor the `processOrder` method.
+1. Improve readability: use clearer variable names, reduce nesting by 1 level.
+2. Enhance error handling for `PaymentException`: log it & re-throw `OrderProcessingException`.
+3. Ensure SRP. Don't touch the logging framework.</code></pre>
+                    <p><strong>Cursor's Superpower:</strong> The <code>@</code> Symbol!</p>
+                    <ul>
+                        <li><code>@file_name.ext</code>: "Look HERE!"</li>
+                        <li><code>@folder_name</code>: "Consider ALL THIS!"</li>
+                        <li><code>@symbolName</code>: "Zoom in on THIS function/class!"</li>
+                        <li><code>@weburl.com</code>: "Check this StackOverflow answer!"</li>
+                    </ul>
+                </div>
+            </div>
+            <p><strong>Key:</strong> You're the senior dev guiding your AI intern. Be specific!</p>
+            <div class="slide-footer">3 / 9</div>
+        </section>
+
+        <section class="slide">
+            <h1>Houston, We Have a Hallucination! 👽</h1>
+            <h2>And How to Land Safely</h2>
+            <div class="pain-cure-container">
+                <div class="pain-column">
+                    <h3>The Pain: AI Gone Rogue!</h3>
+                    <div class="placeholder-image">[Placeholder: Train off rails or short-circuiting robot]</div>
+                    <p>You've been chatting with Cursor, it was going great... then BAM! It starts suggesting nonsense, repeating itself, or forgetting previous instructions.</p>
+                    <p>"It was supposed to write Python, why is it giving me JavaScript mixed with a shopping list?!"</p>
+                    <p><strong>Why it hurts:</strong> Breaks your flow, frustrating, like your brilliant intern suddenly lost it.</p>
+                </div>
+                <div class="cure-column">
+                    <h3>The Cursor Cures: The "Oh Snap!" Toolkit</h3>
+                    <ol>
+                        <li><strong>The Panic Button (But Calmer):</strong> <code>Cmd+Shift+L</code> (Mac) or <code>Ctrl+Shift+L</code> (Win/Linux) for New Chat, or type <code>/clear</code>.
+                            <p><em>"Fresh start! Don't let it dwell on its mistakes."</em></p>
+                            <div class="placeholder-video">[Placeholder: Short screencast of using Cmd+Shift+L or /clear in Cursor]</div>
+                        </li>
+                        <li><strong>Context Check!</strong> Are your <code>@</code> references still relevant?
+                            <p><em>"Did you accidentally tell it to look at <code>node_modules</code>? Oops."</em> Use <code>.cursorignore</code> for files/folders to exclude.</p>
+                        </li>
+                        <li><strong>Prompt Tune-Up:</strong> "Was my last instruction a bit... ambitious? Let's break it down."</li>
+                        <li><strong>Clean Code is Happy Code (Linter Love):</strong> Red/yellow squigglies = LLM Kryptonite. Lint *before* asking Cursor!
+                            <div class="placeholder-image">[Placeholder: Image of code with linter errors vs clean code]</div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="slide-footer">4 / 9</div>
+        </section>
+
+        <section class="slide">
+            <h1>"Build Me a Spaceship!" vs. "Let's Design the Cockpit First." 🚀</h1>
+             <div class="pain-cure-container">
+                <div class="pain-column">
+                    <h3>The Pain: The "Boil the Ocean" Request</h3>
+                    <div class="placeholder-image">[Placeholder: Someone trying to eat a whole elephant]</div>
+                    <p><strong>You:</strong> "Cursor, generate the entire microservice for auth, payments, and notifications. And make it snappy."</p>
+                    <p><strong>Cursor:</strong> (Spits out a novel, buggy code... or times out).</p>
+                    <p><em>Later:</em> "That amazing AI function from yesterday... where did it go? What did I even ask?"</p>
+                </div>
+                <div class="cure-column">
+                    <h3>The Cursor Cures: Think Small, Commit Often!</h3>
+                    <div class="placeholder-image">[Placeholder: Person eating elephant piece by piece / A life raft]</div>
+                    <ol>
+                        <li><strong>You're the Architect, Cursor's the Builder (for components):</strong>
+                            <p>Developer: Defines architecture, interfaces.</p>
+                            <p>Cursor: "Implement <code>@IPaymentGateway.java createPayPalPaymentGateway()</code> with methods <code>processPayment</code> and <code>refundPayment</code>."</p>
+                        </li>
+                        <li><strong>One Bite at a Time (Sequential & Verify):</strong> Ask for smaller chunks.
+                            <p><strong>Crucial:</strong> Verify each piece! "Cursor, <code>/test</code> generate JUnit5 tests for <code>@calculateDiscount</code>."</p>
+                             <div class="placeholder-video">[Placeholder: Screencast of using /test for a small function]</div>
+                        </li>
+                        <li><strong>Your AI Safety Net: <code>git commit</code> Early & Often!</strong>
+                            <pre><code>git commit -m "WIP: Cursor drafted PaymentProcessor"</code></pre>
+                            <p><strong>Why?</strong> Easy rollback, clear history, no "What did AI change?!" moments.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="slide-footer">5 / 9</div>
+        </section>
+
+        <section class="slide">
+            <h1>"What Sorcery is This?!" & "My Project Looks Like a Teenager's Bedroom!" 🧙‍♂️🧹</h1>
+            <div class="pain-cure-container">
+                <div class="pain-column">
+                    <h3>The Pain: Black Box Code & Anarchy</h3>
+                    <div class="placeholder-image">[Placeholder: Tangled wires or messy room]</div>
+                    <p>Cursor generates clever code. You: "Uhhh... I *think* it works? But how?"</p>
+                    <p>Different team members use Cursor, get slightly different styles. Your codebase starts to look... eclectic.</p>
+                </div>
+                <div class="cure-column">
+                    <h3>The Cursor Cures: X-Ray Goggles & House Rules!</h3>
+                    <ol>
+                        <li><strong>Understand Thy AI's Mind (Code Lens & Explain):</strong>
+                            <p>Use Cursor's Code Lens (inline actions) or select code: "Explain this."</p>
+                            <div class="placeholder-video">[Placeholder: Screencast of Cursor's "Explain Code" Code Lens feature]</div>
+                            <p><code>@symbolName</code> + Go to Definition/References for navigation.</p>
+                        </li>
+                        <li><strong>Document As You Go (With AI Help!):</strong>
+                            <p>Select function: "Cursor, <code>/doc</code> generate Javadoc comments."</p>
+                             <div class="placeholder-video">[Placeholder: Screencast of using /doc to generate comments]</div>
+                        </li>
+                        <li><strong>Project Consistency with Rules (<code>.cursorrule</code>):</strong>
+                            <p>Define project LLM behavior (e.g., "All Java comments in Javadoc style."). Like a style guide for your AI!</p>
+                            <div class="placeholder-image">[Placeholder: Example of a simple .cursorrule file content]</div>
+                        </li>
+                        <li><strong>More Context Providers (MCPs):</strong>
+                            <p><code>@context7 [library_name]</code>: "Consult Spring Boot docs for <code>@RestController</code>."</p>
+                            <p><code>@obsidian</code>: "Use my Obsidian notes."</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="slide-footer">6 / 9</div>
+        </section>
+
+        <section class="slide">
+            <h1>Your Brain: Still The Most Valuable Processor 🧠</h1>
+            <div class="placeholder-image">[Placeholder: Captain confidently steering a ship, AI co-pilot beside them]</div>
+            <ul style="max-width: 700px;">
+                <li><strong>Code Review is NON-NEGOTIABLE!</strong>
+                    <ul><li>AI code is a DRAFT. Check for conventions, readability, security, correctness, side effects.</li>
+                    <li>"Cursor's 'Explain Code' can help prep for reviews!"</li></ul>
+                </li>
+                <li><strong>The "Cognitive Offloading" Trap:</strong>
+                    <ul><li>Don't let skills get rusty! Understand the core logic. Use AI to learn, not just to do.</li></ul>
+                </li>
+                <li><strong>GIGO (Garbage In, Garbage Out) Still Applies:</strong>
+                    <ul><li>You provide the fuel (prompts) and steering (context). Quality in = Quality out.</li></ul>
+                </li>
+                <li><strong>Cursor is a Super-Smart Co-Pilot, NOT an Autonomous Agent (Yet!):</strong>
+                    <ul><li>Developers direct, break down tasks, make final judgments.</li>
+                    <li><em>(Experimental features like "Bug Finder" are helpful checks, not replacements for tests.)</em></li></ul>
+                </li>
+            </ul>
+            <div class="slide-footer">7 / 9</div>
+        </section>
+
+        <section class="slide">
+            <h1>The Future is Collaborative: Developer + AI</h1>
+            <div class="placeholder-image">[Placeholder: Two hands shaking – one human, one robotic/AI-styled]</div>
+            <p><strong>LLMs like Cursor aren't a threat; they're a massive force multiplier.</strong></p>
+            <ul>
+                <li>They handle the tedious, you focus on the creative and complex.</li>
+                <li>They help you learn faster and explore new solutions.</li>
+            </ul>
+            <h2>The Evolving Landscape:</h2>
+            <p>Tools are getting smarter (Codex, etc.). But your critical thinking, design skills, & domain expertise? <strong>More valuable than EVER.</strong></p>
+            
+            <h2>Key Takeaways for Match Group Devs:</h2>
+            <div class="key-takeaway-grid">
+                <div class="key-takeaway-item">
+                    <h3>🚀 Experiment Fearlessly</h3>
+                    <p>(But wisely!) Try Cursor on a small, real task *today*.</p>
+                </div>
+                <div class="key-takeaway-item">
+                    <h3>🗣️ Share Wins & Woes</h3>
+                    <p>Slack channel? (#cursor-tips?), quick demos. "Check this cool prompt!"</p>
+                </div>
+                <div class="key-takeaway-item">
+                    <h3>🛠️ Advocate for Power-Ups</h3>
+                    <p>If Pro/Enterprise tools offer clear benefits, let's discuss. "Good tools = happy, productive devs!"</p>
+                </div>
+                <div class="key-takeaway-item">
+                    <h3>📚 Stay Curious & Learn</h3>
+                    <p>AI evolves fast. What's cutting-edge today is standard tomorrow.</p>
+                </div>
+            </div>
+            <div class="slide-footer">8 / 9</div>
+        </section>
+
+        <section class="slide">
+            <h1>Questions? Ideas? AI Therapy Session?</h1>
+            <div class="logo-placeholder">[Thank You Placeholder Image / Match Group Logo]</div>
+            <p>Let's discuss how we can make AI work smarter for <em>us</em> at Match Group!</p>
+            <p style="margin-top: 30px; font-size: 1.5em; color: #004D40;">Thank You!</p>
+            <div class="slide-footer">9 / 9</div>
+        </section>
+
+    </div>
+
+    <div class="navigation">
+        <button id="prevBtn" onclick="changeSlide(-1)" disabled>Previous</button>
+        <button id="nextBtn" onclick="changeSlide(1)">Next</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const prevButton = document.getElementById('prevBtn');
+        const nextButton = document.getElementById('nextBtn');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+            updateNavButtons();
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) {
+                currentSlide = 0;
+            }
+            if (currentSlide >= totalSlides) {
+                currentSlide = totalSlides - 1;
+            }
+            showSlide(currentSlide);
+        }
+
+        function updateNavButtons() {
+            prevButton.disabled = currentSlide === 0;
+            nextButton.disabled = currentSlide === totalSlides - 1;
+        }
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') { // Space for next too
+                if (currentSlide < totalSlides - 1) {
+                  changeSlide(1);
+                }
+            } else if (event.key === 'ArrowLeft') {
+                 if (currentSlide > 0) {
+                  changeSlide(-1);
+                }
+            }
+        });
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+
+</body>
+</html>
