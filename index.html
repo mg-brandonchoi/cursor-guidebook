@@ -347,101 +347,153 @@
 
         /* --- CSS Animation for Screencasts --- */
         .css-screencast-container {
-            background-color: #ECEFF1; /* Light grey background */
-            border: 1px solid #CFD8DC; /* Slightly darker border */
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px auto;
-            width: 90%;
-            max-width: 380px; /* Max width for the animation box */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: #FFFFFF; /* Clean white background like real chat */
+            border: 1px solid #E0E0E0; /* Subtle border */
+            border-radius: 12px; /* More modern rounded corners */
+            padding: 20px;
+            margin: 20px auto;
+            width: 95%;
+            max-width: 500px; /* Larger, more realistic chat window */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* More prominent shadow */
             text-align: left;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.9em;
-            min-height: 120px; /* Min height for visual consistency */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* Modern system font */
+            font-size: 0.95em;
+            min-height: 180px; /* Taller for better proportions */
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Aligns bubbles to the top first */
+            justify-content: flex-start;
+            position: relative;
         }
 
         .chat-bubble {
-            padding: 8px 12px;
-            border-radius: 15px; /* Standard bubble radius */
-            margin-bottom: 8px;
-            max-width: 80%;
+            padding: 12px 16px; /* More generous padding */
+            border-radius: 18px; /* More rounded like modern chat apps */
+            margin-bottom: 12px;
+            max-width: 75%; /* Slightly narrower for better readability */
             word-wrap: break-word;
-            opacity: 0; /* Start hidden */
-            transform: translateY(10px); /* Start slightly lower */
-            animation-fill-mode: forwards; /* Keep end state */
-            animation-timing-function: ease-out; /* Smoother appearance */
+            opacity: 0;
+            transform: translateY(20px) scale(0.95); /* More natural entrance */
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother easing */
+            font-size: 0.9em;
+            line-height: 1.4;
         }
 
         .user-bubble {
-            background-color: #00796B; /* Medium Teal */
+            background: linear-gradient(135deg, #007AFF, #0051D5); /* iOS-style blue gradient */
             color: white;
-            align-self: flex-end; /* Align to the right */
-            border-bottom-right-radius: 5px; /* Typical chat bubble tail effect */
+            align-self: flex-end;
+            border-bottom-right-radius: 6px; /* Subtle tail */
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3); /* Subtle glow */
         }
 
         .cursor-bubble {
-            background-color: #CFD8DC; /* Grey for Cursor response */
-            color: #263238; /* Dark text */
-            align-self: flex-start; /* Align to the left */
-            border-bottom-left-radius: 5px; /* Typical chat bubble tail effect */
+            background-color: #F2F2F7; /* Light gray like iOS */
+            color: #000000;
+            align-self: flex-start;
+            border-bottom-left-radius: 6px;
+            border: 1px solid #E5E5EA; /* Subtle border */
         }
         
-        /* Specific animation timings for semantic search */
+        /* Improved animation timings */
         .css-screencast-container.semantic-search-animation .user-bubble {
-            animation: fadeInSlideUp 0.5s 2.3s forwards;
+            animation: modernFadeIn 0.6s 1.2s forwards;
         }
         .css-screencast-container.semantic-search-animation .cursor-bubble {
-            animation: fadeInSlideUp 0.5s 3.0s forwards;
+            animation: modernFadeIn 0.6s 2.8s forwards;
         }
         .css-screencast-container.semantic-search-animation .chat-input-simulation {
-             animation: typeInSemantic 2s steps(40, end) 0.2s forwards;
+            animation: modernTypeIn 2.2s ease-out 0.1s forwards;
         }
 
-        /* Specific animation timings for generate rules */
-         .css-screencast-container.generate-rules-animation .user-bubble {
-            animation: fadeInSlideUp 0.5s 1.8s forwards;
+        .css-screencast-container.generate-rules-animation .user-bubble {
+            animation: modernFadeIn 0.6s 1.0s forwards;
         }
-        .css-screencast-container.generate-rules-animation .cursor-bubble { /* This is command-ack */
-             animation: fadeInSlideUp 0.5s 2.5s forwards; 
+        .css-screencast-container.generate-rules-animation .cursor-bubble {
+            animation: modernFadeIn 0.6s 2.2s forwards; 
         }
         .css-screencast-container.generate-rules-animation .chat-input-simulation {
-            animation: typeInGenerateRules 1.5s steps(22, end) 0.2s forwards; /* Adjusted steps */
+            animation: modernTypeInShort 1.8s ease-out 0.1s forwards;
         }
-
 
         .chat-input-simulation {
-            border: 1px solid #B0BEC5;
-            background-color: white;
-            padding: 8px 10px;
-            border-radius: 20px; /* Rounded input field */
-            margin-top: auto; /* Pushes to bottom of flex container */
-            color: #333; /* Actual text color */
-            overflow: hidden; /* Hide text until revealed by width animation */
-            white-space: nowrap; /* Prevent text wrapping during animation */
-            width: 0; /* Start with no width, text is hidden */
-            opacity: 0; /* Start fully transparent */
+            border: 1px solid #D1D1D6;
+            background-color: #F2F2F7;
+            padding: 12px 16px;
+            border-radius: 22px; /* More rounded input */
+            margin-top: auto;
+            color: #000000;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 0;
+            opacity: 0;
+            font-size: 0.9em;
+            position: relative;
         }
 
-        @keyframes fadeInSlideUp {
-            to {
+        .chat-input-simulation::after {
+            content: '';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 16px;
+            background-color: #007AFF;
+            opacity: 0;
+            animation: blinkCursor 1s infinite;
+        }
+
+        @keyframes modernFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            100% {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
-        @keyframes typeInSemantic { /* For "Where's the code for user authentication?" */
-            0% { width: 0; opacity: 1; border-right: 2px solid #00796B; }
-            99.9% { width: calc(100% - 2px); opacity: 1; border-right: 2px solid #00796B; } /* Keep cursor during typing */
-            100% { width: calc(100% - 2px); opacity: 1; border-right: none; } /* Full text, no cursor */
+        @keyframes modernTypeIn {
+            0% { 
+                width: 0; 
+                opacity: 1; 
+            }
+            5% {
+                opacity: 1;
+            }
+            95% { 
+                width: calc(100% - 40px); 
+                opacity: 1; 
+            }
+            100% { 
+                width: calc(100% - 40px); 
+                opacity: 1; 
+            }
         }
-        @keyframes typeInGenerateRules { /* For "/Generate Cursor Rules" */
-            0% { width: 0; opacity: 1; border-right: 2px solid #00796B; }
-            99.9% { width: calc(100% - 2px); opacity: 1; border-right: 2px solid #00796B; }
-            100% { width: calc(100% - 2px); opacity: 1; border-right: none; }
+
+        @keyframes modernTypeInShort {
+            0% { 
+                width: 0; 
+                opacity: 1; 
+            }
+            5% {
+                opacity: 1;
+            }
+            95% { 
+                width: calc(100% - 40px); 
+                opacity: 1; 
+            }
+            100% { 
+                width: calc(100% - 40px); 
+                opacity: 1; 
+            }
+        }
+
+        @keyframes blinkCursor {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
         /* --- End CSS Animation Styles --- */
 
@@ -456,7 +508,7 @@
             .slide h2 { font-size: 1.5em; margin-top: 20px; margin-bottom: 10px; }
             .slide h3 { font-size: 1.25em; margin-bottom: 8px; }
             .professional-visual-placeholder, .generic-logo-placeholder { min-height: 150px; margin: 15px auto; }
-            .css-screencast-container { max-width: 340px; font-size: 0.85em; min-height: 110px;}
+            .css-screencast-container { max-width: 420px; font-size: 0.9em; min-height: 160px;}
 
         }
 
@@ -472,7 +524,7 @@
             .navigation button { padding: 10px 20px; font-size: 0.9em; }
             .pain-cure-container { flex-direction: column; gap: 15px; } 
             .pain-column, .cure-column { width: 90%; max-width: none; } /* Ensure full width when stacked */
-            .css-screencast-container { max-width: 300px; font-size: 0.8em; min-height: 100px;}
+            .css-screencast-container { max-width: 380px; font-size: 0.85em; min-height: 140px; padding: 16px;}
         }
 
         @media screen and (max-width: 768px) {
@@ -729,7 +781,8 @@ void processOrder(Order order, User user, PaymentDetails details) {
 #  context_contains: "refactor"</code></pre>
                         </li>
                         <li><strong>Utilize Context Providers (MCPs):</strong>
-                            <p>Simply mentioning a library name (e.g., "How do I use Spring Boot for this...") can often allow Cursor to automatically find and use relevant documentation as context.</p>
+                            <p>Use Context7 MCP to get up-to-date library documentation directly in your chat. Instead of searching docs manually, ask: "How do I implement authentication with @/supabase/supabase?" or "@/vercel/next.js show me routing examples"</p>
+                            <p><em>Context7 automatically fetches the latest docs for popular libraries like React, Next.js, Supabase, MongoDB, etc.</em></p>
                         </li>
                     </ol>
                 </div>
