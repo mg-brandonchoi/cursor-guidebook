@@ -24,18 +24,18 @@
         }
 
         .slide {
-            width: 90%;
-            max-width: 1000px;
-            height: 90%;
-            max-height: 700px;
+            width: 95%;
+            max-width: 1200px;
+            height: 95%;
+            min-height: 500px;
             background-color: #FFFFFF;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            padding: 40px;
+            padding: 20px;
             box-sizing: border-box;
             display: none; /* Hidden by default */
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             text-align: center;
             overflow-y: auto; /* Allow scrolling for content-heavy slides */
@@ -47,37 +47,38 @@
 
         .slide h1 {
             color: #004D40; /* Dark Teal */
-            font-size: 2.8em;
-            margin-bottom: 20px;
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            margin-top: 10px;
         }
 
         .slide h2 {
             color: #00796B; /* Medium Teal */
-            font-size: 2em;
-            margin-top: 30px;
-            margin-bottom: 15px;
+            font-size: 1.6em;
+            margin-top: 20px;
+            margin-bottom: 10px;
         }
         
         .slide h3 {
             color: #00C49A; /* Bright Teal Accent */
-            font-size: 1.5em;
-            margin-bottom: 10px;
+            font-size: 1.3em;
+            margin-bottom: 8px;
         }
 
         .slide p, .slide li {
-            font-size: 1.1em;
-            line-height: 1.6;
+            font-size: 1em;
+            line-height: 1.5;
             text-align: left;
-            max-width: 800px;
-            margin: 10px auto;
+            max-width: 90%;
+            margin: 8px auto;
         }
 
         .slide ul {
             list-style-position: inside;
             padding-left: 20px;
             text-align: left;
-            max-width: 760px;
-            margin: 10px auto;
+            max-width: 90%;
+            margin: 8px auto;
         }
 
         .slide code {
@@ -92,14 +93,14 @@
         .slide pre {
             background-color: #2d2d2d; /* Darker Code Background for Blocks */
             color: #f8f8f2; /* Light text for dark background */
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
             text-align: left;
             overflow-x: auto;
-            max-width: 800px;
-            margin: 15px auto;
+            max-width: 90%;
+            margin: 10px auto;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 0.95em;
+            font-size: 0.85em;
             white-space: pre-wrap; /* Allow wrapping */
             word-wrap: break-word; /* Break long words */
         }
@@ -112,19 +113,20 @@
         }
 
         .placeholder-image, .placeholder-video {
-            width: 80%;
-            max-width: 500px;
-            height: 300px;
+            width: 70%;
+            max-width: 400px;
+            height: 200px;
             background-color: #E0E0E0;
             border: 2px dashed #00796B; /* Medium Teal */
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            margin: 20px auto;
+            margin: 15px auto;
             font-style: italic;
             color: #555;
             border-radius: 8px;
+            font-size: 0.9em;
         }
 
         .logo-placeholder {
@@ -240,6 +242,74 @@
             right: 30px;
             font-size: 0.9em;
             color: #777;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-height: 800px) {
+            .slide {
+                padding: 15px;
+                height: 98%;
+            }
+            .slide h1 {
+                font-size: 1.8em;
+                margin-bottom: 10px;
+                margin-top: 5px;
+            }
+            .slide h2 {
+                font-size: 1.4em;
+                margin-top: 15px;
+                margin-bottom: 8px;
+            }
+            .slide h3 {
+                font-size: 1.2em;
+                margin-bottom: 6px;
+            }
+            .placeholder-image, .placeholder-video {
+                height: 150px;
+                margin: 10px auto;
+            }
+        }
+
+        @media screen and (max-height: 600px) {
+            .slide {
+                padding: 10px;
+            }
+            .slide h1 {
+                font-size: 1.5em;
+                margin-bottom: 8px;
+                margin-top: 5px;
+            }
+            .slide h2 {
+                font-size: 1.2em;
+                margin-top: 10px;
+                margin-bottom: 6px;
+            }
+            .slide h3 {
+                font-size: 1.1em;
+                margin-bottom: 4px;
+            }
+            .slide p, .slide li {
+                font-size: 0.9em;
+                margin: 6px auto;
+            }
+            .placeholder-image, .placeholder-video {
+                height: 120px;
+                margin: 8px auto;
+            }
+            .navigation {
+                bottom: 15px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .pain-cure-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .slide {
+                width: 98%;
+                padding: 15px;
+            }
         }
 
     </style>
