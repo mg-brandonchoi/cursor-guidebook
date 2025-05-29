@@ -86,7 +86,7 @@
         .toc-list li:hover i { color: #38bdf8; /* text-sky-400 */ }
 
         /* Styles for Don't / Do sections in Mistake slides & ProTip slides */
-        .mistake-layout, .pro-tip-layout { /* Combined common styles */
+        .mistake-layout {
             display: grid;
             grid-template-columns: 1fr 1fr; 
             gap: 2rem; 
@@ -94,26 +94,59 @@
             max-width: 72rem; /* max-w-6xl */
             text-align: left;
         }
-        .mistake-section, .pro-tip-section { /* Combined common styles */
+        .pro-tip-single-column-layout, .attitude-layout { /* Combined single column layouts */
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            text-align: left;
+        }
+
+        .mistake-section, .pro-tip-section, .attitude-section { 
             padding: 1.5rem; 
             border-radius: 0.5rem; 
             background-color: #334155; /* bg-slate-700 */
             display: flex; 
             flex-direction: column; 
         }
-        .mistake-section h3, .pro-tip-section h3 { 
+        .pro-tip-single-column-layout .pro-tip-section, .attitude-layout .attitude-section { 
+            max-width: 48rem; /* max-w-3xl, slightly wider for attitude list */
+            width: 100%;
+        }
+
+        .mistake-section h3, .pro-tip-section h3, .attitude-section h4 { 
             font-size: 1.5rem; 
             font-weight: 600; 
             margin-bottom: 1rem; 
             display: flex;
             align-items: center;
         }
-        .mistake-section p.description-text, .pro-tip-section p.description-text {
+        .attitude-section h4 { /* Specific for attitude list items */
+             font-size: 1.25rem; /* text-xl */
+             color: #94a3b8; /* text-slate-400 */
+             margin-bottom: 0.5rem;
+        }
+         .attitude-section h4 i {
+            margin-right: 0.75rem; /* mr-3 */
+            color: #60a5fa; /* text-blue-400 */
+            width: 1.5em; /* Ensure icon alignment */
+            text-align: center;
+        }
+
+
+        .mistake-section p.description-text, .pro-tip-section p.description-text, .attitude-section p.description-text {
             font-size: 1.125rem; 
             line-height: 1.75; 
             color: #cbd5e1; /* text-slate-300 */
             margin-bottom: 1rem;
         }
+         .attitude-section p.description-text {
+            font-size: 1rem; /* text-base */
+            color: #94a3b8; /* text-slate-400 */
+            margin-left: calc(1.5em + 0.75rem); /* Align with text after icon */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+
+
         .mistake-section .explanation, .pro-tip-section .explanation {
             font-size: 1rem; 
             color: #94a3b8; /* text-slate-400 */
@@ -127,11 +160,20 @@
         .dont-section h3 {
             color: #f87171; /* text-red-400 */
         }
-        .do-section, .pro-tip-highlight { /* Combined Do and ProTip highlight */
+        .do-section, .pro-tip-highlight, .attitude-highlight { 
             border: 2px solid #22c55e; /* border-green-500 */
         }
-        .do-section h3, .pro-tip-highlight h3 {
+        .do-section h3, .pro-tip-highlight h3, .attitude-highlight h3 {
             color: #4ade80; /* text-green-400 */
+        }
+        .attitude-highlight { /* Specific border for attitude section */
+             border-color: #38bdf8; /* border-sky-500 */
+        }
+        .attitude-highlight h3 { /* Main title for attitude slide */
+            color: #38bdf8; /* text-sky-400 */
+            font-size: 1.875rem; /* text-3xl */
+            justify-content: center; /* Center the main title */
+            margin-bottom: 2rem;
         }
         
         .shortcut-key { 
@@ -164,18 +206,21 @@
             height: 100%; 
             border-radius: 0.375rem; 
         }
-        .pro-tip-layout .visualization-box { /* Specific for pro-tips to potentially allow more height */
+        .pro-tip-single-column-layout .visualization-box { 
              min-height: 260px;
         }
 
 
          /* Responsive adjustments */
         @media (max-width: 768px) { 
-            .mistake-layout, .pro-tip-layout {
+            .mistake-layout, .pro-tip-single-column-layout, .attitude-layout { 
                 grid-template-columns: 1fr; 
             }
-            .mistake-section h3, .pro-tip-section h3 {
+            .mistake-section h3, .pro-tip-section h3, .attitude-section h4 {
                 font-size: 1.25rem; 
+            }
+             .attitude-highlight h3 {
+                font-size: 1.5rem; /* text-2xl */
             }
         }
 
@@ -214,7 +259,7 @@
             <ul class="toc-list">
                 <li class="themed-text"><i class="fas fa-exclamation-triangle"></i>커서를 쓸 때 주로 하는 실수들</li>
                 <li class="themed-text"><i class="fas fa-lightbulb"></i>Cursor Pro Tip</li>
-                <li class="themed-text"><i class="fas fa-flag-checkered"></i>마무리</li>
+                <li class="themed-text"><i class="fas fa-user-shield"></i>AI 도구를 다루는 자세</li> <li class="themed-text"><i class="fas fa-flag-checkered"></i>마무리</li>
             </ul>
         </div>
     </div>
@@ -692,11 +737,13 @@
         </div>
     </div>
 
-    <div id="slide11" class="slide"> <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #1: `/` 커맨드를 적극 활용하세요</h2>
-        <div class="pro-tip-layout" style="grid-template-columns: 1fr;"> <div class="pro-tip-section pro-tip-highlight">
+    <div id="slide11" class="slide">
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #1: `/` 커맨드를 적극 활용하세요</h2>
+        <div class="pro-tip-single-column-layout">
+            <div class="pro-tip-section pro-tip-highlight">
                 <h3><i class="fas fa-terminal mr-3"></i>`/` 커맨드로 생산성 UP!</h3>
                 <p class="themed-text description-text">
-                    채팅창에 `/`를 입력하면 다양한 유용한 커맨드를 사용할 수 있습니다. 이를 활용하면 반복적인 작업을 자동화하거나 복잡한 지시를 더 쉽게 내릴 수 있습니다.
+                    채팅창에 `/`를 입력하여 다양한 커맨드로 반복 작업을 자동화하고 복잡한 지시를 간소화하세요.
                 </p>
                 <div class="visualization-box">
                     <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
@@ -716,7 +763,7 @@
                     </svg>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">특히 유용한 기능:</strong> `/generate_cursor_rules` (또는 유사한 이름의 커맨드)는 지금까지의 작업 내용을 바탕으로 커서가 따라야 할 규칙이나 가이드라인을 자동으로 생성해줍니다. 이를 통해 일관성 있는 코드 스타일을 유지하거나 특정 프로젝트의 요구사항을 커서에게 명확히 전달할 수 있습니다.
+                    <strong class="text-green-400">특히 유용한 기능:</strong> `/generate_cursor_rules`는 작업 내용을 바탕으로 커서 규칙을 자동 생성하여, 일관된 스타일 유지 및 프로젝트 요구사항 전달에 유용합니다.
                 </p>
             </div>
         </div>
@@ -724,11 +771,11 @@
 
     <div id="slide12" class="slide">
         <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #2: 코드 설명은 커서에게</h2>
-        <div class="pro-tip-layout" style="grid-template-columns: 1fr;">
+        <div class="pro-tip-single-column-layout">
             <div class="pro-tip-section pro-tip-highlight">
                 <h3><i class="fas fa-question-circle mr-3"></i>이해 안되면 바로 질문하세요!</h3>
                 <p class="themed-text description-text">
-                    커서가 작성해준 코드가 잘 이해되지 않거나, 왜 그렇게 작성했는지 궁금하다면 주저하지 말고 후속 질문으로 설명을 요청하세요.
+                    커서가 작성한 코드가 이해되지 않으면, 주저 말고 설명을 요청하세요.
                 </p>
                 <div class="visualization-box">
                     <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
@@ -755,7 +802,7 @@
                     </svg>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">기대 효과:</strong> 의외로 명쾌한 설명을 듣거나, 커서 스스로 자신이 저지른 실수를 깨닫고 더 나은 코드로 수정해주는 경우도 있습니다. 커서와의 대화를 통해 더 깊이 있는 학습이 가능합니다.
+                    <strong class="text-green-400">기대 효과:</strong> 명쾌한 설명을 듣거나 커서가 스스로 실수를 수정하기도 합니다. 대화를 통해 더 깊이 학습할 수 있습니다.
                 </p>
             </div>
         </div>
@@ -763,11 +810,11 @@
     
     <div id="slide13" class="slide">
         <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #3: 자연어로 코드 탐색</h2>
-        <div class="pro-tip-layout" style="grid-template-columns: 1fr;">
+        <div class="pro-tip-single-column-layout">
             <div class="pro-tip-section pro-tip-highlight">
                 <h3><i class="fas fa-search-location mr-3"></i>"그 함수 어디있더라?" 커서에게 물어보세요!</h3>
                 <p class="themed-text description-text">
-                    특정 기능의 함수 이름이나 파일 위치가 정확히 기억나지 않을 때, 일반적인 검색 기능 대신 커서에게 자연어로 물어보세요.
+                    함수명이나 파일 위치가 기억나지 않으면, 검색 대신 커서에게 자연어로 질문하세요.
                 </p>
                 <div class="visualization-box">
                      <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
@@ -794,7 +841,7 @@
                     </svg>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">장점:</strong> 정확한 키워드를 몰라도, 마치 동료 개발자에게 물어보듯 자연스러운 질문으로 원하는 코드나 파일을 빠르게 찾을 수 있습니다. 이는 특히 크고 복잡한 프로젝트에서 유용합니다.
+                    <strong class="text-green-400">장점:</strong> 키워드를 몰라도 동료에게 묻듯 코드를 찾을 수 있어, 크고 복잡한 프로젝트에서 특히 유용합니다.
                 </p>
             </div>
         </div>
@@ -802,11 +849,11 @@
 
     <div id="slide14" class="slide">
         <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #4: 새 라이브러리? Context7 MCP로 정확도 UP!</h2>
-        <div class="pro-tip-layout" style="grid-template-columns: 1fr;">
+        <div class="pro-tip-single-column-layout">
             <div class="pro-tip-section pro-tip-highlight">
                 <h3><i class="fas fa-book-reader mr-3"></i>커서에게 공식 문서를 읽혀주세요!</h3>
                 <p class="themed-text description-text">
-                    커서가 특정 라이브러리나 프레임워크의 최신 인터페이스를 잘 모르고 오래된 방식으로 코딩할 때, **Context7 MCP** (가칭, 또는 유사 기능)를 활용하여 공식 문서를 컨텍스트로 제공하세요.
+                    커서가 최신 라이브러리 정보를 모를 때, **Context7 MCP** (가칭) 등으로 공식 문서를 제공하여 정확도를 높이세요.
                 </p>
                 <div class="visualization-box">
                      <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
@@ -840,7 +887,7 @@
                     </svg>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">효과:</strong> 커서가 최신 정보를 바탕으로 정확한 코드를 생성하도록 유도하여, 할루시네이션(환각)을 줄이고 답변의 질을 크게 높일 수 있습니다. (예: Swift UI API 변경에 빠르게 대응)
+                    <strong class="text-green-400">효과:</strong> 최신 정보 기반으로 정확한 코드 생성을 유도하고, 할루시네이션을 줄여 답변의 질을 높입니다 (예: Swift UI API 변경 대응).
                 </p>
             </div>
         </div>
@@ -848,11 +895,11 @@
 
     <div id="slide15" class="slide">
         <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #5: 팀 코드 리뷰엔 버그 파인더!</h2>
-        <div class="pro-tip-layout" style="grid-template-columns: 1fr;">
+        <div class="pro-tip-single-column-layout">
             <div class="pro-tip-section pro-tip-highlight">
                 <h3><i class="fas fa-search-plus mr-3"></i>잠재적 버그, 커서가 찾아드립니다!</h3>
                 <p class="themed-text description-text">
-                    팀원의 코드를 리뷰하거나, 자신의 코드에 숨어있을지 모르는 잠재적인 버그를 찾고 싶을 때 **버그 파인더** (가칭, 또는 유사 기능)를 활용해 보세요.
+                    코드 리뷰나 자체 검토 시, **버그 파인더** (가칭)로 잠재적 버그를 찾아보세요.
                 </p>
                 <div class="visualization-box">
                      <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
@@ -884,13 +931,33 @@
                     </svg>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">활용법:</strong> 브랜치 간 코드 변경 사항을 비교하여 잠재적인 버그를 신뢰도 점수와 함께 제시해줍니다. (예: <code class="shortcut-key">Cmd+Shift+P</code> > Bug Finder 실행)
+                    <strong class="text-green-400">활용법:</strong> 브랜치 간 코드 변경 사항을 비교하여 잠재적 버그와 신뢰도 점수를 확인합니다 (예: <code class="shortcut-key">Cmd+Shift+P</code> > Bug Finder).
                 </p>
             </div>
         </div>
     </div>
 
-    <div id="slide16" class="slide"> <div class="text-center max-w-4xl">
+    <div id="slide16" class="slide">
+        <div class="attitude-layout">
+            <div class="attitude-section attitude-highlight">
+                <h3 class="themed-text"><i class="fas fa-user-cog mr-3"></i>AI 도구를 다루는 자세</h3>
+                
+                <h4 class="themed-text"><i class="fas fa-code-compare"></i>Code Review is NON-NEGOTIABLE!</h4>
+                <p class="themed-text description-text">커서가 생성한 코드라도 반드시 직접 리뷰하고 이해해야 합니다. 자동 생성된 코드를 맹신하지 마세요.</p>
+
+                <h4 class="themed-text"><i class="fas fa-brain"></i>Don't let skills get rusty!</h4>
+                <p class="themed-text description-text">AI는 학습 도구이지, 단순 작업 대체용이 아닙니다. 핵심 로직을 이해하려 노력하고, AI를 통해 배우세요.</p>
+
+                <h4 class="themed-text"><i class="fas fa-gas-pump"></i>Quality in = Quality out.</h4>
+                <p class="themed-text description-text">명확한 프롬프트와 충분한 컨텍스트(연료)를 제공하고, 올바른 방향(조향)을 제시해야 양질의 결과를 얻을 수 있습니다.</p>
+                
+                <h4 class="themed-text"><i class="fas fa-user-astronaut"></i>Cursor is a Super-Smart Co-Pilot</h4>
+                <p class="themed-text description-text">커서는 매우 똑똑한 공동 조종사이지만, 아직 자율적인 에이전트는 아닙니다. 최종 판단과 책임은 사용자에게 있습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide17" class="slide"> <div class="text-center max-w-4xl">
             <h2 class="text-4xl sm:text-5xl text-sky-400 mb-8 themed-text">마무리</h2>
             <p class="themed-text description-text">
                 [발표 내용을 요약하고, 핵심 메시지를 다시 한번 강조하며 마무리합니다.]
