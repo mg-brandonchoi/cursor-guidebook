@@ -146,6 +146,51 @@
             margin-bottom: 1.5rem; /* mb-6 */
         }
 
+        /* New style for separate explanation blocks */
+        .mistake-explanation {
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-left: 5px solid #64748b;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        .mistake-explanation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(100, 116, 139, 0.5) 50%, transparent 100%);
+        }
+        .mistake-explanation.dont-explanation {
+            border-left-color: #ef4444;
+            background: linear-gradient(135deg, #1e293b 0%, #1c1917 100%);
+        }
+        .mistake-explanation.dont-explanation::before {
+            background: linear-gradient(90deg, transparent 0%, rgba(239, 68, 68, 0.3) 50%, transparent 100%);
+        }
+        .mistake-explanation.do-explanation {
+            border-left-color: #22c55e;
+            background: linear-gradient(135deg, #1e293b 0%, #14532d 100%);
+        }
+        .mistake-explanation.do-explanation::before {
+            background: linear-gradient(90deg, transparent 0%, rgba(34, 197, 94, 0.3) 50%, transparent 100%);
+        }
+        .mistake-explanation p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #cbd5e1;
+            margin: 0;
+            font-weight: 500;
+        }
+        .mistake-explanation p strong {
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
 
         .mistake-section .explanation, .pro-tip-section .explanation {
             font-size: 1rem; 
@@ -285,15 +330,12 @@
                         <text x="20" y="114" font-family="sans-serif" font-size="11" fill="#eff6ff">주제 C: 문서 작업 관련</text>
                         <rect x="85" y="126" width="190" height="22" rx="5" fill="#ef4444" fill-opacity="0.6"/>
                         <text x="90" y="141" font-family="sans-serif" font-size="11" fill="#fee2e2" text-anchor="start">주제 A: 아까 그 버그 말인데요...</text>
-                        <path d="M 240 50 Q 260 80 240 110 Q 260 140 240 170" stroke="#ef4444" stroke-width="3" fill="none" stroke-dasharray="5,5">
+                        <path d="M 270 50 Q 290 80 270 110 Q 290 140 270 170" stroke="#ef4444" stroke-width="3" fill="none" stroke-dasharray="5,5">
                             <animate attributeName="stroke-dashoffset" values="0;20" dur="1s" repeatCount="indefinite"/>
                         </path>
-                        <text x="255" y="115" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#f87171" font-weight="bold" transform="rotate(15 255 115)">?</text>
+                        <text x="285" y="115" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#f87171" font-weight="bold" transform="rotate(15 285 115)">?</text>
                     </svg>
                 </div>
-                <p class="explanation themed-text">
-                    <strong class="text-red-400">Why?</strong> 커서는 대화 맥락을 기억합니다. 주제가 섞이면 컨텍스트가 꼬여 혼란을 유발하고, 부정확한 답변 가능성이 높아집니다.
-                </p>
             </div>
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: 작업마다 새 채팅창 사용</h3>
@@ -303,12 +345,12 @@
                         <rect x="0" y="0" width="300" height="40" fill="#475569"/>
                         <path d="M 5 40 Q 10 5 30 5 L 100 5 Q 120 5 125 40 Z" fill="#293548" stroke="#4ade80" stroke-width="1.5"/>
                         <text x="65" y="25" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4ade80">주제 A</text>
-                        <foreignObject x="45" y="15" width="20" height="20">
+                        <foreignObject x="20" y="10" width="20" height="20">
                            <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-code text-green-400 text-base"></i>
                         </foreignObject>
                         <path d="M 130 40 Q 135 10 150 10 L 210 10 Q 225 10 230 40 Z" fill="#475569" stroke="#64748b" stroke-width="1"/>
                         <text x="180" y="28" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">주제 B</text>
-                         <foreignObject x="160" y="18" width="20" height="20">
+                         <foreignObject x="145" y="10" width="20" height="20">
                            <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-file-alt text-slate-400 text-base"></i>
                         </foreignObject>
                         <circle cx="255" cy="22.5" r="10" fill="#64748b" style="cursor:pointer;"/>
@@ -329,6 +371,11 @@
                     <strong class="text-green-400">Tip:</strong> 새 채팅은 <code class="shortcut-key">CMD/Ctrl+Shift+L</code>. 이전 내용 참조는 <code class="shortcut-key">@</code> 사용.
                 </p>
             </div>
+        </div>
+        <div class="mistake-explanation dont-explanation">
+            <p class="themed-text">
+                <strong class="text-red-400">Why?</strong> 커서는 대화 맥락을 기억합니다. 주제가 섞이면 컨텍스트가 꼬여 혼란을 유발하고, 부정확한 답변 가능성이 높아집니다.
+            </p>
         </div>
     </div>
 
@@ -362,9 +409,6 @@
                         </foreignObject>
                     </svg>
                 </div>
-                <p class="explanation themed-text">
-                    <strong class="text-red-400">Why?</strong> LLM은 다음 토큰 생성기이며, 커서는 잘못된 맥락에서 실수를 반복하거나 수정 의도를 파악하기 어렵습니다.
-                </p>
             </div>
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: 원인 프롬프트 수정 후 재요청</h3>
@@ -396,6 +440,11 @@
                 </p>
             </div>
         </div>
+        <div class="mistake-explanation dont-explanation">
+            <p class="themed-text">
+                <strong class="text-red-400">Why?</strong> LLM은 다음 토큰 생성기이며, 커서는 잘못된 맥락에서 실수를 반복하거나 수정 의도를 파악하기 어렵습니다.
+            </p>
+        </div>
     </div>
 
     <div id="slide6" class="slide">
@@ -419,9 +468,6 @@
                          <text x="150" y="195" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#ef4444" font-weight="bold">?</text>
                     </svg>
                 </div>
-                <p class="explanation themed-text">
-                    <strong class="text-red-400">Why?</strong> 커서의 출력은 입력 정보에 의존합니다. 수정 위치나 컨텍스트가 없으면 커서가 추측하기 어렵고, 엉뚱한 결과를 낼 수 있습니다.
-                </p>
             </div>
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: 수정 대상 코드 명시 (파일 첨부)</h3>
@@ -463,6 +509,11 @@
                 </p>
             </div>
         </div>
+        <div class="mistake-explanation dont-explanation">
+            <p class="themed-text">
+                <strong class="text-red-400">Why?</strong> 커서의 출력은 입력 정보에 의존합니다. 수정 위치나 컨텍스트가 없으면 커서가 추측하기 어렵고, 엉뚱한 결과를 낼 수 있습니다.
+            </p>
+        </div>
     </div>
 
     <div id="slide7" class="slide">
@@ -490,9 +541,6 @@
                         <rect x="10" y="148" width="280" height="55" rx="3" fill="#fffbeb" fill-opacity="0.15"/>
                     </svg>
                 </div>
-                <p class="explanation themed-text">
-                    <strong class="text-red-400">Why?</strong> 린터 오류는 커서 컨텍스트에 포함됩니다. 사소한 오류에도 커서는 민감하게 반응해 핵심보다 오류에 집중하거나 잘못 추론할 수 있습니다.
-                </p>
             </div>
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: 린터 오류 해결 후 요청</h3>
@@ -521,6 +569,11 @@
                 </p>
             </div>
         </div>
+        <div class="mistake-explanation dont-explanation">
+            <p class="themed-text">
+                <strong class="text-red-400">Why?</strong> 린터 오류는 커서 컨텍스트에 포함됩니다. 사소한 오류에도 커서는 민감하게 반응해 핵심보다 오류에 집중하거나 잘못 추론할 수 있습니다.
+            </p>
+        </div>
     </div>
 
     <div id="slide8" class="slide">
@@ -544,9 +597,6 @@
                         <text x="150" y="195" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#ef4444" font-weight="bold">???</text>
                     </svg>
                 </div>
-                <p class="explanation themed-text">
-                    <strong class="text-red-400">Why?</strong> 큰 작업은 목적이 명확하지 않으면 사용자 의도나 프로젝트 구조와 벗어날 가능성이 커져 결국 만족스럽지 못한 결과로 이어집니다.
-                </p>
             </div>
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: 디자인 선행 후 단계별 작업 요청</h3>
@@ -588,6 +638,11 @@
                 </p>
             </div>
         </div>
+        <div class="mistake-explanation dont-explanation">
+            <p class="themed-text">
+                <strong class="text-red-400">Why?</strong> 큰 작업은 목적이 명확하지 않으면 사용자 의도나 프로젝트 구조와 벗어날 가능성이 커져 결국 만족스럽지 못한 결과로 이어집니다.
+            </p>
+        </div>
     </div>
 
     <div id="slide9" class="slide">
@@ -619,9 +674,6 @@
                         <rect x="10" y="188" width="280" height="38" rx="3" fill="#fffbeb" fill-opacity="0.15"/>
                     </svg>
                 </div>
-                <p class="explanation themed-text">
-                    <strong class="text-red-400">Why?</strong> 커서는 파일 이름, 변수/함수 이름, 모듈 구조 등을 통해 코드를 이해합니다. 기술 부채가 쌓인 코드는 커서를 혼란스럽게 만들어 작업 효율을 떨어뜨립니다.
-                </p>
             </div>
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: SRP 준수 및 리팩토링 요청</h3>
@@ -661,6 +713,11 @@
                 </p>
             </div>
         </div>
+        <div class="mistake-explanation dont-explanation">
+            <p class="themed-text">
+                <strong class="text-red-400">Why?</strong> 커서는 파일 이름, 변수/함수 이름, 모듈 구조 등을 통해 코드를 이해합니다. 기술 부채가 쌓인 코드는 커서를 혼란스럽게 만들어 작업 효율을 떨어뜨립니다.
+            </p>
+        </div>
     </div>
 
     <div id="slide10" class="slide">
@@ -693,9 +750,6 @@
                         </text>
                     </svg>
                 </div>
-                <p class="explanation themed-text">
-                    <strong class="text-red-400">Why?</strong> 커서가 항상 완벽한 결과만 내는 것은 아닙니다. 좋은 결과물을 저장해두지 않으면, 이후 작업에서 결과가 만족스럽지 않거나 예기치 못한 문제로 이전의 좋은 상태를 잃어버릴 수 있습니다.
-                </p>
             </div>
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: 만족 시 커밋 메시지 생성 및 저장</h3>
@@ -734,6 +788,11 @@
                     <strong class="text-green-400">Tip:</strong> 커서에게 "이 변경사항에 대한 커밋 메시지 작성해줘"와 같이 요청하면, 작업 내용을 요약하는 메시지를 쉽게 얻을 수 있습니다. 이를 활용해 작업 단위를 명확히 하고, 언제든 좋은 상태로 돌아갈 수 있도록 하세요.
                 </p>
             </div>
+        </div>
+        <div class="mistake-explanation dont-explanation">
+            <p class="themed-text">
+                <strong class="text-red-400">Why?</strong> 커서가 항상 완벽한 결과만 내는 것은 아닙니다. 좋은 결과물을 저장해두지 않으면, 이후 작업에서 결과가 만족스럽지 않거나 예기치 못한 문제로 이전의 좋은 상태를 잃어버릴 수 있습니다.
+            </p>
         </div>
     </div>
 
