@@ -1,946 +1,902 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursor Chaos to Coding Zen</title>
+    <title>커서 그렇게 쓰는거 아닌데</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Custom styles */
+        html, body {
+            scroll-behavior: smooth; 
+        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #F4F7F6; /* Light Gray */
-            color: #333333; /* Dark Gray */
-            overflow: hidden; /* Hide scrollbars during presentation mode */
+            font-family: 'Nanum Gothic', 'Fira Code', monospace, sans-serif;
+            position: relative; 
+            overflow-x: hidden; 
+            background-color: #1e293b; /* bg-slate-800 as a fallback */
         }
 
-        .presentation-container {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        /* Blinking cursor animation */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .blinking-cursor {
+            animation: blink 1s step-end infinite;
+            background-color: currentColor; 
+            width: 0.15em; 
+            height: 0.9em; 
+            margin-left: 0.1em;
+            display: inline-block;
+            vertical-align: middle; 
+        }
+
+        /* Subtle code snippet background */
+        body::before {
+            content: "/* Presentation Background Pattern */\n\n// File: main.js\nconst APP_CONFIG = {\n  version: '1.0.0',\n  theme: 'dark-vscode',\n  debugMode: false\n};\n\nfunction initApp(config) {\n  console.log(`Initializing app v${config.version}`);\n  if (config.theme) {\n    document.body.classList.add(config.theme);\n  }\n}\n\nconst debounce = (func, delay) => {\n  let timeoutId;\n  return (...args) => {\n    clearTimeout(timeoutId);\n    timeoutId = setTimeout(() => func.apply(this, args), delay);\n  };\n};\n\nclass SlideDeck {\n  constructor(slides) { this.slides = slides; this.currentSlide = 0; }\n  next() { if (this.currentSlide < this.slides.length - 1) this.currentSlide++; }\n  prev() { if (this.currentSlide > 0) this.currentSlide--; }\n}\n\nconst userSettings = { editorFont: 'Fira Code', fontSize: 14, autoSave: true };\n\n// End of background pattern.\n";
+            position: fixed; 
+            top: 0; left: 0; width: 100%; height: 100%;
+            font-family: 'Fira Code', monospace; 
+            font-size: 10px; 
+            color: rgba(71, 85, 105, 0.15); /* slate-600 @ 15% */
+            white-space: pre-wrap; 
+            overflow: hidden; 
+            pointer-events: none; 
+            z-index: 0; 
+            padding: 1.5rem; 
+            line-height: 1.6; 
+            text-align: left;
         }
 
         .slide {
-            width: 98%;
-            max-width: 1400px;
-            height: 95%;
-            min-height: 500px;
-            background-color: #FFFFFF;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            padding: 20px 25px;
-            box-sizing: border-box;
-            display: none; /* Hidden by default */
-            flex-direction: column;
-            justify-content: flex-start; /* Align content to top */
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column; 
             align-items: center;
-            text-align: center;
-            overflow-y: auto; /* Allow scrolling for content-heavy slides */
-        }
-
-        .slide.active {
-            display: flex;
-        }
-
-        .slide h1 {
-            color: #004D40; /* Dark Teal */
-            font-size: 2.4em; /* Slightly larger */
-            margin-bottom: 15px;
-            margin-top: 15px; /* Adjusted for better spacing */
-        }
-
-        .slide h2 {
-            color: #00796B; /* Medium Teal */
-            font-size: 1.8em; /* Slightly larger */
-            margin-top: 25px; /* Increased top margin */
-            margin-bottom: 15px;
-        }
-        
-        .slide h3 {
-            color: #00897B; /* Slightly brighter teal for h3 */
-            font-size: 1.4em; /* Slightly larger */
-            margin-bottom: 10px;
-            margin-top: 5px; /* Added top margin for consistency */
-        }
-
-        .slide p, .slide li {
-            font-size: 1.05em; /* Slightly larger for readability */
-            line-height: 1.6; /* Increased line height */
-            text-align: left;
-            max-width: 95%;
-            margin: 8px auto;
-        }
-        
-        .slide ul, .slide ol { /* Applied to ol as well */
-            list-style-position: inside;
-            padding-left: 20px;
-            text-align: left;
-            max-width: 95%;
-            margin: 8px auto;
-        }
-        
-        .slide ul li p, .slide ol li p { /* Reduce margin for p inside li */
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-
-
-        .slide code {
-            background-color: #E0F2F1; /* Light Teal Background */
-            padding: 0.2em 0.5em;
-            margin: 0 0.2em;
-            border-radius: 4px;
-            font-family: 'Consolas', 'Courier New', Courier, monospace; /* Preferred monospace fonts */
-            color: #004D40; /* Dark Teal text for code */
-            font-size: 0.95em;
-        }
-
-        .slide pre {
-            background-color: #263238; /* Dark Blue Grey */
-            color: #ECEFF1; /* Light Grey text */
-            padding: 15px;
-            border-radius: 8px;
-            text-align: left;
-            overflow-x: auto;
-            max-width: 95%;
-            margin: 12px auto;
-            font-family: 'Consolas', 'Courier New', Courier, monospace;
-            font-size: 0.9em; /* Adjusted for balance */
-            white-space: pre-wrap; 
-            word-wrap: break-word;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        
-        .slide pre code {
-            background-color: transparent;
-            color: inherit;
-            padding: 0;
-            margin: 0;
-            font-size: 1em; /* Ensure pre code inherits size correctly */
-        }
-
-        /* --- New Professional Placeholder Styles --- */
-        .professional-visual-placeholder, .generic-logo-placeholder {
-            width: 80%;
-            max-width: 500px;
-            min-height: 150px; /* Adjusted min-height */
-            background-color: #E0E7E9; /* Softer placeholder color */
-            border: 2px dashed #00796B; /* Medium Teal */
-            display: flex;
-            flex-direction: column; /* Allow icon and text */
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            margin: 15px auto;
-            font-style: italic;
-            color: #004D40; /* Dark Teal for text */
-            border-radius: 8px;
-            font-size: 0.95em;
-            padding: 15px;
-            box-sizing: border-box;
-        }
-        .professional-visual-placeholder .icon, .generic-logo-placeholder .icon {
-            font-size: 2.5em; /* Larger icon */
-            margin-bottom: 10px;
-            color: #004D40;
-        }
-        .video-placeholder-content { /* Style for text within video placeholders */
-             font-style: normal;
-             font-weight: bold;
-             color: #004D40;
-             font-size: 1em;
-        }
-        .professional-visual-placeholder img { /* Style for actual images within placeholders */
-            max-width: 100%;
-            max-height: 180px; /* Limit image height */
-            height: auto;
-            border-radius: 6px;
-            margin-top: 10px;
+            padding: 2rem; /* p-8 */
+            position: relative; 
+            z-index: 1; 
+            text-align: center; 
         }
 
+        .themed-text {
+            font-family: 'Nanum Gothic', 'Fira Code', monospace, sans-serif;
+        }
+        h1.themed-text, h2.themed-text, h3.themed-text { 
+            font-weight: 700; 
+        }
+         p.themed-text, li.themed-text { 
+            font-weight: 400; 
+        }
+        
+        .toc-list {
+            list-style: none; padding: 0; margin-top: 2rem;
+        }
+        .toc-list li {
+            font-size: 1.5rem; margin-bottom: 1rem; color: #94a3b8; /* text-slate-400 */
+            transition: color 0.3s ease;
+        }
+        .toc-list li:hover { color: #38bdf8; /* text-sky-400 */ }
+        .toc-list li i { margin-right: 0.75rem; color: #64748b; /* text-slate-500 */ }
+        .toc-list li:hover i { color: #38bdf8; /* text-sky-400 */ }
 
-        .logo-placeholder { /* For the main logo on title/end slides */
-            width: 180px; /* Slightly larger */
-            height: 60px;
-            background-color: #E0E7E9;
-            border: 2px solid #00796B; /* Solid border for distinction */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            margin: 0 auto 25px auto; /* Increased bottom margin */
-            font-size: 1em;
-            font-weight: bold;
-            color: #004D40;
-            border-radius: 6px;
-        }
-        /* --- End New Placeholder Styles --- */
-
-
-        .slide .subtitle {
-            font-style: italic;
-            color: #424242; /* Darker gray for subtitle */
-            margin-top: -10px;
-            margin-bottom: 30px;
-            font-size: 1.1em; /* Slightly larger subtitle */
-        }
-
-        .slide .presenter-info {
-            margin-top: 15px;
-            font-size: 0.95em;
-            color: #004D40;
-        }
-
-        .navigation {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-        }
-
-        .navigation button {
-            background-color: #00796B; /* Medium Teal */
-            color: white;
-            border: none;
-            padding: 12px 28px; /* Slightly more padding */
-            margin: 0 10px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .navigation button:hover:not(:disabled) {
-            background-color: #004D40; /* Dark Teal */
-            transform: translateY(-2px); /* Subtle lift effect */
-        }
-        .navigation button:disabled {
-            background-color: #BDBDBD; /* Disabled color */
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        .pain-cure-container {
-            display: flex;
-            flex-direction: row; /* Default to side-by-side */
-            justify-content: space-around;
-            align-items: flex-start; 
-            width: 100%;
-            gap: 25px; 
-            margin-top: 20px;
-        }
-        .pain-column, .cure-column {
-            flex: 1; /* Allow columns to take equal space */
-            padding: 20px; 
-            border-radius: 10px; 
-            transition: box-shadow 0.3s ease;
-            min-height: 250px; 
-        }
-        .pain-column:hover, .cure-column:hover {
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-
-        .pain-column {
-            background-color: #FFEBEE; /* Lighter Red */
-            border: 1px solid #FFCDD2;
-            box-shadow: 0 4px 6px rgba(200, 0, 0, 0.05);
-        }
-        .cure-column {
-            background-color: #E0F2F1; /* Lighter Teal */
-            border: 1px solid #B2DFDB;
-            box-shadow: 0 4px 6px rgba(0, 100, 100, 0.05);
-        }
-        .pain-column h3, .cure-column h3 {
-            margin-top: 0;
-            padding-bottom: 10px; 
-            border-bottom: 2px solid; 
-            text-align: center;
-        }
-        .pain-column h3 { color: #C62828; border-color: #EF9A9A; } 
-        .cure-column h3 { color: #00695C; border-color: #80CBC4;} 
-
-        .slide .key-takeaway-grid {
+        /* Styles for Don't / Do sections in Mistake slides & ProTip slides */
+        .mistake-layout, .pro-tip-layout { /* Combined common styles */
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
-            gap: 20px; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 2rem; 
             width: 100%;
-            max-width: 1100px; 
-            margin-top: 20px;
-        }
-        .slide .key-takeaway-item {
-            background-color: #E8F5E9; 
-            padding: 20px; 
-            border-radius: 10px; 
-            border: 1px solid #A5D6A7; 
-            transition: transform 0.2s ease, box-shadow 0.3s ease;
-        }
-         .slide .key-takeaway-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-        }
-        .slide .key-takeaway-item h3 {
-            color: #2E7D32; 
-            margin-top: 0;
-            margin-bottom: 10px; 
-            border-bottom: 2px solid #A5D6A7;
-            padding-bottom: 8px;
-        }
-
-        .slide-footer {
-            position: absolute;
-            bottom: 20px;
-            right: 30px;
-            font-size: 0.9em;
-            color: #757575; 
-        }
-
-        /* --- Code Comparison Styles for Slide 4 --- */
-        .code-comparison-container {
-            display: flex;
-            flex-direction: column; /* Stack on small screens by default */
-            gap: 20px;
-            width: 100%;
-            margin-top: 15px;
-        }
-
-        @media screen and (min-width: 768px) { /* Side-by-side on larger screens */
-            .code-comparison-container {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: flex-start;
-            }
-        }
-
-        .code-block-wrapper {
-            flex: 1;
-            border: 1px solid #DDD;
-            border-radius: 8px;
-            padding: 10px;
-            background-color: #FAFAFA;
-        }
-        .code-block-wrapper h3 {
-            font-size: 1.1em;
-            color: #333;
-            margin-top: 0;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-        .code-block-wrapper pre {
-            margin: 0; 
-            max-height: 200px; 
-            font-size: 0.8em;
-        }
-        .code-block-wrapper.has-errors pre code .error-line {
-            background-color: #FFEBEE; 
-            color: #C62828; 
-            font-weight: bold;
-            display: block; 
-            margin: 0 -18px; 
-            padding: 0 18px;
-        }
-        /* --- End Code Comparison Styles --- */
-
-        /* --- CSS Animation for Screencasts --- */
-        .css-screencast-container {
-            background-color: #FFFFFF; /* Clean white background like real chat */
-            border: 1px solid #E0E0E0; /* Subtle border */
-            border-radius: 12px; /* More modern rounded corners */
-            padding: 16px;
-            margin: 15px auto;
-            width: 90%;
-            max-width: 420px; /* Reduced from 500px to fit better */
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* More prominent shadow */
+            max-width: 72rem; /* max-w-6xl */
             text-align: left;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* Modern system font */
-            font-size: 0.9em; /* Slightly smaller font */
-            min-height: 160px; /* Reduced height */
+        }
+        .mistake-section, .pro-tip-section { /* Combined common styles */
+            padding: 1.5rem; 
+            border-radius: 0.5rem; 
+            background-color: #334155; /* bg-slate-700 */
+            display: flex; 
+            flex-direction: column; 
+        }
+        .mistake-section h3, .pro-tip-section h3 { 
+            font-size: 1.5rem; 
+            font-weight: 600; 
+            margin-bottom: 1rem; 
             display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            position: relative;
+            align-items: center;
+        }
+        .mistake-section p.description-text, .pro-tip-section p.description-text {
+            font-size: 1.125rem; 
+            line-height: 1.75; 
+            color: #cbd5e1; /* text-slate-300 */
+            margin-bottom: 1rem;
+        }
+        .mistake-section .explanation, .pro-tip-section .explanation {
+            font-size: 1rem; 
+            color: #94a3b8; /* text-slate-400 */
+            margin-top: auto; 
+            padding-top: 1rem; 
         }
 
-        .chat-bubble {
-            padding: 12px 16px; /* More generous padding */
-            border-radius: 18px; /* More rounded like modern chat apps */
-            margin-bottom: 12px;
-            max-width: 75%; /* Slightly narrower for better readability */
-            word-wrap: break-word;
-            opacity: 0;
-            transform: translateY(20px) scale(0.95); /* More natural entrance */
-            animation-fill-mode: forwards;
-            animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother easing */
-            font-size: 0.9em;
-            line-height: 1.4;
+        .dont-section {
+            border: 2px solid #ef4444; /* border-red-500 */
         }
-
-        .user-bubble {
-            background: linear-gradient(135deg, #007AFF, #0051D5); /* iOS-style blue gradient */
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 6px; /* Subtle tail */
-            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3); /* Subtle glow */
+        .dont-section h3 {
+            color: #f87171; /* text-red-400 */
         }
-
-        .cursor-bubble {
-            background-color: #F2F2F7; /* Light gray like iOS */
-            color: #000000;
-            align-self: flex-start;
-            border-bottom-left-radius: 6px;
-            border: 1px solid #E5E5EA; /* Subtle border */
+        .do-section, .pro-tip-highlight { /* Combined Do and ProTip highlight */
+            border: 2px solid #22c55e; /* border-green-500 */
+        }
+        .do-section h3, .pro-tip-highlight h3 {
+            color: #4ade80; /* text-green-400 */
         }
         
-        /* Improved animation timings */
-        .css-screencast-container.semantic-search-animation .user-bubble {
-            animation: modernFadeIn 0.6s 1.2s forwards;
-        }
-        .css-screencast-container.semantic-search-animation .cursor-bubble {
-            animation: modernFadeIn 0.6s 2.8s forwards;
-        }
-        .css-screencast-container.semantic-search-animation .chat-input-simulation {
-            animation: modernTypeIn 0.3s ease-out 0.1s forwards;
-        }
-
-        .css-screencast-container.semantic-search-animation .chat-input-simulation .typing-text {
-            animation: typeText 2.2s ease-out 0.4s forwards;
-        }
-
-        .css-screencast-container.generate-rules-animation .user-bubble {
-            animation: modernFadeIn 0.6s 1.0s forwards;
-        }
-        .css-screencast-container.generate-rules-animation .cursor-bubble {
-            animation: modernFadeIn 0.6s 2.2s forwards; 
-        }
-        .css-screencast-container.generate-rules-animation .chat-input-simulation {
-            animation: modernTypeInShort 0.3s ease-out 0.1s forwards;
-        }
-
-        .css-screencast-container.generate-rules-animation .chat-input-simulation .typing-text {
-            animation: typeTextShort 1.8s ease-out 0.4s forwards;
-        }
-
-        .chat-input-simulation {
-            border: 1px solid #D1D1D6;
-            background-color: #F2F2F7;
-            padding: 12px 16px;
-            border-radius: 22px; /* More rounded input */
-            margin-top: auto;
-            color: #000000;
-            overflow: hidden;
-            white-space: nowrap;
-            width: 100%; /* Fixed width */
-            opacity: 0;
+        .shortcut-key { 
+            background-color: #475569; /* bg-slate-600 */
+            color: #e2e8f0; /* text-slate-200 */
+            padding: 0.2em 0.6em;
+            border-radius: 0.25em; 
+            font-family: 'Fira Code', monospace;
             font-size: 0.9em;
-            position: relative;
-            min-height: 20px; /* Ensure consistent height */
+            border: 1px solid #64748b; /* border-slate-500 */
         }
 
-        .chat-input-simulation .typing-text {
-            display: inline-block;
-            width: 0;
-            overflow: hidden;
-            white-space: nowrap;
+        .visualization-box {
+            background-color: #293548; 
+            border-radius: 0.375rem; 
+            padding: 0; 
+            margin-top: 1rem;
+            margin-bottom: 1rem; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #475569; 
+            flex-grow: 1; 
+            min-height: 240px; 
+            overflow: hidden; 
+        }
+        .visualization-box svg {
+            width: 100%; 
+            max-width: 100%; 
+            height: 100%; 
+            border-radius: 0.375rem; 
+        }
+        .pro-tip-layout .visualization-box { /* Specific for pro-tips to potentially allow more height */
+             min-height: 260px;
         }
 
-        .chat-input-simulation::after {
-            content: '';
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 2px;
-            height: 16px;
-            background-color: #007AFF;
-            opacity: 0;
-        }
 
-        .chat-input-simulation.typing::after {
-            animation: blinkCursor 1s infinite;
-        }
-
-        @keyframes modernFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(20px) scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        @keyframes modernTypeIn {
-            0% { 
-                opacity: 1; 
-            }
-            5% {
-                opacity: 1;
-            }
-            100% { 
-                opacity: 1; 
-            }
-        }
-
-        @keyframes modernTypeInShort {
-            0% { 
-                opacity: 1; 
-            }
-            5% {
-                opacity: 1;
-            }
-            100% { 
-                opacity: 1; 
-            }
-        }
-
-        @keyframes typeText {
-            0% { 
-                width: 0; 
-            }
-            100% { 
-                width: 100%; 
-            }
-        }
-
-        @keyframes typeTextShort {
-            0% { 
-                width: 0; 
-            }
-            100% { 
-                width: 100%; 
-            }
-        }
-
-        @keyframes blinkCursor {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        /* --- End CSS Animation Styles --- */
-
-
-        /* Responsive Design Adjustments */
-        @media screen and (max-height: 800px) {
-            .slide {
-                padding: 20px; 
-                height: 98%;
-            }
-            .slide h1 { font-size: 2em; margin-bottom: 12px; margin-top: 10px; }
-            .slide h2 { font-size: 1.5em; margin-top: 20px; margin-bottom: 10px; }
-            .slide h3 { font-size: 1.25em; margin-bottom: 8px; }
-            .professional-visual-placeholder, .generic-logo-placeholder { min-height: 150px; margin: 15px auto; }
-            .css-screencast-container { max-width: 380px; font-size: 0.85em; min-height: 140px;}
-
-        }
-
-        @media screen and (max-height: 650px) { 
-            .slide { padding: 15px; }
-            .slide h1 { font-size: 1.8em; margin-bottom: 10px; margin-top: 8px; }
-            .slide h2 { font-size: 1.3em; margin-top: 15px; margin-bottom: 8px; }
-            .slide h3 { font-size: 1.15em; margin-bottom: 6px; }
-            .slide p, .slide li { font-size: 0.95em; margin: 8px auto; }
-            .professional-visual-placeholder, .generic-logo-placeholder { min-height: 100px; margin: 10px auto; } /* Reduced height */
-            .professional-visual-placeholder img { max-height: 90px; } /* Adjust image height in placeholder */
-            .navigation { bottom: 15px; }
-            .navigation button { padding: 10px 20px; font-size: 0.9em; }
-            .pain-cure-container { flex-direction: column; gap: 15px; } 
-            .pain-column, .cure-column { width: 90%; max-width: none; } /* Ensure full width when stacked */
-            .css-screencast-container { max-width: 340px; font-size: 0.8em; min-height: 120px; padding: 12px;}
-        }
-
-        @media screen and (max-width: 768px) {
-            .pain-cure-container {
-                flex-direction: column; /* Stack columns */
-                gap: 15px; 
-            }
-            .pain-column, .cure-column {
-                 width: 90%; /* Adjust width for stacked layout */
-                 max-width: none; /* Remove max-width constraint when stacked */
-            }
-            .slide {
-                width: 98%;
-                padding: 15px;
-            }
-            .slide h1 { font-size: 1.9em; }
-            .slide h2 { font-size: 1.4em; }
-            .slide h3 { font-size: 1.2em; }
-            .slide .key-takeaway-grid {
+         /* Responsive adjustments */
+        @media (max-width: 768px) { 
+            .mistake-layout, .pro-tip-layout {
                 grid-template-columns: 1fr; 
+            }
+            .mistake-section h3, .pro-tip-section h3 {
+                font-size: 1.25rem; 
             }
         }
 
     </style>
 </head>
-<body>
-
-    <div class="presentation-container">
-
-        <section class="slide active">
-            <div class="logo-placeholder">Match Group</div>
-            <h1>Cursor Chaos to Coding Zen</h1>
-            <p class="subtitle">Taming Your AI Assistant for Dev Superpowers!</p>
-            <p class="subtitle"><em>(Or, how I stopped worrying and learned to love the <code>@</code> symbol)</em></p>
-            <div class="presenter-info">
-                <p>Brandon Choi / MGAI Dev team</p>
-                <p>Match Group Developers</p>
-            </div>
-            <div class="slide-footer">1 / 9</div>
-        </section>
-
-        <section class="slide">
-            <h1>Ever Felt Like This With an LLM? 🤯</h1>
-            <div class="professional-visual-placeholder">
-                <span class="icon">🤔</span> <p>Visual representing developer confusion or a common LLM challenge</p>
-            </div>
-            <ul>
-                <li>"You ask for a simple refactor, it rewrites your entire app... into COBOL."</li>
-                <li>"You whisper 'fix this bug,' it introduces three more exotic ones."</li>
-                <li>"You pour in context, it gives you... a recipe for banana bread."</li>
-            </ul>
-            <p><strong>The Promise:</strong> "Today, we're turning those 'ARGH!' moments into 'AHA!' moments. Let's make Cursor your ultimate dev sidekick, not a mischievous gremlin."</p>
-            <h2>What We'll Actually Cover:</h2>
-            <ul>
-                <li>Common LLM facepalms & Cursor Cures</li>
-                <li>Real-world wins (once you know the tricks!)</li>
-                <li>Keeping your sanity (and your job) in the age of AI</li>
-            </ul>
-            <div class="slide-footer">2 / 9</div>
-        </section>
-
-        <section class="slide">
-            <h1>The Vague Plea vs. The Laser-Guided Command 🎯</h1>
-            <div class="pain-cure-container">
-                <div class="pain-column">
-                    <h3>The Pain: "Just Fix It!"</h3>
-                     <div class="professional-visual-placeholder">
-                         <span class="icon">🌫️</span>
-                         <p>Visual: Abstract representation of a blurry/vague instruction</p>
-                    </div>
-                    <p><strong>You:</strong> "Cursor, fix this broken <code>processOrder</code> function."</p>
-                    <pre><code>// Messy, uncommented code snippet here
-void processOrder(Order order, User user, PaymentDetails details) {
-    if(user.isVal() && order.itemCount() > 0){
-        // ... lots of nested logic ...
-        paymentService.charge(details.getCard(), order.getTotal());
-    }
-}</code></pre>
-                    <p><strong>Cursor:</strong> (Generates something wild or useless) "Is this what you meant? 🤷"</p>
-                    <p><strong>Why it hurts:</strong> Wasted time, frustration, loss of faith in AI.</p>
-                </div>
-                <div class="cure-column">
-                    <h3>The Cursor Cure: Precision is Power!</h3>
-                    <div class="professional-visual-placeholder">
-                        <img src="assets/drag-context.gif" alt="Demonstration of dragging files into Cursor chat for context" onerror="this.alt='GIF showing drag and drop for context'; this.src='https://placehold.co/400x200/E0E7E9/004D40?text=Image+Failed+to+Load';">
-                        <small style="display:block; margin-top: 8px; font-style:normal;">Pro Tip: You can also drag and drop files directly into the chat to add context!</small>
-                    </div>
-                    <p><strong>The Winning Formula:</strong></p>
-                    <p><code>[@Target(s)]</code> + <code>[Clear Goal]</code> + <code>[Step-by-Step Specs/Constraints]</code> + <code>[Maybe Exclusions?]</code></p>
-                    <p><strong>Example:</strong></p>
-                    <pre><code>@OrderService.java please refactor the `processOrder` method.
-1. Improve readability: use clearer variable names, reduce nesting by 1 level.
-2. Enhance error handling for `PaymentException`: log it & re-throw `OrderProcessingException`.
-3. Ensure SRP. Don't touch the logging framework.</code></pre>
-                    <p><strong>Cursor's Superpower:</strong> The <code>@</code> Symbol!</p>
-                    <ul>
-                        <li><code>@file_name.ext</code>: "Look HERE!"</li>
-                        <li><code>@folder_name</code>: "Consider ALL THIS!"</li>
-                        <li><code>@symbolName</code>: "Zoom in on THIS function/class!"</li>
-                        <li><code>@weburl.com</code>: "Check this StackOverflow answer!"</li>
-                    </ul>
-                </div>
-            </div>
-            <p><strong>Key:</strong> You're the senior dev guiding your AI intern. Be specific!</p>
-            <div class="slide-footer">3 / 9</div>
-        </section>
-
-        <section class="slide">
-            <h1>Houston, We Have a Hallucination! 👽</h1>
-            <h2>And How to Land Safely</h2>
-            <div class="pain-cure-container">
-                <div class="pain-column">
-                    <h3>The Pain: AI Gone Rogue!</h3>
-                    <div class="professional-visual-placeholder">
-                        <span class="icon">🤖💥</span>
-                        <p>Visual: Abstract representation of AI malfunction or unexpected output</p>
-                    </div>
-                    <p>You've been chatting with Cursor, it was going great... then BAM! It starts suggesting nonsense, repeating itself, or forgetting previous instructions.</p>
-                    <p>"It was supposed to write Python, why is it giving me JavaScript mixed with a shopping list?!"</p>
-                    <p><strong>Why it hurts:</strong> Breaks your flow, frustrating, like your brilliant intern suddenly lost it.</p>
-                </div>
-                <div class="cure-column">
-                    <h3>The Cursor Cures: The "Oh Snap!" Toolkit</h3>
-                    <ol>
-                        <li><strong>The Panic Button (But Calmer):</strong> <code>Cmd+Shift+L</code> (Mac) or <code>Ctrl+Shift+L</code> (Win/Linux) for New Chat, or type <code>/clear</code>.
-                            <p><em>"Fresh start! Don't let it dwell on its mistakes."</em></p>
-                            <p style="font-size:0.9em; color: #37474F;"><strong>Why?</strong> LLMs generate text token by token based on preceding context. If the LLM has made an error, that erroneous context can negatively influence subsequent generations, leading to further mistakes. Starting a new chat provides a clean slate.</p>
-                             <div class="placeholder-video professional-visual-placeholder">
-                                <span class="icon">🎬</span>
-                                <p class="video-placeholder-content">[Screencast: Using Cmd+Shift+L or /clear in Cursor]</p>
-                            </div>
-                        </li>
-                        <li><strong>Context Check!</strong> Are your <code>@</code> references still relevant?
-                            <p><em>"Did you accidentally tell it to look at <code>node_modules</code>? Oops."</em> Use <code>.cursorignore</code> for files/folders to exclude.</p>
-                        </li>
-                        <li><strong>Prompt Tune-Up:</strong> "Was my last instruction a bit... ambitious? Let's break it down."</li>
-                        <li><strong>Clean Code is Happy Code (Linter Love):</strong> Red/yellow squigglies = LLM Kryptonite. Lint *before* asking Cursor!
-                             <p style="font-size:0.9em; color: #37474F;"><strong>Why?</strong> Linter errors in your code become part of the context. The LLM might focus on these syntax issues or misunderstand your intent, leading to inaccurate suggestions. Clean code lets the LLM focus on the actual task.</p>
-                            <div class="code-comparison-container">
-                                <div class="code-block-wrapper has-errors">
-                                    <h3>Before Linter</h3>
-                                    <pre><code>// function greet(name) {
-//  console.logg("Hello " + name); <span class="error-line">// Typo: console.logg</span>
-// }
-// greet(Alice); <span class="error-line">// Error: 'Alice' is not defined</span>
-// if (x = 5) { <span class="error-line">// Error: Assignment in conditional</span>
-//  // ...
-// }</code></pre>
-                                </div>
-                                <div class="code-block-wrapper">
-                                    <h3>After Linter</h3>
-                                    <pre><code>// function greet(name) {
-//  console.log("Hello " + name);
-// }
-// greet("Alice");
-// if (x === 5) {
-//  // ...
-// }</code></pre>
-                                </div>
-                            </div>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-            <div class="slide-footer">4 / 9</div>
-        </section>
-
-        <section class="slide">
-            <h1>"Build Me a Spaceship!" vs. "Let's Design the Cockpit First." 🚀</h1>
-             <div class="pain-cure-container">
-                <div class="pain-column">
-                    <h3>The Pain: The "Boil the Ocean" Request</h3>
-                    <div class="professional-visual-placeholder">
-                        <img src="assets/elephant.png" alt="Elephant representing an overwhelmingly large task">
-                    </div>
-                    <p><strong>You:</strong> "Cursor, generate the entire microservice for auth, payments, and notifications. And make it snappy."</p>
-                    <p><strong>Cursor:</strong> (Spits out a novel, buggy code... or times out).</p>
-                    <p><em>Later:</em> "That amazing AI function from yesterday... where did it go? What did I even ask?"</p>
-                </div>
-                <div class="cure-column">
-                    <h3>The Cursor Cures: Think Small, Commit Often!</h3>
-                    <div class="professional-visual-placeholder">
-                        <img src="assets/elephant2.png" alt="Elephant representing an overwhelmingly large task">
-                    </div>
-                    <ol>
-                        <li><strong>You're the Architect, Cursor's the Builder (for components):</strong>
-                            <p>Developer: Defines architecture, interfaces.</p>
-                            <p>Cursor: "Implement <code>@IPaymentGateway.java createPayPalPaymentGateway()</code> with methods <code>processPayment</code> and <code>refundPayment</code>."</p>
-                        </li>
-                        <li><strong>One Bite at a Time (Sequential & Verify):</strong> Ask for smaller chunks.
-                            <p><strong>Crucial:</strong> Verify each piece! "Cursor, <code>/test</code> generate JUnit5 tests for <code>@calculateDiscount</code>."</p>
-                             <div class="placeholder-video professional-visual-placeholder">
-                                <span class="icon">🎬</span>
-                                <p class="video-placeholder-content">[Screencast: Using /test for a small function]</p>
-                             </div>
-                        </li>
-                        <li><strong>Your AI Safety Net: <code>git commit</code> Early & Often!</strong>
-                            <pre><code>git commit -m "WIP: Cursor drafted PaymentProcessor"</code></pre>
-                            <p><strong>Why?</strong> Easy rollback, clear history, no "What did AI change?!" moments.</p>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-            <div class="slide-footer">5 / 9</div>
-        </section>
-
-        <section class="slide">
-            <h1>"What Sorcery is This?!" & "My Project Looks Like a Teenager's Bedroom!" 🧙‍♂️🧹</h1>
-            <div class="pain-cure-container">
-                <div class="pain-column">
-                    <h3>The Pain: Black Box Code & Anarchy</h3>
-                     <div class="professional-visual-placeholder">
-                        <span class="icon">🕸️</span> <p>Visual: Abstract of messy, unmanageable code or inconsistent styles</p>
-                    </div>
-                    <p>Cursor generates clever code. You: "Uhhh... I *think* it works? But how?"</p>
-                    <p>Different team members use Cursor, get slightly different styles. Your codebase starts to look... eclectic.</p>
-                </div>
-                <div class="cure-column">
-                    <h3>The Cursor Cures: X-Ray Goggles & House Rules!</h3>
-                    <ol>
-                        <li><strong>Find Your Code with Semantic Search:</strong>
-                            <p>Cursor indexes your codebase. If you're looking for functionality but don't recall the exact file/function, ask in chat! E.g., "Where's the code for user authentication?"</p>
-                            <div class="css-screencast-container semantic-search-animation">
-                                <div class="chat-bubble user-bubble">Where's the code for user authentication?</div>
-                                <div class="chat-bubble cursor-bubble">src/services/auth.js (AuthService.authenticate)</div>
-                                <div class="chat-input-simulation">
-                                    <span class="typing-text">Where's the code for user authentication?</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li><strong>Leverage AI for Documentation & Rule Generation:</strong>
-                            <p>Select a function and prompt: "Generate Javadoc comments for this function."</p>
-                            <p>Cursor also has features like <code>/Generate Cursor Rules</code> (typed in chat) to help create project-specific LLM guidelines based on your code or instructions.</p>
-                             <div class="css-screencast-container generate-rules-animation">
-                                <div class="chat-bubble user-bubble">/Generate Cursor Rules</div>
-                                <div class="chat-bubble cursor-bubble">OK, analyzing selection to create rules...</div>
-                                <div class="chat-input-simulation">
-                                    <span class="typing-text">/Generate Cursor Rules</span>
-                                </div>
-                             </div>
-                        </li>
-                        <li><strong>Project Consistency with Rules (<code>.cursorrule</code>):</strong>
-                            <p>Define project LLM behavior. This file acts like a style guide for your AI! Files are typically located at <code>projectroot/.cursor/rules/rule-name.mdc</code> and are in Markdown format. You can also specify conditions for when a rule is included in the chat.</p>
-                            <pre><code class="language-markdown"># My Project Coding Style Guide
-
-## General Principles
-- Keep functions short and focused.
-- Prefer immutable data structures.
-
-## Java Specific
-- All public methods must have Javadoc.
-- Use `final` for all parameters that are not reassigned.
-
----
-# Rule Conditions (Example - syntax may vary by tool)
-# apply_when:
-#  language: java
-#  context_contains: "refactor"</code></pre>
-                        </li>
-                        <li><strong>Utilize Context Providers (MCPs):</strong>
-                            <p>Use Context7 MCP to get up-to-date library documentation directly in your chat. Instead of searching docs manually, ask: "How do I implement authentication with @/supabase/supabase?" or "@/vercel/next.js show me routing examples"</p>
-                            <p><em>Context7 automatically fetches the latest docs for popular libraries like React, Next.js, Supabase, MongoDB, etc.</em></p>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-            <div class="slide-footer">6 / 9</div>
-        </section>
-
-        <section class="slide">
-            <h1>Your Brain: Still The Most Valuable Processor 🧠</h1>
-            <div class="professional-visual-placeholder">
-                <span class="icon">🧑‍✈️+🤖</span>
-                <p>Visual: Human developer confidently leading/collaborating with AI tool</p>
-            </div>
-            <ul style="max-width: 900px; margin: 12px auto;"> 
-                <li><strong>Code Review is NON-NEGOTIABLE!</strong>
-                    <ul><li>AI code is a DRAFT. Check for conventions, readability, security, correctness, side effects.</li>
-                    <li>"Cursor's 'Explain Code' (if available for selected code) can help prep for reviews!"</li></ul>
-                </li>
-                <li><strong>The "Cognitive Offloading" Trap:</strong>
-                    <ul><li>Don't let skills get rusty! Understand the core logic. Use AI to learn, not just to do.</li></ul>
-                </li>
-                <li><strong>GIGO (Garbage In, Garbage Out) Still Applies:</strong>
-                    <ul><li>You provide the fuel (prompts) and steering (context). Quality in = Quality out.</li></ul>
-                </li>
-                <li><strong>Cursor is a Super-Smart Co-Pilot, NOT an Autonomous Agent (Yet!):</strong>
-                    <ul><li>Developers direct, break down tasks, make final judgments.</li>
-                    <li><em>(Experimental features like "Bug Finder" are helpful checks, not replacements for tests.)</em></li></ul>
-                </li>
-            </ul>
-            <div class="slide-footer">7 / 9</div>
-        </section>
-
-        <section class="slide">
-            <h1>The Future is Collaborative: Developer + AI</h1>
-            <div class="professional-visual-placeholder">
-                <span class="icon">🤝</span>
-                <p>Visual: Modern, abstract representation of human-AI collaboration</p>
-            </div>
-            <p><strong>LLMs like Cursor aren't a threat; they're a massive force multiplier.</strong></p>
-            <ul>
-                <li>They handle the tedious, you focus on the creative and complex.</li>
-                <li>They help you learn faster and explore new solutions.</li>
-            </ul>
-            <h2>The Evolving Landscape:</h2>
-            <p>Tools are getting smarter (Codex, etc.). But your critical thinking, design skills, & domain expertise? <strong>More valuable than EVER.</strong></p>
-            
-            <h2>Key Takeaways for Match Group Devs:</h2>
-            <div class="key-takeaway-grid">
-                <div class="key-takeaway-item">
-                    <h3>🚀 Experiment Fearlessly</h3>
-                    <p>(But wisely!) Try Cursor on a small, real task *today*.</p>
-                </div>
-                <div class="key-takeaway-item">
-                    <h3>🗣️ Share Wins & Woes</h3>
-                    <p>Slack channel? (#cursor-tips?), quick demos. "Check this cool prompt!"</p>
-                </div>
-                <div class="key-takeaway-item">
-                    <h3>🛠️ Advocate for Power-Ups</h3>
-                    <p>If Pro/Enterprise tools offer clear benefits, let's discuss. "Good tools = happy, productive devs!"</p>
-                </div>
-                <div class="key-takeaway-item">
-                    <h3>📚 Stay Curious & Learn</h3>
-                    <p>AI evolves fast. What's cutting-edge today is standard tomorrow.</p>
-                </div>
-            </div>
-            <div class="slide-footer">8 / 9</div>
-        </section>
-
-        <section class="slide">
-            <h1>Questions? Ideas? AI Therapy Session?</h1>
-            <div class="logo-placeholder">Match Group</div>
-            <p>Let's discuss how we can make AI work smarter for <em>us</em> at Match Group!</p>
-            <p style="margin-top: 30px; font-size: 1.5em; color: #004D40;">Thank You!</p>
-            <div class="slide-footer">9 / 9</div>
-        </section>
-
+<body class="bg-slate-900 text-slate-300 selection:bg-sky-500 selection:text-slate-900">
+    
+    <div id="slide1" class="slide">
+        <div class="text-center">
+            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-sky-400 mb-6 themed-text">
+                커서 그렇게 쓰는거 아닌데<span class="blinking-cursor"></span>
+            </h1>
+            <p class="text-xl sm:text-2xl md:text-3xl text-slate-400 themed-text">
+                커서가 코딩을 못한다구요?
+            </p>
+        </div>
     </div>
 
-    <div class="navigation">
-        <button id="prevBtn" onclick="changeSlide(-1)" disabled>Previous</button>
-        <button id="nextBtn" onclick="changeSlide(1)">Next</button>
+    <div id="slide2" class="slide">
+        <div class="text-center max-w-3xl"> 
+            <h2 class="text-4xl sm:text-5xl text-sky-400 mb-8 themed-text">
+                커서가 코딩을 못한다구요?<br>컴파일러가 거짓말 하는거 봤나요?
+            </h2>
+            <p class="text-2xl sm:text-3xl text-slate-300 mb-6 themed-text description-text"> 
+                기계는 거짓말을 하지 않습니다.
+            </p>
+            <p class="text-xl sm:text-2xl text-slate-400 themed-text">
+                커서가 잘 작동하지 않는다면 내 손을 의심해 봅시다.<br>무슨 실수를 하고 있는지 알아볼까요?
+            </p>
+        </div>
     </div>
 
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        const prevButton = document.getElementById('prevBtn');
-        const nextButton = document.getElementById('nextBtn');
+    <div id="slide3" class="slide">
+        <div class="text-center max-w-3xl">
+            <h3 class="text-4xl sm:text-5xl text-sky-400 mb-10 themed-text">목차</h3>
+            <ul class="toc-list">
+                <li class="themed-text"><i class="fas fa-exclamation-triangle"></i>커서를 쓸 때 주로 하는 실수들</li>
+                <li class="themed-text"><i class="fas fa-lightbulb"></i>Cursor Pro Tip</li>
+                <li class="themed-text"><i class="fas fa-flag-checkered"></i>마무리</li>
+            </ul>
+        </div>
+    </div>
 
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.remove('active');
-                if (i === index) {
-                    slide.classList.add('active');
-                }
-            });
-            updateNavButtons();
-        }
+    <div id="slide4" class="slide">
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">실수 #1: 컨텍스트 관리 소홀</h2>
+        <div class="mistake-layout">
+            <div class="mistake-section dont-section">
+                <h3><i class="fas fa-times-circle mr-3"></i>Don't: 한 채팅창에 모든 작업 혼용</h3>
+                <p class="themed-text description-text">하나의 채팅창에서 여러 다른 주제의 작업을 계속 이어갑니다.</p>
+                <div class="visualization-box">
+                    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <circle cx="20" cy="17.5" r="6" fill="#ef4444"/>
+                        <circle cx="40" cy="17.5" r="6" fill="#f59e0b"/>
+                        <circle cx="60" cy="17.5" r="6" fill="#22c55e"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">단일 채팅창</text>
+                        <rect x="15" y="45" width="180" height="22" rx="5" fill="#ef4444" fill-opacity="0.6"/>
+                        <text x="20" y="60" font-family="sans-serif" font-size="11" fill="#fee2e2">주제 A: 버그 수정 요청</text>
+                        <rect x="105" y="72" width="170" height="22" rx="5" fill="#f59e0b" fill-opacity="0.6"/>
+                        <text x="110" y="87" font-family="sans-serif" font-size="11" fill="#fff7ed" text-anchor="start">주제 B: 새 기능 아이디어</text>
+                        <rect x="15" y="99" width="200" height="22" rx="5" fill="#3b82f6" fill-opacity="0.6"/>
+                        <text x="20" y="114" font-family="sans-serif" font-size="11" fill="#eff6ff">주제 C: 문서 작업 관련</text>
+                        <rect x="85" y="126" width="190" height="22" rx="5" fill="#ef4444" fill-opacity="0.6"/>
+                        <text x="90" y="141" font-family="sans-serif" font-size="11" fill="#fee2e2" text-anchor="start">주제 A: 아까 그 버그 말인데요...</text>
+                        <path d="M 240 50 Q 260 80 240 110 Q 260 140 240 170" stroke="#ef4444" stroke-width="3" fill="none" stroke-dasharray="5,5">
+                            <animate attributeName="stroke-dashoffset" values="0;20" dur="1s" repeatCount="indefinite"/>
+                        </path>
+                        <text x="255" y="115" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#f87171" font-weight="bold" transform="rotate(15 255 115)">?</text>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-red-400">Why?</strong> 커서는 대화 맥락을 기억합니다. 주제가 섞이면 컨텍스트가 꼬여 혼란을 유발하고, 부정확한 답변 가능성이 높아집니다.
+                </p>
+            </div>
+            <div class="mistake-section do-section">
+                <h3><i class="fas fa-check-circle mr-3"></i>Do: 작업마다 새 채팅창 사용</h3>
+                <p class="themed-text description-text">새로운 주제나 작업은 새 채팅창에서 시작합니다.</p>
+                <div class="visualization-box">
+                     <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="40" fill="#475569"/>
+                        <path d="M 5 40 Q 10 5 30 5 L 100 5 Q 120 5 125 40 Z" fill="#293548" stroke="#4ade80" stroke-width="1.5"/>
+                        <text x="65" y="25" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#4ade80">주제 A</text>
+                        <foreignObject x="45" y="15" width="20" height="20">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-code text-green-400 text-base"></i>
+                        </foreignObject>
+                        <path d="M 130 40 Q 135 10 150 10 L 210 10 Q 225 10 230 40 Z" fill="#475569" stroke="#64748b" stroke-width="1"/>
+                        <text x="180" y="28" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">주제 B</text>
+                         <foreignObject x="160" y="18" width="20" height="20">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-file-alt text-slate-400 text-base"></i>
+                        </foreignObject>
+                        <circle cx="255" cy="22.5" r="10" fill="#64748b" style="cursor:pointer;"/>
+                        <text x="255" y="27.5" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#1e293b" font-weight="bold">+</text>
+                        <rect x="0" y="40" width="300" height="100" fill="#293548" />
+                        <text x="15" y="65" font-family="sans-serif" font-size="11" fill="#cbd5e1">주제 A 관련 대화 내용...</text>
+                        <rect x="15" y="75" width="270" height="15" fill="#4ade80" fill-opacity="0.2" rx="3"/>
+                        <rect x="15" y="95" width="220" height="15" fill="#4ade80" fill-opacity="0.2" rx="3"/>
+                        <text x="150" y="155" text-anchor="middle" font-family="Fira Code, monospace" font-size="12" fill="#e2e8f0">
+                            새 창: <tspan fill="#4ade80" class="font-semibold">CMD/Ctrl+Shift+L</tspan>
+                        </text>
+                        <text x="150" y="178" text-anchor="middle" font-family="Fira Code, monospace" font-size="12" fill="#e2e8f0">
+                            참조: <tspan fill="#60a5fa" class="font-semibold">@chat</tspan> / <tspan fill="#60a5fa" class="font-semibold">@file</tspan>
+                        </text>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-green-400">Tip:</strong> 새 채팅은 <code class="shortcut-key">CMD/Ctrl+Shift+L</code>. 이전 내용 참조는 <code class="shortcut-key">@</code> 사용.
+                </p>
+            </div>
+        </div>
+    </div>
 
-        function changeSlide(direction) {
-            const newSlideIndex = currentSlide + direction;
-            if (newSlideIndex >= 0 && newSlideIndex < totalSlides) {
-                currentSlide = newSlideIndex;
-                showSlide(currentSlide);
-            }
-        }
+    <div id="slide5" class="slide">
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">실수 #2: LLM의 실수를 LLM에게 직접 수정 요청</h2>
+        <div class="mistake-layout">
+            <div class="mistake-section dont-section">
+                <h3><i class="fas fa-times-circle mr-3"></i>Don't: LLM의 실수를 직접 수정 요청</h3>
+                <p class="themed-text description-text">커서가 생성한 코드나 내용에 오류가 있을 때, 단순히 "이거 틀렸어, 고쳐줘" 라고 다시 요청합니다.</p>
+                <div class="visualization-box">
+                    <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">오류 수정 요청 (잘못된 방식)</text>
+                        <text x="15" y="55" font-family="sans-serif" font-size="12" fill="#e2e8f0">User: 특정 함수 만들어줘</text>
+                        <rect x="10" y="42" width="170" height="22" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <text x="15" y="82" font-family="monospace" font-size="11" fill="#fca5a5">커서: function myFunction() {</text>
+                        <text x="25" y="98" font-family="monospace" font-size="11" fill="#fca5a5">  // <tspan fill="#ef4444" font-weight="bold">오류 있는 코드 부분</tspan></text>
+                        <text x="25" y="114" font-family="monospace" font-size="11" fill="#fca5a5">}</text>
+                        <rect x="10" y="70" width="280" height="50" rx="3" fill="#fee2e2" fill-opacity="0.2"/>
+                        <text x="15" y="142" font-family="sans-serif" font-size="12" fill="#e2e8f0">User: 이거 틀렸어, 고쳐줘!</text>
+                        <rect x="10" y="129" width="180" height="22" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <text x="15" y="172" font-family="monospace" font-size="11" fill="#fca5a5">커서: function myFunctionFixed() {</text>
+                        <text x="25" y="188" font-family="monospace" font-size="11" fill="#fca5a5">  // <tspan fill="#ef4444" font-weight="bold">또 다른 오류 발생</tspan></text>
+                        <text x="25" y="204" font-family="monospace" font-size="11" fill="#fca5a5">}</text>
+                        <rect x="10" y="159" width="280" height="50" rx="3" fill="#fee2e2" fill-opacity="0.2"/>
+                        <path d="M 270 85 A 35 35 0 1 1 270 185" stroke="#ef4444" stroke-width="2.5" fill="none" stroke-dasharray="4,4">
+                             <animate attributeName="stroke-dashoffset" values="0;16" dur="1s" repeatCount="indefinite"/>
+                        </path>
+                        <foreignObject x="270" y="125" width="24" height="24">
+                            <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-sync-alt text-xl text-red-400"></i>
+                        </foreignObject>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-red-400">Why?</strong> LLM은 다음 토큰 생성기이며, 커서는 잘못된 맥락에서 실수를 반복하거나 수정 의도를 파악하기 어렵습니다.
+                </p>
+            </div>
+            <div class="mistake-section do-section">
+                <h3><i class="fas fa-check-circle mr-3"></i>Do: 원인 프롬프트 수정 후 재요청</h3>
+                <p class="themed-text description-text">커서가 실수한 결과물을 만든 원인 프롬프트를 찾아 명확히 수정 후 다시 요청합니다.</p>
+                <div class="visualization-box">
+                     <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">프롬프트 수정 (올바른 방식)</text>
+                        <text x="15" y="55" font-family="sans-serif" font-size="12" fill="#e2e8f0">User: 특정 함수 만들어줘 (초기)</text>
+                        <rect x="10" y="42" width="220" height="22" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <foreignObject x="245" y="44" width="20" height="20" style="cursor:pointer;">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-pencil-alt text-sky-400 text-base"></i>
+                        </foreignObject>
+                        <text x="15" y="82" font-family="monospace" font-size="11" fill="#fcd34d">커서: function myFunction() {</text>
+                        <text x="25" y="98" font-family="monospace" font-size="11" fill="#fcd34d">  // <tspan fill="#fbbf24" font-weight="bold">오류 발견!</tspan></text>
+                        <text x="25" y="114" font-family="monospace" font-size="11" fill="#fcd34d">}</text>
+                        <rect x="10" y="70" width="280" height="50" rx="3" fill="#fffbeb" fill-opacity="0.15"/>
+                        <text x="15" y="142" font-family="sans-serif" font-size="12" fill="#e2e8f0">User: <tspan fill="#4ade80">정확한 매개변수 포함한</tspan> 함수 <tspan fill="#4ade80">(수정)</tspan></text>
+                        <rect x="10" y="129" width="280" height="22" rx="3" fill="#22c55e" fill-opacity="0.3"/>
+                        <text x="150" y="125" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#4ade80">(코드 롤백 & 프롬프트 수정됨)</text>
+                        <text x="15" y="172" font-family="monospace" font-size="11" fill="#86efac">커서: function myFunction(param1, param2) {</text>
+                        <text x="25" y="188" font-family="monospace" font-size="11" fill="#86efac">  // <tspan fill="#22c55e" font-weight="bold">정상 작동하는 코드</tspan></text>
+                        <text x="25" y="204" font-family="monospace" font-size="11" fill="#86efac">}</text>
+                        <rect x="10" y="159" width="280" height="50" rx="3" fill="#dcfce7" fill-opacity="0.2"/>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-green-400">Tip:</strong> 대부분의 커서 인터페이스에서 이전 프롬프트 수정 시 코드가 해당 시점으로 롤백되어 편리합니다. 근본 원인 수정이 효과적입니다.
+                </p>
+            </div>
+        </div>
+    </div>
 
-        function updateNavButtons() {
-            prevButton.disabled = currentSlide === 0;
-            nextButton.disabled = currentSlide === totalSlides - 1;
-        }
-        
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'ArrowRight' || event.key === ' ') { 
-                if (!nextButton.disabled) { 
-                  changeSlide(1);
-                  event.preventDefault(); 
-                }
-            } else if (event.key === 'ArrowLeft') {
-                 if (!prevButton.disabled) { 
-                  changeSlide(-1);
-                }
-            }
-        });
+    <div id="slide6" class="slide">
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">실수 #3: 수정 대상 명시 없이 지시하기</h2>
+        <div class="mistake-layout">
+            <div class="mistake-section dont-section">
+                <h3><i class="fas fa-times-circle mr-3"></i>Don't: 수정 대상 명시 없이 지시</h3>
+                <p class="themed-text description-text">코드베이스의 어느 부분을 수정해야 하는지 알려주지 않고, "이 기능 추가해줘" 또는 "이 버그 고쳐줘"와 같이 모호하게 요청합니다.</p>
+                <div class="visualization-box">
+                    <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">모호한 지시</text>
+                        <text x="15" y="55" font-family="sans-serif" font-size="12" fill="#e2e8f0">User: 버튼 클릭 시 알림창 뜨게 해줘.</text>
+                        <rect x="10" y="42" width="250" height="22" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <text x="15" y="82" font-family="sans-serif" font-size="11" fill="#fcd34d">커서: 어떤 버튼을 말씀하시는지,</text>
+                        <text x="15" y="98" font-family="sans-serif" font-size="11" fill="#fcd34d">어느 파일의 코드에 알림창 기능을</text>
+                        <text x="15" y="114" font-family="sans-serif" font-size="11" fill="#fcd34d">추가할까요? 관련 정보를 더 알려주세요.</text>
+                        <rect x="10" y="70" width="280" height="58" rx="3" fill="#fffbeb" fill-opacity="0.15"/>
+                        <foreignObject x="120" y="140" width="60" height="60"> <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-file-code fa-3x text-slate-500 opacity-50"></i>
+                        </foreignObject>
+                         <text x="150" y="195" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#ef4444" font-weight="bold">?</text>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-red-400">Why?</strong> 커서의 출력은 입력 정보에 의존합니다. 수정 위치나 컨텍스트가 없으면 커서가 추측하기 어렵고, 엉뚱한 결과를 낼 수 있습니다.
+                </p>
+            </div>
+            <div class="mistake-section do-section">
+                <h3><i class="fas fa-check-circle mr-3"></i>Do: 수정 대상 코드 명시 (파일 첨부)</h3>
+                <p class="themed-text description-text">수정할 코드 부분이나 관련 파일을 명확히 전달하여 컨텍스트를 제공합니다.</p>
+                <div class="visualization-box">
+                     <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">파일 드래그로 컨텍스트 제공</text>
+                        <rect x="10" y="45" width="280" height="100" fill="#1e293b" rx="5"/>
+                        <line x1="40" y1="50" x2="40" y2="140" stroke="#3b4a61"/>
+                        <text x="45" y="65" font-family="Fira Code, monospace" font-size="9" fill="#64748b">1 | &lt;script&gt;</text>
+                        <text x="45" y="80" font-family="Fira Code, monospace" font-size="9" fill="#64748b">2 | function greet() {</text>
+                        <text x="45" y="95" font-family="Fira Code, monospace" font-size="9" fill="#64748b">3 |   console.log("Hello");</text>
+                        <text x="45" y="110" font-family="Fira Code, monospace" font-size="9" fill="#64748b">4 | }</text>
+                        <text x="45" y="125" font-family="Fira Code, monospace" font-size="9" fill="#64748b">5 | &lt;/script&gt;</text>
+                        <g id="file-icon-group-slide6"> <rect id="file-rect-slide6" x="230" y="50" width="40" height="50" rx="3" fill="#60a5fa" stroke="#93c5fd" stroke-width="1.5"/>
+                            <path d="M 235 60 L 265 60 M 235 70 L 265 70 M 235 80 L 255 80" stroke="#dbeafe" stroke-width="2"/>
+                            <text id="file-name-text-slide6" x="250" y="95" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#dbeafe">script.js</text>
+                            <animateMotion dur="4s" begin="0s" path="M0,0 C0,0 0,80 -80,100 Z" repeatCount="indefinite" keyTimes="0;0.5;1" values="M0,0 C0,0 0,80 -80,100; M0,0 C0,0 0,80 -80,100; M0,0" />
+                            <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.375;0.5;0.9;1" dur="4s" begin="0s" repeatCount="indefinite" />
+                        </g>
+                        <rect x="10" y="155" width="280" height="40" rx="5" fill="#475569"/>
+                        <text id="chat-input-text-slide6" x="20" y="178" font-family="Fira Code, monospace" font-size="11" fill="#94a3b8">
+                            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.45;0.5;0.9;1" dur="4s" begin="0s" repeatCount="indefinite" />
+                            @script.js 이 파일의 greet 함수 수정해줘
+                        </text>
+                        <g id="blinking-chat-cursor-group-slide6">  <line x1="20" y1="179" x2="20" y2="167" stroke="#60a5fa" stroke-width="1.5" />
+                            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.45;0.5;0.9;1" dur="4s" begin="0s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0;1;0" dur="1s" begin="0s" repeatCount="indefinite" targetElement="#blinking-chat-cursor-group-slide6 line"/>
+                        </g>
+                        <text x="150" y="215" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#4ade80" font-weight="bold">
+                            <tspan font-family="FontAwesome">&#xf00c;</tspan> 알겠습니다!
+                            <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.625;0.65;0.9;1" dur="4s" begin="0s" repeatCount="indefinite" />
+                        </text>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-green-400">Tip:</strong> 파일 드래그 앤 드롭 또는 <code class="shortcut-key">@파일명</code>으로 컨텍스트를 정확히 전달하세요. 코드 블록 선택 후 <code class="shortcut-key">Cmd+L</code>도 유용합니다.
+                </p>
+            </div>
+        </div>
+    </div>
 
-        // Initialize
-        showSlide(currentSlide);
-    </script>
+    <div id="slide7" class="slide">
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">실수 #4: 린터 오류가 있는 상태에서 요청하기</h2>
+        <div class="mistake-layout">
+            <div class="mistake-section dont-section">
+                <h3><i class="fas fa-times-circle mr-3"></i>Don't: 린터 오류 무시하고 요청</h3>
+                <p class="themed-text description-text">코드에 린터(Linter) 오류가 표시된 상태에서 커서에게 코드 생성이나 수정을 요청합니다.</p>
+                <div class="visualization-box">
+                    <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">린터 오류 + 요청</text>
+                        <text x="15" y="60" font-family="Fira Code, monospace" font-size="11" fill="#e2e8f0">function greet() {</text>
+                        <text x="25" y="78" font-family="Fira Code, monospace" font-size="11" fill="#e2e8f0"> console.log("Hello") <tspan fill="#ef4444" font-weight="bold">// Missing semicolon</tspan></text>
+                        <path d="M25 82 Q 150 85 275 82" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="3 2" class="squiggle"/>
+                        <text x="15" y="96" font-family="Fira Code, monospace" font-size="11" fill="#e2e8f0">}</text>
+                        <foreignObject x="260" y="70" width="20" height="20">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-exclamation-circle text-red-500 text-base"></i>
+                        </foreignObject>
+                        <text x="15" y="130" font-family="sans-serif" font-size="12" fill="#e2e8f0">User: 이 함수에 파라미터 추가해줘.</text>
+                        <rect x="10" y="117" width="220" height="22" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <text x="15" y="160" font-family="sans-serif" font-size="11" fill="#fcd34d">커서: 세미콜론이 빠진 것 같아요.</text>
+                        <text x="15" y="176" font-family="sans-serif" font-size="11" fill="#fcd34d">먼저 린트 오류를 수정하는 것이 어떨까요?</text>
+                        <text x="15" y="192" font-family="sans-serif" font-size="11" fill="#fcd34d">그 후에 파라미터를 추가해 드릴게요.</text>
+                        <rect x="10" y="148" width="280" height="55" rx="3" fill="#fffbeb" fill-opacity="0.15"/>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-red-400">Why?</strong> 린터 오류는 커서 컨텍스트에 포함됩니다. 사소한 오류에도 커서는 민감하게 반응해 핵심보다 오류에 집중하거나 잘못 추론할 수 있습니다.
+                </p>
+            </div>
+            <div class="mistake-section do-section">
+                <h3><i class="fas fa-check-circle mr-3"></i>Do: 린터 오류 해결 후 요청</h3>
+                <p class="themed-text description-text">요청 전 린터 오류를 먼저 해결하세요. 커서가 의도와 다르게 수정하면 포맷터 설정을 확인하세요.</p>
+                <div class="visualization-box">
+                     <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">린터 오류 해결 + 요청</text>
+                        <text x="15" y="60" font-family="Fira Code, monospace" font-size="11" fill="#e2e8f0">function greet() {</text>
+                        <text x="25" y="78" font-family="Fira Code, monospace" font-size="11" fill="#e2e8f0"> console.log("Hello");</text>
+                        <text x="15" y="96" font-family="Fira Code, monospace" font-size="11" fill="#e2e8f0">}</text>
+                        <foreignObject x="260" y="70" width="20" height="20">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-check-circle text-green-500 text-base"></i>
+                        </foreignObject>
+                        <text x="150" y="115" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#4ade80">(Format on Save: ON)</text>
+                        <text x="15" y="145" font-family="sans-serif" font-size="12" fill="#e2e8f0">User: 이 함수에 파라미터 추가해줘.</text>
+                        <rect x="10" y="132" width="220" height="22" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <text x="15" y="175" font-family="monospace" font-size="11" fill="#86efac">커서: function greet(name) {</text>
+                        <text x="25" y="191" font-family="monospace" font-size="11" fill="#86efac"> console.log(`Hello, ${name}`);</text>
+                        <text x="15" y="207" font-family="monospace" font-size="11" fill="#86efac">}</text>
+                        <rect x="10" y="163" width="280" height="55" rx="3" fill="#dcfce7" fill-opacity="0.2"/>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-green-400">Tip:</strong> 'Default Formatter' 및 'Format on Save' 설정으로 코드 스타일을 일관되게 유지하세요. 사소한 오류로 커서를 혼란시키는 것보다 낫습니다.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide8" class="slide">
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">실수 #5: 디자인 방향 없이 큰 작업 요청</h2>
+        <div class="mistake-layout">
+            <div class="mistake-section dont-section">
+                <h3><i class="fas fa-times-circle mr-3"></i>Don't: 디자인 방향 없이 큰 작업 요청</h3>
+                <p class="themed-text description-text">명확한 디자인 계획이나 목적 없이 커서에게 "멋진 SNS 만들어줘"와 같이 광범위한 작업을 요청합니다.</p>
+                <div class="visualization-box">
+                    <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">광범위한 요청</text>
+                        <text x="15" y="60" font-family="sans-serif" font-size="12" fill="#e2e8f0">User: 멋진 SNS 서비스 만들어줘!</text>
+                        <rect x="10" y="47" width="220" height="22" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <text x="15" y="90" font-family="sans-serif" font-size="11" fill="#fcd34d">커서: (혼란) 어떤 기능을 원하시나요?</text>
+                        <text x="15" y="106" font-family="sans-serif" font-size="11" fill="#fcd34d">사용자 흐름, 데이터 모델은요?</text>
+                        <rect x="10" y="78" width="280" height="40" rx="3" fill="#fffbeb" fill-opacity="0.15"/>
+                        <circle cx="70" cy="150" r="15" fill="#ef4444" opacity="0.7"/>
+                        <rect x="100" y="135" width="30" height="30" fill="#3b82f6" opacity="0.7" transform="rotate(15 115 150)"/>
+                        <path d="M140 160 Q160 130 180 160 T 220 160" stroke="#f59e0b" stroke-width="3" fill="none" opacity="0.7"/>
+                        <text x="150" y="195" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#ef4444" font-weight="bold">???</text>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-red-400">Why?</strong> 큰 작업은 목적이 명확하지 않으면 사용자 의도나 프로젝트 구조와 벗어날 가능성이 커져 결국 만족스럽지 못한 결과로 이어집니다.
+                </p>
+            </div>
+            <div class="mistake-section do-section">
+                <h3><i class="fas fa-check-circle mr-3"></i>Do: 디자인 선행 후 단계별 작업 요청</h3>
+                <p class="themed-text description-text">먼저 커서에게 디자인(요구사항, 규칙, 마크다운 문서 등)을 요청하고, 이를 검토/수정한 후, 구체적인 태스크 단위로 작업을 지시합니다.</p>
+                <div class="visualization-box">
+                     <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">단계별 접근</text>
+                        <text x="15" y="60" font-family="sans-serif" font-size="10" fill="#e2e8f0">1. User: SNS 디자인 문서(MD) 작성해줘</text>
+                        <text x="30" y="72" font-family="sans-serif" font-size="10" fill="#e2e8f0">(기능: 포스팅, 댓글)</text>
+                        <rect x="10" y="47" width="240" height="32" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <foreignObject x="260" y="52" width="22" height="22">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-arrow-right text-sky-400 text-lg"></i>
+                        </foreignObject>
+                        <foreignObject x="15" y="88" width="36" height="36">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fab fa-markdown fa-2x text-green-400"></i>
+                        </foreignObject>
+                        <text x="55" y="105" font-family="sans-serif" font-size="10" fill="#a7f3d0">커서: 디자인 문서입니다.</text>
+                         <rect x="50" y="92" width="150" height="18" rx="3" fill="#22c55e" fill-opacity="0.2"/>
+                        <text x="15" y="135" font-family="sans-serif" font-size="10" fill="#e2e8f0">2. User: (검토/수정 후)</text>
+                        <text x="30" y="147" font-family="sans-serif" font-size="10" fill="#e2e8f0">"@SNS_디자인_문서 기반 포스팅 API 구현"</text>
+                        <rect x="10" y="122" width="240" height="32" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <foreignObject x="260" y="127" width="22" height="22">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-arrow-right text-sky-400 text-lg"></i>
+                        </foreignObject>
+                        <foreignObject x="15" y="165" width="36" height="36">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-code fa-2x text-green-400"></i>
+                        </foreignObject>
+                        <text x="55" y="182" font-family="sans-serif" font-size="10" fill="#a7f3d0">커서: 포스팅 API 구현 중...</text>
+                        <rect x="50" y="169" width="150" height="18" rx="3" fill="#22c55e" fill-opacity="0.2"/>
+                        <foreignObject x="15" y="205" width="20" height="20">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-search text-slate-400 text-base"></i>
+                        </foreignObject>
+                        <text x="38" y="218" font-family="sans-serif" font-size="9" fill="#94a3b8">감이 안 잡히면: Deep Research 활용</text>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-green-400">Tip:</strong> 사용할 API, 시스템 흐름 등에 대한 지식과 디자인 결정이 선행되어야 합니다. 큰 작업에 대한 감이 없다면, Gemini/OpenAI Deep Research 등으로 베스트 프랙티스를 찾아보는 것도 도움이 됩니다.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide9" class="slide">
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">실수 #6: 기술 부채 방치하기</h2>
+        <div class="mistake-layout">
+            <div class="mistake-section dont-section">
+                <h3><i class="fas fa-times-circle mr-3"></i>Don't: 기술 부채 방치</h3>
+                <p class="themed-text description-text">명확하지 않은 파일/변수/함수 이름, 부족한 모듈화 등 기술 부채가 쌓인 코드에 대해 커서에게 작업을 요청합니다.</p>
+                <div class="visualization-box">
+                     <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">기술 부채 + 요청</text>
+                        <path d="M30 60 C 80 40, 120 100, 150 70 S 220 40, 270 90" stroke="#f59e0b" stroke-width="2" fill="none" opacity="0.7"/>
+                        <path d="M40 80 C 90 120, 50 150, 100 130 S 180 180, 200 140" stroke="#ef4444" stroke-width="2" fill="none" opacity="0.7"/>
+                        <path d="M60 50 C 10 80, 100 110, 130 100 S 250 130, 240 70" stroke="#3b82f6" stroke-width="2" fill="none" opacity="0.7"/>
+                        <text x="150" y="120" text-anchor="middle" font-family="Fira Code, monospace" font-size="10" fill="#9ca3af">
+                            function a(b,c,d,e,f,g) { /* ... */ }
+                        </text>
+                         <text x="150" y="135" text-anchor="middle" font-family="Fira Code, monospace" font-size="10" fill="#9ca3af">
+                            // data_processor_util_final_v2.js
+                        </text>
+                        <foreignObject x="132" y="68" width="36" height="36">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-exclamation-triangle fa-2x text-amber-400"></i>
+                        </foreignObject>
+                        <text x="15" y="170" font-family="sans-serif" font-size="12" fill="#e2e8f0">User: 이 코드에 새 기능 추가해줘.</text>
+                        <rect x="10" y="157" width="220" height="22" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <text x="15" y="200" font-family="sans-serif" font-size="11" fill="#fcd34d">커서: (혼란) 코드가 복잡해서</text>
+                        <text x="15" y="216" font-family="sans-serif" font-size="11" fill="#fcd34d">어디를 수정해야 할지 모르겠어요...</text>
+                        <rect x="10" y="188" width="280" height="38" rx="3" fill="#fffbeb" fill-opacity="0.15"/>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-red-400">Why?</strong> 커서는 파일 이름, 변수/함수 이름, 모듈 구조 등을 통해 코드를 이해합니다. 기술 부채가 쌓인 코드는 커서를 혼란스럽게 만들어 작업 효율을 떨어뜨립니다.
+                </p>
+            </div>
+            <div class="mistake-section do-section">
+                <h3><i class="fas fa-check-circle mr-3"></i>Do: SRP 준수 및 리팩토링 요청</h3>
+                <p class="themed-text description-text">커서에게 단일 책임 원칙(SRP)을 준수하도록 리팩토링을 요청하거나, 특정 파일의 수정을 명확히 지시하여 코드의 명확성을 높입니다.</p>
+                <div class="visualization-box">
+                     <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">리팩토링 요청</text>
+                        <g transform="translate(30 50)">
+                            <path d="M0 0 C 10 -20, 20 20, 30 0 S 50 -20, 60 0" stroke="#f59e0b" stroke-width="1.5" fill="none"/>
+                            <path d="M5 10 C 15 30, 25 -10, 35 10 S 55 30, 65 10" stroke="#ef4444" stroke-width="1.5" fill="none"/>
+                            <text x="32.5" y="35" text-anchor="middle" font-size="8" fill="#9ca3af">복잡한 코드</text>
+                        </g>
+                        <text x="15" y="115" font-family="sans-serif" font-size="10" fill="#e2e8f0">User: @복잡한_코드.js 이 파일 SRP 준수해서</text>
+                        <text x="15" y="129" font-family="sans-serif" font-size="10" fill="#e2e8f0">리팩토링하고, 모듈화 해줘.</text>
+                        <rect x="10" y="102" width="260" height="34" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <foreignObject x="275" y="108" width="20" height="20">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-arrow-right text-sky-400 text-base"></i>
+                        </foreignObject>
+                        <g transform="translate(30 155)">
+                            <rect x="0" y="0" width="40" height="30" rx="3" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
+                            <text x="20" y="18" text-anchor="middle" font-size="7" fill="#a7f3d0">모듈A</text>
+                            <rect x="50" y="0" width="40" height="30" rx="3" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
+                            <text x="70" y="18" text-anchor="middle" font-size="7" fill="#a7f3d0">모듈B</text>
+                            <rect x="100" y="0" width="40" height="30" rx="3" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
+                            <text x="120" y="18" text-anchor="middle" font-size="7" fill="#a7f3d0">모듈C</text>
+                        </g>
+                        <text x="210" y="173" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#a7f3d0">커서: 리팩토링 완료!</text>
+                         <rect x="190" y="160" width="100" height="18" rx="3" fill="#22c55e" fill-opacity="0.2"/>
+                        <text x="150" y="215" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#4ade80" font-weight="bold">
+                            <tspan font-family="FontAwesome">&#xf00c;</tspan> 깔끔해요!
+                        </text>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-green-400">Tip:</strong> 파일 하나만 지정하고 "이 파일 수정해줘"라고 했을 때 커서가 어디를 수정할지 명확히 알 수 있도록 코드를 관리하는 것이 이상적입니다.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide10" class="slide">
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">실수 #7: 만족스러운 결과물에 안주하고 계속 작업</h2>
+        <div class="mistake-layout">
+            <div class="mistake-section dont-section">
+                <h3><i class="fas fa-times-circle mr-3"></i>Don't: 만족 후 바로 다음 작업 진행</h3>
+                <p class="themed-text description-text">커서가 만족스러운 코드나 결과물을 생성했을 때, 이를 저장하거나 커밋하지 않고 곧바로 다음 작업을 이어갑니다.</p>
+                <div class="visualization-box">
+                    <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">만족 후 저장 없이 진행</text>
+                        <text x="15" y="60" font-family="monospace" font-size="11" fill="#86efac">커서: function perfectCode() {</text>
+                        <text x="25" y="76" font-family="monospace" font-size="11" fill="#86efac">  // 완벽한 로직!</text>
+                        <text x="15" y="92" font-family="monospace" font-size="11" fill="#86efac">}</text>
+                        <rect x="10" y="47" width="200" height="55" rx="3" fill="#dcfce7" fill-opacity="0.2"/>
+                        <foreignObject x="220" y="65" width="28" height="28">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-check-circle text-xl text-green-400"></i>
+                        </foreignObject>
+                        <text x="265" y="80" font-family="FontAwesome" font-size="20" fill="#f59e0b">👏</text>
+                        <text x="15" y="125" font-family="sans-serif" font-size="12" fill="#e2e8f0">User: 좋아! 그럼 이제 다른 기능 추가해줘.</text>
+                        <rect x="10" y="112" width="260" height="22" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <text x="15" y="155" font-family="monospace" font-size="11" fill="#fca5a5">커서: function messedUp() {</text>
+                        <text x="25" y="171" font-family="monospace" font-size="11" fill="#fca5a5">  // 이전 코드 어디갔지? <tspan fill="#ef4444" font-weight="bold">새로운 오류!</tspan></text>
+                        <text x="15" y="187" font-family="monospace" font-size="11" fill="#fca5a5">}</text>
+                        <rect x="10" y="143" width="280" height="55" rx="3" fill="#fee2e2" fill-opacity="0.2"/>
+                        <rect x="10" y="47" width="200" height="55" rx="3" fill="#4b5563" fill-opacity="0.3"/>
+                         <text x="150" y="215" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#ef4444" font-weight="bold">
+                            <tspan font-family="FontAwesome">&#xf071;</tspan> 이전 작업 손실!
+                        </text>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-red-400">Why?</strong> 커서가 항상 완벽한 결과만 내는 것은 아닙니다. 좋은 결과물을 저장해두지 않으면, 이후 작업에서 결과가 만족스럽지 않거나 예기치 못한 문제로 이전의 좋은 상태를 잃어버릴 수 있습니다.
+                </p>
+            </div>
+            <div class="mistake-section do-section">
+                <h3><i class="fas fa-check-circle mr-3"></i>Do: 만족 시 커밋 메시지 생성 및 저장</h3>
+                <p class="themed-text description-text">만족스러운 결과물이 나왔을 때는, 해당 작업에 대한 커밋 메시지를 커서에게 생성하도록 요청하고, 이를 바탕으로 작업을 커밋(저장)합니다.</p>
+                <div class="visualization-box">
+                     <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">만족 시 커밋</text>
+                        <text x="15" y="60" font-family="monospace" font-size="11" fill="#86efac">커서: function perfectCode() {</text>
+                        <text x="25" y="76" font-family="monospace" font-size="11" fill="#86efac">  // 완벽한 로직!</text>
+                        <text x="15" y="92" font-family="monospace" font-size="11" fill="#86efac">}</text>
+                        <rect x="10" y="47" width="200" height="55" rx="3" fill="#dcfce7" fill-opacity="0.2"/>
+                         <foreignObject x="220" y="65" width="28" height="28">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-check-circle text-xl text-green-400"></i>
+                        </foreignObject>
+                        <text x="15" y="125" font-family="sans-serif" font-size="11" fill="#e2e8f0">User: 이 작업에 대한 커밋 메시지 만들어줘.</text>
+                        <rect x="10" y="112" width="250" height="22" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                         <foreignObject x="265" y="115" width="20" height="20">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-arrow-right text-sky-400 text-base"></i>
+                        </foreignObject>
+                        <foreignObject x="15" y="148" width="24" height="24">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-comment-dots text-lg text-sky-400"></i>
+                        </foreignObject>
+                        <text x="45" y="165" font-family="Fira Code, monospace" font-size="10" fill="#bfdbfe">커서: feat: Implement perfectCode function</text>
+                        <rect x="40" y="152" width="250" height="20" rx="3" fill="#3b82f6" fill-opacity="0.2"/>
+                        <foreignObject x="100" y="185" width="28" height="28">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-save text-xl text-green-400"></i>
+                        </foreignObject>
+                         <text x="135" y="202" font-family="sans-serif" font-size="10" fill="#a7f3d0">git commit -m "..."</text>
+                         <text x="150" y="220" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#4ade80" font-weight="bold">
+                            <tspan font-family="FontAwesome">&#xf560;</tspan> 안전하게 저장!
+                        </text>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-green-400">Tip:</strong> 커서에게 "이 변경사항에 대한 커밋 메시지 작성해줘"와 같이 요청하면, 작업 내용을 요약하는 메시지를 쉽게 얻을 수 있습니다. 이를 활용해 작업 단위를 명확히 하고, 언제든 좋은 상태로 돌아갈 수 있도록 하세요.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide11" class="slide"> <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #1: `/` 커맨드를 적극 활용하세요</h2>
+        <div class="pro-tip-layout" style="grid-template-columns: 1fr;"> <div class="pro-tip-section pro-tip-highlight">
+                <h3><i class="fas fa-terminal mr-3"></i>`/` 커맨드로 생산성 UP!</h3>
+                <p class="themed-text description-text">
+                    채팅창에 `/`를 입력하면 다양한 유용한 커맨드를 사용할 수 있습니다. 이를 활용하면 반복적인 작업을 자동화하거나 복잡한 지시를 더 쉽게 내릴 수 있습니다.
+                </p>
+                <div class="visualization-box">
+                    <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">`/` 커맨드 활용</text>
+                        
+                        <text x="15" y="60" font-family="Fira Code, monospace" font-size="14" fill="#e2e8f0">User: /</text>
+                        <line x1="65" y1="62" x2="65" y2="48" stroke="#60a5fa" stroke-width="2">
+                            <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/>
+                        </line>
+
+                        <rect x="15" y="75" width="270" height="90" rx="5" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+                        <text x="25" y="95" font-family="sans-serif" font-size="11" fill="#cbd5e1"><tspan fill="#818cf8">/generate_rules</tspan> - 현재 대화 기반 규칙 생성</text>
+                        <text x="25" y="115" font-family="sans-serif" font-size="11" fill="#cbd5e1"><tspan fill="#818cf8">/create_test</tspan> - 선택 코드 테스트 생성</text>
+                        <text x="25" y="135" font-family="sans-serif" font-size="11" fill="#cbd5e1"><tspan fill="#818cf8">/explain_code</tspan> - 선택 코드 설명</text>
+                        <text x="25" y="155" font-family="sans-serif" font-size="11" fill="#cbd5e1">...</text>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-green-400">특히 유용한 기능:</strong> `/generate_cursor_rules` (또는 유사한 이름의 커맨드)는 지금까지의 작업 내용을 바탕으로 커서가 따라야 할 규칙이나 가이드라인을 자동으로 생성해줍니다. 이를 통해 일관성 있는 코드 스타일을 유지하거나 특정 프로젝트의 요구사항을 커서에게 명확히 전달할 수 있습니다.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide12" class="slide">
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #2: 코드 설명은 커서에게</h2>
+        <div class="pro-tip-layout" style="grid-template-columns: 1fr;">
+            <div class="pro-tip-section pro-tip-highlight">
+                <h3><i class="fas fa-question-circle mr-3"></i>이해 안되면 바로 질문하세요!</h3>
+                <p class="themed-text description-text">
+                    커서가 작성해준 코드가 잘 이해되지 않거나, 왜 그렇게 작성했는지 궁금하다면 주저하지 말고 후속 질문으로 설명을 요청하세요.
+                </p>
+                <div class="visualization-box">
+                    <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">코드 설명 요청</text>
+
+                        <text x="15" y="60" font-family="monospace" font-size="10" fill="#e2e8f0">커서: const x = data.map(d => d*2).filter(d > 10);</text>
+                        <rect x="10" y="47" width="280" height="22" rx="3" fill="#4b5563" fill-opacity="0.3"/>
+
+                        <text x="15" y="90" font-family="sans-serif" font-size="12" fill="#e2e8f0">User: 이 코드 왜 이렇게 작성했어? 설명해줘.</text>
+                        <rect x="10" y="77" width="260" height="22" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        
+                        <foreignObject x="15" y="110" width="24" height="24">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-comment-dots text-lg text-sky-400"></i>
+                        </foreignObject>
+                        <text x="45" y="120" font-family="sans-serif" font-size="10" fill="#bfdbfe">커서: 이 코드는 먼저 data 배열의 각 요소를 2배로</text>
+                        <text x="45" y="132" font-family="sans-serif" font-size="10" fill="#bfdbfe">변환한 후, 그 결과 중 10보다 큰 값만 필터링합니다.</text>
+                        <text x="45" y="144" font-family="sans-serif" font-size="10" fill="#bfdbfe">가독성과 성능을 고려하여 메서드 체이닝을 사용했습니다.</text>
+                        <rect x="40" y="107" width="250" height="45" rx="3" fill="#3b82f6" fill-opacity="0.2"/>
+                        
+                        <text x="45" y="170" font-family="sans-serif" font-size="10" fill="#fcd34d">커서: (또는) 앗, filter 조건에 오류가 있었네요!</text>
+                        <text x="45" y="182" font-family="sans-serif" font-size="10" fill="#fcd34d"><tspan fill="#f87171" font-weight="bold">d => d > 10</tspan> 으로 수정하는 것이 맞습니다.</text>
+                         <rect x="40" y="157" width="250" height="30" rx="3" fill="#fef3c7" fill-opacity="0.2"/>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-green-400">기대 효과:</strong> 의외로 명쾌한 설명을 듣거나, 커서 스스로 자신이 저지른 실수를 깨닫고 더 나은 코드로 수정해주는 경우도 있습니다. 커서와의 대화를 통해 더 깊이 있는 학습이 가능합니다.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="slide13" class="slide">
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #3: 자연어로 코드 탐색</h2>
+        <div class="pro-tip-layout" style="grid-template-columns: 1fr;">
+            <div class="pro-tip-section pro-tip-highlight">
+                <h3><i class="fas fa-search-location mr-3"></i>"그 함수 어디있더라?" 커서에게 물어보세요!</h3>
+                <p class="themed-text description-text">
+                    특정 기능의 함수 이름이나 파일 위치가 정확히 기억나지 않을 때, 일반적인 검색 기능 대신 커서에게 자연어로 물어보세요.
+                </p>
+                <div class="visualization-box">
+                     <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">자연어 코드 검색</text>
+
+                        <text x="15" y="60" font-family="sans-serif" font-size="12" fill="#e2e8f0">User: 유저 로그인 처리하는 컨트롤러 코드 찾아줘.</text>
+                        <rect x="10" y="47" width="280" height="22" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <foreignObject x="260" y="80" width="24" height="24">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-arrow-down text-sky-400 text-lg"></i>
+                        </foreignObject>
+                        
+                        <foreignObject x="15" y="110" width="36" height="36">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-file-code fa-2x text-green-400"></i>
+                        </foreignObject>
+                        <text x="60" y="125" font-family="Fira Code, monospace" font-size="10" fill="#a7f3d0">커서: `AuthContoller.js` 파일의</text>
+                        <text x="60" y="139" font-family="Fira Code, monospace" font-size="10" fill="#a7f3d0">`handleLoginRequest` 함수를 찾았습니다.</text>
+                        <rect x="55" y="112" width="235" height="34" rx="3" fill="#22c55e" fill-opacity="0.2"/>
+
+                        <text x="60" y="165" font-family="Fira Code, monospace" font-size="9" fill="#9ca3af">function handleLoginRequest(req, res) {</text>
+                        <text x="60" y="177" font-family="Fira Code, monospace" font-size="9" fill="#9ca3af">  // ... 로그인 처리 로직 ...</text>
+                        <text x="60" y="189" font-family="Fira Code, monospace" font-size="9" fill="#9ca3af">}</text>
+                        <rect x="55" y="152" width="235" height="45" rx="3" fill="#374151" fill-opacity="0.5"/>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-green-400">장점:</strong> 정확한 키워드를 몰라도, 마치 동료 개발자에게 물어보듯 자연스러운 질문으로 원하는 코드나 파일을 빠르게 찾을 수 있습니다. 이는 특히 크고 복잡한 프로젝트에서 유용합니다.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide14" class="slide">
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #4: 새 라이브러리? Context7 MCP로 정확도 UP!</h2>
+        <div class="pro-tip-layout" style="grid-template-columns: 1fr;">
+            <div class="pro-tip-section pro-tip-highlight">
+                <h3><i class="fas fa-book-reader mr-3"></i>커서에게 공식 문서를 읽혀주세요!</h3>
+                <p class="themed-text description-text">
+                    커서가 특정 라이브러리나 프레임워크의 최신 인터페이스를 잘 모르고 오래된 방식으로 코딩할 때, **Context7 MCP** (가칭, 또는 유사 기능)를 활용하여 공식 문서를 컨텍스트로 제공하세요.
+                </p>
+                <div class="visualization-box">
+                     <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">Context7 MCP (문서 참조)</text>
+
+                        <text x="15" y="60" font-family="sans-serif" font-size="10" fill="#e2e8f0">User: SwiftUI 최신 API로 이 부분 수정해줘.</text>
+                        <rect x="10" y="47" width="240" height="20" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        
+                        <text x="15" y="85" font-family="monospace" font-size="10" fill="#fca5a5">커서: (오래된 API 사용) ... </text>
+                        <rect x="10" y="72" width="200" height="20" rx="3" fill="#fee2e2" fill-opacity="0.2"/>
+                        <foreignObject x="220" y="73" width="20" height="20">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-times-circle text-red-400 text-base"></i>
+                        </foreignObject>
+
+                        <text x="15" y="115" font-family="sans-serif" font-size="10" fill="#e2e8f0">User: (Context7 MCP로 SwiftUI 공식 문서 제공)</text>
+                        <rect x="10" y="102" width="240" height="20" rx="3" fill="#4b5563" fill-opacity="0.7"/>
+                        <foreignObject x="260" y="103" width="24" height="24">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-upload text-sky-400 text-lg"></i>
+                        </foreignObject>
+                        
+                        <text x="15" y="145" font-family="monospace" font-size="10" fill="#86efac">커서: (최신 API 사용) ... </text>
+                        <rect x="10" y="132" width="200" height="20" rx="3" fill="#dcfce7" fill-opacity="0.2"/>
+                        <foreignObject x="220" y="133" width="20" height="20">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-check-circle text-green-400 text-base"></i>
+                        </foreignObject>
+                        
+                        <text x="150" y="175" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#9ca3af"> (할루시네이션 감소, 정확도 향상)</text>
+                        <path d="M100 190 L150 210 L200 190" stroke="#4ade80" stroke-width="2" fill="none"/>
+                        <circle cx="150" cy="210" r="3" fill="#4ade80"/>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-green-400">효과:</strong> 커서가 최신 정보를 바탕으로 정확한 코드를 생성하도록 유도하여, 할루시네이션(환각)을 줄이고 답변의 질을 크게 높일 수 있습니다. (예: Swift UI API 변경에 빠르게 대응)
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide15" class="slide">
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #5: 팀 코드 리뷰엔 버그 파인더!</h2>
+        <div class="pro-tip-layout" style="grid-template-columns: 1fr;">
+            <div class="pro-tip-section pro-tip-highlight">
+                <h3><i class="fas fa-search-plus mr-3"></i>잠재적 버그, 커서가 찾아드립니다!</h3>
+                <p class="themed-text description-text">
+                    팀원의 코드를 리뷰하거나, 자신의 코드에 숨어있을지 모르는 잠재적인 버그를 찾고 싶을 때 **버그 파인더** (가칭, 또는 유사 기능)를 활용해 보세요.
+                </p>
+                <div class="visualization-box">
+                     <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
+                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">버그 파인더 (Bug Finder)</text>
+
+                        <rect x="20" y="45" width="260" height="25" rx="3" fill="#334155" stroke="#475569"/>
+                        <text x="30" y="62" font-family="Fira Code, monospace" font-size="10" fill="#cbd5e1">Cmd+Shift+P > Bug Finder</text>
+                        <foreignObject x="260" y="48" width="18" height="18">
+                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-search text-sky-400 text-sm"></i>
+                        </foreignObject>
+
+                        <rect x="10" y="80" width="280" height="145" rx="5" fill="#334155" stroke="#475569"/>
+                        <text x="20" y="100" font-family="sans-serif" font-size="11" fill="#e2e8f0">Branch: main vs feature/new-login</text>
+                        
+                        <text x="20" y="125" font-family="sans-serif" font-size="10" fill="#fca5a5"><tspan font-family="FontAwesome">&#xf071;</tspan> Null Pointer Risk (User.java:42)</text>
+                        <text x="200" y="125" font-family="sans-serif" font-size="10" fill="#fca5a5">Confidence: 75%</text>
+                        <rect x="20" y="132" width="260" height="2" fill="#ef4444" opacity="0.5"/>
+
+                        <text x="20" y="150" font-family="sans-serif" font-size="10" fill="#fbbf24"><tspan font-family="FontAwesome">&#xf06a;</tspan> Logic Error Possible (Payment.js:103)</text>
+                        <text x="200" y="150" font-family="sans-serif" font-size="10" fill="#fbbf24">Confidence: 60%</text>
+                        <rect x="20" y="157" width="260" height="2" fill="#f59e0b" opacity="0.5"/>
+                        
+                        <text x="20" y="175" font-family="sans-serif" font-size="10" fill="#a7f3d0"><tspan font-family="FontAwesome">&#xf058;</tspan> Minor: Off-by-one (LoopUtil.py:22)</text>
+                        <text x="200" y="175" font-family="sans-serif" font-size="10" fill="#a7f3d0">Confidence: 40%</text>
+                         <rect x="20" y="182" width="260" height="2" fill="#4ade80" opacity="0.5"/>
+
+                        <text x="150" y="210" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#9ca3af">(잠재적 버그 목록과 신뢰도 점수 제시)</text>
+                    </svg>
+                </div>
+                <p class="explanation themed-text">
+                    <strong class="text-green-400">활용법:</strong> 브랜치 간 코드 변경 사항을 비교하여 잠재적인 버그를 신뢰도 점수와 함께 제시해줍니다. (예: <code class="shortcut-key">Cmd+Shift+P</code> > Bug Finder 실행)
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide16" class="slide"> <div class="text-center max-w-4xl">
+            <h2 class="text-4xl sm:text-5xl text-sky-400 mb-8 themed-text">마무리</h2>
+            <p class="themed-text description-text">
+                [발표 내용을 요약하고, 핵심 메시지를 다시 한번 강조하며 마무리합니다.]
+            </p>
+        </div>
+    </div>
 
 </body>
 </html>
