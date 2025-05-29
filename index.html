@@ -396,10 +396,8 @@
                             
                             <!-- AI Confusion Response -->
                             <div class="flex justify-start gap-2">
-                                <div class="flex-shrink-0">
-                                    <div class="w-7 h-7 bg-slate-700 rounded-full flex items-center justify-center">
-                                        <i class="fas fa-robot text-slate-400 text-xs"></i>
-                                    </div>
+                                <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                    <i class="fas fa-robot text-slate-400 text-xs"></i>
                                 </div>
                                 <div class="bg-red-900 bg-opacity-30 p-2 rounded-lg max-w-[70%] border border-red-400 relative">
                                     <p class="text-red-300 text-xs">어디의 버그요...?</p>
@@ -458,10 +456,8 @@
                                 
                                 <!-- AI response -->
                                 <div class="flex justify-start gap-2">
-                                    <div class="flex-shrink-0">
-                                        <div class="w-7 h-7 bg-slate-700 rounded-full flex items-center justify-center">
-                                            <i class="fas fa-robot text-green-400 text-xs"></i>
-                                        </div>
+                                    <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                        <i class="fas fa-robot text-green-400 text-xs"></i>
                                     </div>
                                     <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-green-500 border-opacity-30">
                                         <p class="text-green-300 text-xs">세션 관리 코드를 확인하겠습니다.</p>
@@ -487,10 +483,8 @@
                                 </div>
                                 
                                 <div class="flex justify-start gap-2">
-                                    <div class="flex-shrink-0">
-                                        <div class="w-7 h-7 bg-slate-700 rounded-full flex items-center justify-center">
-                                            <i class="fas fa-robot text-blue-400 text-xs"></i>
-                                        </div>
+                                    <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                        <i class="fas fa-robot text-blue-400 text-xs"></i>
                                     </div>
                                     <div class="bg-blue-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-blue-500 border-opacity-30">
                                         <p class="text-blue-300 text-xs">UI 컴포넌트와 테마 관리 시스템을 구현하겠습니다.</p>
@@ -515,10 +509,8 @@
                                 </div>
                                 
                                 <div class="flex justify-start gap-2">
-                                    <div class="flex-shrink-0">
-                                        <div class="w-7 h-7 bg-slate-700 rounded-full flex items-center justify-center">
-                                            <i class="fas fa-robot text-purple-400 text-xs"></i>
-                                        </div>
+                                    <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                        <i class="fas fa-robot text-purple-400 text-xs"></i>
                                     </div>
                                     <div class="bg-purple-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-purple-500 border-opacity-30">
                                         <p class="text-purple-300 text-xs">최신 엔드포인트 변경사항을 반영하겠습니다.</p>
@@ -592,23 +584,53 @@
             <div class="mistake-section dont-section">
                 <h3><i class="fas fa-times-circle mr-3"></i>Don't: LLM의 실수를 직접 수정 요청</h3>
                 <p class="themed-text description-text">커서가 생성한 코드나 내용에 오류가 있을 때, 단순히 "이거 틀렸어, 고쳐줘" 라고 다시 요청합니다.</p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">오류 수정 요청 (잘못된 방식)</div>
-                    <div class="bg-slate-700 p-4 space-y-3 h-52 overflow-hidden">
-                        <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">User: 특정 함수 만들어줘</div>
-                        <div class="bg-red-100 bg-opacity-20 p-2 rounded border border-red-400">
-                            <div class="text-red-300 text-xs font-mono">커서: function myFunction() {</div>
-                            <div class="text-red-300 text-xs font-mono ml-4">// <span class="text-red-400 font-bold">오류 있는 코드 부분</span></div>
-                            <div class="text-red-300 text-xs font-mono">}</div>
+                <div class="visualization-box flex flex-col">
+                    <!-- Chat Window Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">User: 이거 틀렸어, 고쳐줘!</div>
-                        <div class="bg-red-100 bg-opacity-20 p-2 rounded border border-red-400">
-                            <div class="text-red-300 text-xs font-mono">커서: function myFunctionFixed() {</div>
-                            <div class="text-red-300 text-xs font-mono ml-4">// <span class="text-red-400 font-bold">또 다른 오류 발생</span></div>
-                            <div class="text-red-300 text-xs font-mono">}</div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">오류 수정 요청 (잘못된 방식)</span></div>
+                    </div>
+                    <!-- Chat Messages Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-2">
+                        <!-- User Message 1 -->
+                        <div class="flex justify-end">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
+                                <p class="text-slate-200 text-xs">특정 함수 만들어줘</p>
+                            </div>
                         </div>
-                        <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
-                            <i class="fas fa-sync-alt text-2xl text-red-400 animate-spin"></i>
+                        <!-- AI Error Response 1 -->
+                        <div class="flex justify-start gap-2">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-red-400 text-xs"></i></div>
+                            <div class="bg-red-900 bg-opacity-30 p-2 rounded-lg max-w-[70%] border border-red-400">
+                                <code class="text-red-300 text-xs font-mono">function myFunction() {<br>&nbsp;&nbsp;// <span class="text-red-400 font-bold">오류 있는 코드 부분</span><br>}</code>
+                            </div>
+                        </div>
+                        <!-- User Message 2 -->
+                        <div class="flex justify-end">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
+                                <p class="text-slate-200 text-xs">이거 틀렸어, 고쳐줘!</p>
+                            </div>
+                        </div>
+                        <!-- AI Error Response 2 -->
+                        <div class="flex justify-start gap-2 relative">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-red-400 text-xs"></i></div>
+                            <div class="bg-red-900 bg-opacity-30 p-2 rounded-lg max-w-[70%] border border-red-400">
+                                <code class="text-red-300 text-xs font-mono">function myFunctionFixed() {<br>&nbsp;&nbsp;// <span class="text-red-400 font-bold">또 다른 오류 발생</span><br>}</code>
+                            </div>
+                            <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
+                                <i class="fas fa-sync-alt text-xl text-red-400 animate-spin"></i>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Chat Input Area -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
@@ -616,28 +638,59 @@
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: 원인 프롬프트 수정 후 재요청</h3>
                 <p class="themed-text description-text">커서가 실수한 결과물을 만든 원인 프롬프트를 찾아 명확히 수정 후 다시 요청합니다.</p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">프롬프트 수정 (올바른 방식)</div>
-                    <div class="bg-slate-700 p-4 space-y-3 h-52 overflow-hidden">
-                        <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs flex items-center">
-                            User: 특정 함수 만들어줘 (초기)
-                            <i class="fas fa-pencil-alt text-sky-400 ml-2"></i>
+                <div class="visualization-box flex flex-col">
+                    <!-- Chat Window Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="bg-yellow-100 bg-opacity-15 p-2 rounded border border-yellow-400">
-                            <div class="text-yellow-300 text-xs font-mono">커서: function myFunction() {</div>
-                            <div class="text-yellow-300 text-xs font-mono ml-4">// <span class="text-yellow-400 font-bold">오류 발견!</span></div>
-                            <div class="text-yellow-300 text-xs font-mono">}</div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">프롬프트 수정 (올바른 방식)</span></div>
+                    </div>
+                    <!-- Chat Messages Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-2">
+                        <!-- User Message 1 (Initial) -->
+                        <div class="flex justify-end">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[80%]">
+                                <p class="text-slate-200 text-xs flex items-center">
+                                    특정 함수 만들어줘 (초기)
+                                    <i class="fas fa-pencil-alt text-sky-400 ml-2 text-xs"></i>
+                                </p>
+                            </div>
                         </div>
-                        <div class="bg-green-400 bg-opacity-30 p-2 rounded text-slate-200 text-xs text-center">
-                            (코드 롤백 & 프롬프트 수정됨)
+                        <!-- AI Error Response -->
+                        <div class="flex justify-start gap-2">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-yellow-400 text-xs"></i></div>
+                            <div class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[70%] border border-yellow-400">
+                                <code class="text-yellow-300 text-xs font-mono">function myFunction() {<br>&nbsp;&nbsp;// <span class="text-yellow-400 font-bold">오류 발견!</span><br>}</code>
+                            </div>
                         </div>
-                        <div class="bg-green-400 bg-opacity-30 p-2 rounded text-slate-200 text-xs">
-                            User: <span class="text-green-400">정확한 매개변수 포함한</span> 함수 <span class="text-green-400">(수정)</span>
+                        <!-- System Message -->
+                        <div class="text-center my-1">
+                            <span class="bg-green-700 text-green-200 text-xs px-2 py-0.5 rounded-full">(코드 롤백 & 프롬프트 수정됨)</span>
                         </div>
-                        <div class="bg-green-100 bg-opacity-20 p-2 rounded border border-green-400">
-                            <div class="text-green-300 text-xs font-mono">커서: function myFunction(param1, param2) {</div>
-                            <div class="text-green-300 text-xs font-mono ml-4">// <span class="text-green-400 font-bold">정상 작동하는 코드</span></div>
-                            <div class="text-green-300 text-xs font-mono">}</div>
+                        <!-- User Message 2 (Corrected) -->
+                        <div class="flex justify-end">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[80%]">
+                                <p class="text-slate-200 text-xs">
+                                    <span class="text-green-400">정확한 매개변수 포함한</span> 함수 <span class="text-green-400">(수정)</span>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- AI Correct Response -->
+                        <div class="flex justify-start gap-2">
+                             <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-green-400 text-xs"></i></div>
+                            <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-green-400">
+                                <code class="text-green-300 text-xs font-mono">function myFunction(param1, param2) {<br>&nbsp;&nbsp;// <span class="text-green-400 font-bold">정상 작동하는 코드</span><br>}</code>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Chat Input Area -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
@@ -659,67 +712,112 @@
             <div class="mistake-section dont-section">
                 <h3><i class="fas fa-times-circle mr-3"></i>Don't: 수정 대상 명시 없이 지시</h3>
                 <p class="themed-text description-text">코드베이스의 어느 부분을 수정해야 하는지 알려주지 않고, "로딩 스피너 추가해줘" 또는 "API 에러 처리 개선해줘"와 같이 모호하게 요청합니다.</p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">모호한 지시</div>
-                    <div class="bg-slate-700 p-4 h-52 flex flex-col justify-center items-center">
-                        <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs mb-4">User: 로딩 스피너 추가해줘.</div>
-                        <div class="text-center mb-4">
-                            <div class="inline-block relative">
-                                <div class="w-12 h-12 border-4 border-slate-500 border-t-transparent rounded-full animate-spin opacity-50"></div>
-                                <div class="w-8 h-8 border-4 border-slate-400 border-t-transparent rounded-full animate-spin absolute top-2 left-2 opacity-30"></div>
-                                <div class="w-4 h-4 border-4 border-slate-300 border-t-transparent rounded-full animate-spin absolute top-4 left-4 opacity-10"></div>
+                <div class="visualization-box flex flex-col">
+                    <!-- Chat Window Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                        </div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">모호한 지시</span></div>
+                    </div>
+                    <!-- Chat Messages Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-2">
+                        <!-- User Message -->
+                        <div class="flex justify-end">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
+                                <p class="text-slate-200 text-xs">로딩 스피너 추가해줘.</p>
                             </div>
                         </div>
-                        <div class="bg-yellow-100 bg-opacity-15 p-3 rounded border border-yellow-400 text-center">
-                            <div class="text-yellow-300 text-xs">커서: 어떤 컴포넌트에 로딩 스피너를</div>
-                            <div class="text-yellow-300 text-xs">추가할까요? 데이터 로딩 중인지,</div>
-                            <div class="text-yellow-300 text-xs">버튼 클릭 시인지 구체적으로 알려주세요.</div>
+                        <!-- AI Question -->
+                        <div class="flex justify-start gap-2">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-yellow-400 text-xs"></i></div>
+                            <div class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
+                                <p class="text-yellow-300 text-xs">어떤 컴포넌트에 로딩 스피너를 추가할까요? 데이터 로딩 중인지, 버튼 클릭 시인지 구체적으로 알려주세요.</p>
+                            </div>
                         </div>
-                        <div class="text-6xl text-red-400 mt-4">?</div>
+                         <!-- Confusion Illustration -->
+                        <div class="flex justify-center items-center pt-3">
+                            <div class="relative flex flex-col items-center">
+                                <div class="text-6xl text-red-400">?</div>
+                                <div class="inline-block relative mt-2">
+                                    <div class="w-10 h-10 border-4 border-slate-500 border-t-transparent rounded-full animate-spin opacity-50"></div>
+                                    <div class="w-6 h-6 border-2 border-slate-400 border-t-transparent rounded-full animate-spin absolute top-2 left-2 opacity-30" style="animation-delay: -0.2s;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Chat Input Area -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: 수정 대상 코드 명시 (파일 첨부)</h3>
                 <p class="themed-text description-text">수정할 코드 부분이나 관련 파일을 명확히 전달하여 컨텍스트를 제공합니다.</p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">파일 드래그로 컨텍스트 제공</div>
-                    <div class="bg-slate-700 p-4 h-52 space-y-3">
-                        <div class="bg-slate-800 p-3 rounded border border-slate-600 font-mono text-xs">
-                            <div class="flex">
-                                <div class="text-slate-500 w-8">1</div>
-                                <div class="text-slate-400">const [loading, setLoading] = useState(false);</div>
-                            </div>
-                            <div class="flex">
-                                <div class="text-slate-500 w-8">2</div>
-                                <div class="text-slate-400">const fetchData = async () => {</div>
-                            </div>
-                            <div class="flex">
-                                <div class="text-slate-500 w-8">3</div>
-                                <div class="text-slate-400 ml-4">setLoading(true);</div>
-                            </div>
-                            <div class="flex">
-                                <div class="text-slate-500 w-8">4</div>
-                                <div class="text-slate-400 ml-4">// API 호출...</div>
-                            </div>
-                            <div class="flex">
-                                <div class="text-slate-500 w-8">5</div>
-                                <div class="text-slate-400">};</div>
-                            </div>
+                <div class="visualization-box flex flex-col">
+                    <!-- Chat Window Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="flex items-center space-x-2">
-                            <div class="bg-blue-400 p-2 rounded flex flex-col items-center text-xs text-white">
-                                <i class="fas fa-file-code mb-1"></i>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">파일 첨부로 컨텍스트 제공</span></div>
+                    </div>
+                    <!-- Content Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-hidden flex flex-col justify-between">
+                        <!-- Code Snippet -->
+                        <div class="bg-slate-800 p-2 rounded border border-slate-600 font-mono text-xs mb-2 flex-shrink-0">
+                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">1</span><span class="text-slate-400">const [loading, setLoading] = useState(false);</span></div>
+                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">2</span><span class="text-slate-400">const fetchData = async () => {</span></div>
+                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">3</span><span class="text-slate-400 ml-4">setLoading(true);</span></div>
+                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">4</span><span class="text-slate-400 ml-4">// API 호출...</span></div>
+                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">5</span><span class="text-slate-400">};</span></div>
+                        </div>
+
+                        <!-- Drag and Drop Area -->
+                        <div id="drag-drop-container" class="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-slate-600 rounded-md relative py-3">
+                            <div id="file-icon-drag" class="bg-blue-500 p-2 rounded text-white text-xs flex flex-col items-center absolute cursor-grab" style="left: 20%; top: 20%;">
+                                <i class="fas fa-file-code mb-0.5 text-base"></i>
                                 <div>UserList.jsx</div>
                             </div>
-                            <i class="fas fa-long-arrow-alt-right text-blue-400"></i>
-                            <div class="bg-slate-600 p-2 rounded flex-1">
-                                <div class="font-mono text-xs text-slate-300">@UserList.jsx 이 컴포넌트에</div>
-                                <div class="font-mono text-xs text-slate-300">로딩 스피너 UI 추가해줘</div>
+                            <div id="drop-target" class="w-full h-full flex flex-col items-center justify-center">
+                                <i class="fas fa-bullseye text-3xl text-slate-500 mb-1"></i>
+                                <p class="text-slate-500 text-xs">여기로 파일을 드래그하세요</p>
                             </div>
                         </div>
-                        <div class="text-center text-green-400 text-sm font-semibold">
-                            <i class="fas fa-check-circle mr-2"></i>알겠습니다!
+                        
+                        <!-- User Message with File Attached -->
+                        <div class="mt-2 flex justify-end">
+                             <div id="user-message-with-file" class="bg-slate-700 p-2 rounded-lg max-w-[90%] hidden">
+                                <div class="flex items-center mb-1">
+                                    <div class="bg-blue-500 p-1.5 rounded text-white text-xs flex items-center mr-2">
+                                        <i class="fas fa-file-code mr-1"></i>
+                                        <span>UserList.jsx</span>
+                                    </div>
+                                    <p class="text-slate-200 text-xs">이 컴포넌트에 로딩 스피너 UI 추가해줘</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- AI Response -->
+                        <div class="mt-1 flex justify-start gap-2">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-green-400 text-xs"></i></div>
+                            <div id="ai-response-file" class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-green-500 border-opacity-30 hidden">
+                                <p class="text-green-300 text-xs"><i class="fas fa-check-circle mr-1"></i>알겠습니다! UserList.jsx에 로딩 스피너를 추가할게요.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Chat Input Area (Dummy) -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
@@ -735,30 +833,126 @@
         </div>
     </div>
 
+    <script>
+        // Slide 6 Drag and Drop Animation
+        document.addEventListener('DOMContentLoaded', function () {
+            const fileIcon = document.getElementById('file-icon-drag');
+            const dropTarget = document.getElementById('drop-target');
+            const dragContainer = document.getElementById('drag-drop-container');
+            const userMessageWithFile = document.getElementById('user-message-with-file');
+            const aiResponseFile = document.getElementById('ai-response-file');
+
+            if (fileIcon && dropTarget && dragContainer && userMessageWithFile && aiResponseFile) {
+                let isDragging = false;
+                let offsetX, offsetY;
+
+                fileIcon.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    offsetX = e.clientX - fileIcon.getBoundingClientRect().left;
+                    offsetY = e.clientY - fileIcon.getBoundingClientRect().top;
+                    fileIcon.style.cursor = 'grabbing';
+                    fileIcon.style.transition = 'none'; // Disable transition during drag
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    
+                    let newX = e.clientX - offsetX - dragContainer.getBoundingClientRect().left;
+                    let newY = e.clientY - offsetY - dragContainer.getBoundingClientRect().top;
+
+                    // Constrain within dragContainer
+                    newX = Math.max(0, Math.min(newX, dragContainer.clientWidth - fileIcon.offsetWidth));
+                    newY = Math.max(0, Math.min(newY, dragContainer.clientHeight - fileIcon.offsetHeight));
+
+                    fileIcon.style.left = newX + 'px';
+                    fileIcon.style.top = newY + 'px';
+                });
+
+                document.addEventListener('mouseup', (e) => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    fileIcon.style.cursor = 'grab';
+                    fileIcon.style.transition = 'all 0.3s ease'; // Re-enable transition
+
+                    const fileRect = fileIcon.getBoundingClientRect();
+                    const targetRect = dropTarget.getBoundingClientRect();
+
+                    // Check if the center of the file icon is over the drop target
+                    const fileCenterX = fileRect.left + fileRect.width / 2;
+                    const fileCenterY = fileRect.top + fileRect.height / 2;
+
+                    if (fileCenterX > targetRect.left && fileCenterX < targetRect.right &&
+                        fileCenterY > targetRect.top && fileCenterY < targetRect.bottom) {
+                        
+                        // Simulate file drop
+                        fileIcon.style.opacity = '0';
+                        fileIcon.style.transform = 'scale(0.5)';
+                        
+                        setTimeout(() => {
+                            dragContainer.innerHTML = '<div class="flex flex-col items-center justify-center h-full"><i class="fas fa-check-circle text-4xl text-green-400 mb-2"></i><p class="text-green-400 text-sm">파일 첨부 완료!</p></div>';
+                            userMessageWithFile.classList.remove('hidden');
+                            userMessageWithFile.classList.add('flex');
+                            aiResponseFile.classList.remove('hidden');
+                            aiResponseFile.classList.add('flex');
+                        }, 300);
+                    } else {
+                        // Snap back to original position if not dropped on target
+                        fileIcon.style.left = '20%';
+                        fileIcon.style.top = '20%';
+                    }
+                });
+            }
+        });
+    </script>
+
     <div id="slide7" class="slide">
         <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">실수 #4: 린터 오류가 있는 상태에서 요청하기</h2>
         <div class="mistake-layout">
             <div class="mistake-section dont-section">
                 <h3><i class="fas fa-times-circle mr-3"></i>Don't: 린터 오류 무시하고 요청</h3>
                 <p class="themed-text description-text">코드에 린터(Linter) 오류가 표시된 상태에서 커서에게 코드 생성이나 수정을 요청합니다.</p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">린터 오류 + 요청</div>
-                    <div class="bg-slate-700 p-4 h-52 space-y-3">
-                        <div class="bg-slate-800 p-3 rounded border border-red-400">
-                            <div class="font-mono text-xs text-slate-200">function greet() {</div>
-                            <div class="font-mono text-xs text-slate-200 relative">
-                                <span class="ml-2">console.log("Hello")</span>
-                                <span class="text-red-400 font-bold">// Missing semicolon</span>
-                                <div class="absolute bottom-0 left-2 right-0 h-px bg-red-400 border-b-2 border-dotted border-red-400"></div>
-                            </div>
-                            <div class="font-mono text-xs text-slate-200">}</div>
-                            <i class="fas fa-exclamation-circle text-red-500 absolute top-3 right-3"></i>
+                <div class="visualization-box flex flex-col">
+                    <!-- Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">User: 이 함수에 파라미터 추가해줘.</div>
-                        <div class="bg-yellow-100 bg-opacity-15 p-3 rounded border border-yellow-400">
-                            <div class="text-yellow-300 text-xs">커서: 세미콜론이 빠진 것 같아요.</div>
-                            <div class="text-yellow-300 text-xs">먼저 린트 오류를 수정하는 것이 어떨까요?</div>
-                            <div class="text-yellow-300 text-xs">그 후에 파라미터를 추가해 드릴게요.</div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">린터 오류 + 요청</span></div>
+                    </div>
+                    <!-- Code Area with Linter Error -->
+                    <div class="bg-slate-850 p-3 flex-shrink-0 border-b border-slate-700 relative">
+                        <div class="font-mono text-xs text-slate-200">function greet() {</div>
+                        <div class="font-mono text-xs text-slate-200 relative pl-2">
+                            <span>console.log("Hello")</span>
+                            <span class="text-red-400 font-bold ml-2">// Missing semicolon</span>
+                            <div class="absolute bottom-0 left-2 h-px bg-red-400 w-[calc(100%-1rem)] border-b-2 border-dotted border-red-400"></div>
+                        </div>
+                        <div class="font-mono text-xs text-slate-200">}</div>
+                        <i class="fas fa-exclamation-circle text-red-500 absolute top-2 right-2 text-sm"></i>
+                    </div>
+                    <!-- Chat Messages Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-2">
+                        <!-- User Message -->
+                        <div class="flex justify-end">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
+                                <p class="text-slate-200 text-xs">이 함수에 파라미터 추가해줘.</p>
+                            </div>
+                        </div>
+                        <!-- AI Warning -->
+                        <div class="flex justify-start gap-2">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-yellow-400 text-xs"></i></div>
+                            <div class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
+                                <p class="text-yellow-300 text-xs">세미콜론이 빠진 것 같아요. 먼저 린트 오류를 수정하는 것이 어떨까요? 그 후에 파라미터를 추가해 드릴게요.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Chat Input Area -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
@@ -766,21 +960,48 @@
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: 린터 오류 해결 후 요청</h3>
                 <p class="themed-text description-text">요청 전 린터 오류를 먼저 해결하세요. 커서가 의도와 다르게 수정하면 포맷터 설정을 확인하세요.</p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">린터 오류 해결 + 요청</div>
-                    <div class="bg-slate-700 p-4 h-52 space-y-3">
-                        <div class="bg-slate-800 p-3 rounded border border-green-400">
-                            <div class="font-mono text-xs text-slate-200">function greet() {</div>
-                            <div class="font-mono text-xs text-slate-200 ml-2">console.log("Hello");</div>
-                            <div class="font-mono text-xs text-slate-200">}</div>
-                            <i class="fas fa-check-circle text-green-500 absolute top-3 right-3"></i>
+                <div class="visualization-box flex flex-col">
+                    <!-- Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="text-center text-green-400 text-xs">(Format on Save: ON)</div>
-                        <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">User: 이 함수에 파라미터 추가해줘.</div>
-                        <div class="bg-green-100 bg-opacity-20 p-3 rounded border border-green-400">
-                            <div class="text-green-300 text-xs font-mono">커서: function greet(name) {</div>
-                            <div class="text-green-300 text-xs font-mono ml-2">console.log(`Hello, ${name}`);</div>
-                            <div class="text-green-300 text-xs font-mono">}</div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">린터 오류 해결 + 요청</span></div>
+                    </div>
+                    <!-- Code Area - Corrected -->
+                    <div class="bg-slate-850 p-3 flex-shrink-0 border-b border-slate-700 relative">
+                        <div class="font-mono text-xs text-slate-200">function greet() {</div>
+                        <div class="font-mono text-xs text-slate-200 pl-2">console.log("Hello");</div>
+                        <div class="font-mono text-xs text-slate-200">}</div>
+                        <i class="fas fa-check-circle text-green-500 absolute top-2 right-2 text-sm"></i>
+                    </div>
+                     <!-- System Message -->
+                    <div class="text-center py-1 bg-slate-850 border-b border-slate-700 flex-shrink-0">
+                        <span class="text-green-400 text-xs font-medium">(Format on Save: ON)</span>
+                    </div>
+                    <!-- Chat Messages Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-2">
+                        <!-- User Message -->
+                        <div class="flex justify-end">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
+                                <p class="text-slate-200 text-xs">이 함수에 파라미터 추가해줘.</p>
+                            </div>
+                        </div>
+                        <!-- AI Response -->
+                        <div class="flex justify-start gap-2">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-green-400 text-xs"></i></div>
+                            <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[85%] border border-green-400">
+                                <code class="text-green-300 text-xs font-mono">function greet(name) {<br>&nbsp;&nbsp;console.log(`Hello, ${name}`);<br>}</code>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Chat Input Area -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
@@ -802,62 +1023,104 @@
             <div class="mistake-section dont-section">
                 <h3><i class="fas fa-times-circle mr-3"></i>Don't: 디자인 방향 없이 큰 작업 요청</h3>
                 <p class="themed-text description-text">명확한 디자인 계획이나 목적 없이 커서에게 "멋진 SNS 만들어줘"와 같이 광범위한 작업을 요청합니다.</p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">광범위한 요청</div>
-                    <div class="bg-slate-700 p-4 h-52 flex flex-col justify-center items-center">
-                        <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs mb-4">User: 멋진 SNS 서비스 만들어줘!</div>
-                        <div class="bg-yellow-100 bg-opacity-15 p-3 rounded border border-yellow-400 mb-4 text-center">
-                            <div class="text-yellow-300 text-xs">커서: (혼란) 어떤 기능을 원하시나요?</div>
-                            <div class="text-yellow-300 text-xs">사용자 흐름, 데이터 모델은요?</div>
+                <div class="visualization-box flex flex-col">
+                    <!-- Chat Window Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="flex items-center space-x-4 mb-4">
-                            <div class="w-8 h-8 bg-red-400 rounded-full opacity-70"></div>
-                            <div class="w-8 h-8 bg-blue-400 rounded-lg opacity-70 transform rotate-12"></div>
-                            <div class="w-12 h-4 bg-yellow-400 rounded-full opacity-70"></div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">광범위한 요청</span></div>
+                    </div>
+                    <!-- Chat Messages Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-2">
+                        <!-- User Message -->
+                        <div class="flex justify-end">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
+                                <p class="text-slate-200 text-xs">멋진 SNS 서비스 만들어줘!</p>
+                            </div>
                         </div>
-                        <div class="text-6xl text-red-400">???</div>
+                        <!-- AI Question -->
+                        <div class="flex justify-start gap-2">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-yellow-400 text-xs"></i></div>
+                            <div class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
+                                <p class="text-yellow-300 text-xs">(혼란) 어떤 기능을 원하시나요? 사용자 흐름, 데이터 모델은요?</p>
+                            </div>
+                        </div>
+                        <!-- Confusion Illustration -->
+                        <div class="flex flex-col items-center justify-center pt-3">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-7 h-7 bg-red-400 rounded-full opacity-70 animate-bounce" style="animation-delay: -0.3s;"></div>
+                                <div class="w-7 h-7 bg-blue-400 rounded-lg opacity-70 transform rotate-12 animate-spin"></div>
+                                <div class="w-10 h-3 bg-yellow-400 rounded-full opacity-70 animate-pulse"></div>
+                            </div>
+                            <div class="text-6xl text-red-400">???</div>
+                        </div>
+                    </div>
+                    <!-- Chat Input Area -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: 디자인 선행 후 단계별 작업 요청</h3>
                 <p class="themed-text description-text">먼저 커서에게 디자인(요구사항, 규칙, 마크다운 문서 등)을 요청하고, 이를 검토/수정한 후, 구체적인 태스크 단위로 작업을 지시합니다.</p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">단계별 접근</div>
-                    <div class="bg-slate-700 p-4 h-52 space-y-3">
-                        <div class="flex items-center space-x-2">
-                            <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs flex-1">
-                                <div>1. User: SNS 디자인 문서(MD) 작성해줘</div>
-                                <div class="ml-4 text-slate-400">(기능: 포스팅, 댓글)</div>
-                            </div>
-                            <i class="fas fa-arrow-right text-sky-400"></i>
+                <div class="visualization-box flex flex-col h-[280px]">
+                    <!-- Chat Window Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        
-                        <div class="flex items-center space-x-2">
-                            <i class="fab fa-markdown text-2xl text-green-400"></i>
-                            <div class="bg-green-400 bg-opacity-20 p-2 rounded text-green-300 text-xs flex-1">
-                                커서: 디자인 문서입니다.
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center space-x-2">
-                            <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs flex-1">
-                                <div>2. User: (검토/수정 후)</div>
-                                <div class="ml-4">"@SNS_디자인_문서 기반 포스팅 API 구현"</div>
-                            </div>
-                            <i class="fas fa-arrow-right text-sky-400"></i>
-                        </div>
-                        
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-code text-2xl text-green-400"></i>
-                            <div class="bg-green-400 bg-opacity-20 p-2 rounded text-green-300 text-xs flex-1">
-                                커서: 포스팅 API 구현 중...
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">단계별 접근</span></div>
+                    </div>
+                    <!-- Chat Messages Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-auto space-y-2 text-xs">
+                        <!-- Step 1: Request Design Doc -->
+                        <div class="flex justify-end">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[85%]">
+                                <p class="text-slate-200">1. User: SNS 디자인 문서(MD) 작성해줘</p>
+                                <p class="text-slate-400 ml-4">(기능: 포스팅, 댓글)</p>
                             </div>
                         </div>
-                        
-                        <div class="flex items-center space-x-2 text-slate-400 text-xs">
-                            <i class="fas fa-search"></i>
+                        <!-- AI Response: Design Doc -->
+                        <div class="flex justify-start gap-2 items-center">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fab fa-markdown text-green-400"></i></div>
+                            <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[85%] border border-green-400">
+                                <p class="text-green-300">커서: 디자인 문서입니다. (검토/수정)</p>
+                            </div>
+                        </div>
+                        <!-- Step 2: Request API Implementation -->
+                        <div class="flex justify-end">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[85%]">
+                                <p class="text-slate-200">2. User: (검토/수정 후)</p>
+                                <p class="text-slate-200 ml-4"><span class="text-sky-400">@SNS_디자인_문서</span> 기반 포스팅 API 구현</p>
+                            </div>
+                        </div>
+                        <!-- AI Response: API Implementation -->
+                        <div class="flex justify-start gap-2 items-center">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-code text-green-400"></i></div>
+                            <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[85%] border border-green-400">
+                                <p class="text-green-300">커서: 포스팅 API 구현 중...</p>
+                            </div>
+                        </div>
+                         <!-- Deep Research Tip -->
+                        <div class="flex justify-center items-center text-slate-400 pt-1">
+                            <i class="fas fa-search mr-1.5"></i>
                             <span>감이 안 잡히면: Deep Research 활용</span>
+                        </div>
+                    </div>
+                    <!-- Chat Input Area -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
@@ -879,113 +1142,116 @@
             <div class="mistake-section dont-section">
                 <h3><i class="fas fa-times-circle mr-3"></i>Don't: 기술 부채 방치</h3>
                 <p class="themed-text description-text">명확하지 않은 파일/변수/함수 이름, 부족한 모듈화 등 기술 부채가 쌓인 코드에 대해 커서에게 작업을 요청합니다.</p>
-                <div class="visualization-box">
-                     <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
-                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">기술 부채 + 요청</text>
-                        <path d="M30 60 C 80 40, 120 100, 150 70 S 220 40, 270 90" stroke="#f59e0b" stroke-width="2" fill="none" opacity="0.7"/>
-                        <path d="M40 80 C 90 120, 50 150, 100 130 S 180 180, 200 140" stroke="#ef4444" stroke-width="2" fill="none" opacity="0.7"/>
-                        <path d="M60 50 C 10 80, 100 110, 130 100 S 250 130, 240 70" stroke="#3b82f6" stroke-width="2" fill="none" opacity="0.7"/>
-                        <text x="150" y="120" text-anchor="middle" font-family="Fira Code, monospace" font-size="10" fill="#9ca3af">
-                            function a(b,c,d,e,f,g) { /* ... */ }
-                        </text>
-                         <text x="150" y="135" text-anchor="middle" font-family="Fira Code, monospace" font-size="10" fill="#9ca3af">
-                            // data_processor_util_final_v2.js
-                        </text>
-                        <foreignObject x="132" y="68" width="36" height="36">
-                           <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-exclamation-triangle fa-2x text-amber-400"></i>
-                        </foreignObject>
-                        <text x="15" y="170" font-family="sans-serif" font-size="12" fill="#e2e8f0">User: 이 코드에 새 기능 추가해줘.</text>
-                        <rect x="10" y="157" width="220" height="22" rx="3" fill="#4b5563" fill-opacity="0.7"/>
-                        <text x="15" y="200" font-family="sans-serif" font-size="11" fill="#fcd34d">커서: (혼란) 코드가 복잡해서</text>
-                        <text x="15" y="216" font-family="sans-serif" font-size="11" fill="#fcd34d">어디를 수정해야 할지 모르겠어요...</text>
-                        <rect x="10" y="188" width="280" height="38" rx="3" fill="#fffbeb" fill-opacity="0.15"/>
-                    </svg>
+                <div class="visualization-box flex flex-col p-0"> 
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                        </div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">기술 부채 + 요청</span></div>
+                    </div>
+                    <div class="flex-1 bg-slate-900 flex flex-col items-center justify-center p-2 space-y-2">
+                        <svg viewBox="0 0 280 150" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto max-h-[150px]">
+                            <path d="M30 30 C 80 10, 120 70, 150 40 S 220 10, 250 60" stroke="#f59e0b" stroke-width="1.5" fill="none" opacity="0.7"/>
+                            <path d="M40 50 C 90 90, 50 120, 100 100 S 180 150, 200 110" stroke="#ef4444" stroke-width="1.5" fill="none" opacity="0.7"/>
+                            <path d="M60 20 C 10 50, 100 80, 130 70 S 250 100, 240 40" stroke="#3b82f6" stroke-width="1.5" fill="none" opacity="0.7"/>
+                            <text x="140" y="80" text-anchor="middle" font-family="Fira Code, monospace" font-size="9" fill="#9ca3af">
+                                function a(b,c,d,e,f,g) { /* ... */ }
+                            </text>
+                            <text x="140" y="95" text-anchor="middle" font-family="Fira Code, monospace" font-size="9" fill="#9ca3af">
+                                // data_processor_util_final_v2.js
+                            </text>
+                            <foreignObject x="122" y="68" width="36" height="36">
+                               <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-exclamation-triangle fa-lg text-amber-400"></i>
+                            </foreignObject>
+                        </svg>
+                        <div class="flex justify-end w-full px-2">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
+                                <p class="text-slate-200 text-xs">이 코드에 새 기능 추가해줘.</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-start gap-2 w-full px-2">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-yellow-400 text-xs"></i></div>
+                            <div class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
+                                <p class="text-yellow-300 text-xs">(혼란) 코드가 복잡해서 어디를 수정해야 할지 모르겠어요...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: 커서에게 코드 리팩토링 요청</h3>
                 <p class="themed-text description-text">커서에게 리팩토링을 요청해서 코드의 퀄리티를 유지합니다.</p>
-                <div class="visualization-box">
-                     <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="0" y="0" width="300" height="35" fill="#475569"/>
-                        <text x="150" y="22.5" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#cbd5e1">리팩토링 요청</text>
-                        
-                        <!-- Before: Messy Code Section -->
-                        <text x="75" y="60" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#ef4444" font-weight="bold">Before</text>
-                        <rect x="15" y="70" width="120" height="80" rx="5" fill="#1e1b1b" stroke="#ef4444" stroke-width="2" stroke-dasharray="3,3"/>
-                        
-                        <!-- Tangled code visualization -->
-                        <g transform="translate(75 110)">
-                            <!-- Spaghetti code lines -->
-                            <path d="M-40 -20 Q -20 -30, 0 -15 Q 20 0, 40 -10 Q 30 10, 10 20 Q -10 15, -30 5 Q -45 -5, -40 -20" 
-                                  stroke="#f59e0b" stroke-width="2" fill="none" opacity="0.8"/>
-                            <path d="M-35 -10 Q -15 -25, 5 -5 Q 25 10, 35 0 Q 20 25, 0 15 Q -20 20, -35 -10" 
-                                  stroke="#ef4444" stroke-width="2" fill="none" opacity="0.8"/>
-                            <path d="M-30 0 Q -10 -15, 10 5 Q 30 -5, 40 15 Q 15 30, -5 25 Q -25 10, -30 0" 
-                                  stroke="#3b82f6" stroke-width="2" fill="none" opacity="0.8"/>
+                <div class="visualization-box flex flex-col p-0">
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                        </div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">리팩토링 요청</span></div>
+                    </div>
+                    <div class="flex-1 bg-slate-900 flex flex-col items-center justify-center p-2 space-y-2">
+                        <svg viewBox="0 0 280 150" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto max-h-[150px]">
+                            <!-- Before: Messy Code Section -->
+                            <text x="65" y="20" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#ef4444" font-weight="bold">Before</text>
+                            <rect x="10" y="30" width="110" height="70" rx="5" fill="#1e1b1b" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="2,2"/>
+                            <g transform="translate(65 65)">
+                                <path d="M-40 -20 Q -20 -30, 0 -15 Q 20 0, 40 -10 Q 30 10, 10 20 Q -10 15, -30 5 Q -45 -5, -40 -20" stroke="#f59e0b" stroke-width="1.5" fill="none"/>
+                                <path d="M-35 -10 Q -15 -25, 5 -5 Q 25 10, 35 0 Q 20 25, 0 15 Q -20 20, -35 -10" stroke="#ef4444" stroke-width="1.5" fill="none"/>
+                                <path d="M-30 0 Q -10 -15, 10 5 Q 30 -5, 40 15 Q 15 30, -5 25 Q -25 10, -30 0" stroke="#3b82f6" stroke-width="1.5" fill="none"/>
+                            </g>
+                            <text x="65" y="115" text-anchor="middle" font-family="Fira Code, monospace" font-size="7" fill="#9ca3af">복잡하고 얽힌 코드</text>
+
+                            <!-- Arrow -->
+                            <g transform="translate(130 65)">
+                                <path d="M0 0 L20 0" stroke="#38bdf8" stroke-width="2" fill="none"/>
+                                <path d="M15 -3 L20 0 L15 3" stroke="#38bdf8" stroke-width="2" fill="none"/>
+                            </g>
                             
-                            <!-- Code blocks scattered -->
-                            <circle cx="-25" cy="-15" r="4" fill="#fbbf24"/>
-                            <circle cx="0" cy="-10" r="4" fill="#f87171"/>
-                            <circle cx="25" cy="-5" r="4" fill="#60a5fa"/>
-                            <circle cx="-15" cy="10" r="4" fill="#a78bfa"/>
-                            <circle cx="20" cy="15" r="4" fill="#34d399"/>
-                        </g>
-                        
-                        <text x="75" y="165" text-anchor="middle" font-family="Fira Code, monospace" font-size="8" fill="#9ca3af">복잡하고 얽힌 코드</text>
-                        
-                        <!-- Arrow with animation -->
-                        <g transform="translate(140 110)">
-                            <path d="M0 0 L20 0" stroke="#38bdf8" stroke-width="3" fill="none"/>
-                            <path d="M15 -4 L20 0 L15 4" stroke="#38bdf8" stroke-width="3" fill="none"/>
-                            <animateTransform attributeName="transform" type="translate" 
-                                            values="140 110; 143 110; 140 110" dur="2s" repeatCount="indefinite"/>
-                        </g>
-                        
-                        <!-- After: Clean Modules Section -->
-                        <text x="225" y="60" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#22c55e" font-weight="bold">After</text>
-                        <rect x="165" y="70" width="120" height="80" rx="5" fill="#0f1419" stroke="#22c55e" stroke-width="2"/>
-                        
-                        <!-- Clean modules -->
-                        <g transform="translate(225 110)">
-                            <!-- Module A -->
-                            <rect x="-45" y="-25" width="25" height="15" rx="2" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
-                            <text x="-32.5" y="-16" text-anchor="middle" font-size="6" fill="#a7f3d0">Auth</text>
-                            
-                            <!-- Module B -->
-                            <rect x="-12.5" y="-25" width="25" height="15" rx="2" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
-                            <text x="0" y="-16" text-anchor="middle" font-size="6" fill="#a7f3d0">Data</text>
-                            
-                            <!-- Module C -->
-                            <rect x="20" y="-25" width="25" height="15" rx="2" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
-                            <text x="32.5" y="-16" text-anchor="middle" font-size="6" fill="#a7f3d0">UI</text>
-                            
-                            <!-- Clean connections -->
-                            <line x1="-20" y1="-17.5" x2="-12.5" y2="-17.5" stroke="#4ade80" stroke-width="1"/>
-                            <line x1="12.5" y1="-17.5" x2="20" y2="-17.5" stroke="#4ade80" stroke-width="1"/>
-                            
-                            <!-- Utils module below -->
-                            <rect x="-12.5" y="5" width="25" height="15" rx="2" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
-                            <text x="0" y="14" text-anchor="middle" font-size="6" fill="#a7f3d0">Utils</text>
-                            
-                            <!-- Vertical connections -->
-                            <line x1="0" y1="-10" x2="0" y2="5" stroke="#4ade80" stroke-width="1"/>
-                        </g>
-                        
-                        <text x="225" y="165" text-anchor="middle" font-family="Fira Code, monospace" font-size="8" fill="#a7f3d0">모듈화된 깔끔한 구조</text>
-                        
-                        <!-- User request at bottom -->
-                        <rect x="10" y="180" width="280" height="25" rx="3" fill="#4b5563" fill-opacity="0.7"/>
-                        <text x="15" y="195" font-family="sans-serif" font-size="10" fill="#e2e8f0">User: @복잡한_코드.js 이 파일 SRP 준수해서 리팩토링하고, 모듈화 해줘.</text>
-                        
-                        <!-- Success indicator -->
-                        <g transform="translate(150 220)">
-                            <circle cx="0" cy="0" r="8" fill="#22c55e" opacity="0.2"/>
-                            <text x="0" y="3" text-anchor="middle" font-family="FontAwesome" font-size="12" fill="#4ade80">&#xf00c;</text>
-                            <text x="20" y="3" font-family="sans-serif" font-size="10" fill="#4ade80">리팩토링 완료!</text>
-                        </g>
-                    </svg>
+                            <!-- After: Clean Modules Section -->
+                            <text x="215" y="20" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#22c55e" font-weight="bold">After</text>
+                            <rect x="160" y="30" width="110" height="70" rx="5" fill="#0f1419" stroke="#22c55e" stroke-width="1.5"/>
+                            <g transform="translate(215 65)">
+                                <rect x="-40" y="-20" width="20" height="12" rx="2" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
+                                <text x="-30" y="-11.5" text-anchor="middle" font-size="5" fill="#a7f3d0">Auth</text>
+                                <rect x="-10" y="-20" width="20" height="12" rx="2" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
+                                <text x="0" y="-11.5" text-anchor="middle" font-size="5" fill="#a7f3d0">Data</text>
+                                <rect x="20" y="-20" width="20" height="12" rx="2" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
+                                <text x="30" y="-11.5" text-anchor="middle" font-size="5" fill="#a7f3d0">UI</text>
+                                <line x1="-10" y1="-14" x2="-20" y2="-14" stroke="#4ade80" stroke-width="0.5"/>
+                                <line x1="10" y1="-14" x2="20" y2="-14" stroke="#4ade80" stroke-width="0.5"/>
+                                <rect x="-10" y="5" width="20" height="12" rx="2" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
+                                <text x="0" y="13.5" text-anchor="middle" font-size="5" fill="#a7f3d0">Utils</text>
+                                <line x1="0" y1="-8" x2="0" y2="5" stroke="#4ade80" stroke-width="0.5"/>
+                            </g>
+                            <text x="215" y="115" text-anchor="middle" font-family="Fira Code, monospace" font-size="7" fill="#a7f3d0">모듈화된 깔끔한 구조</text>
+                        </svg>
+                        <div class="flex justify-end w-full px-2">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[85%]">
+                                <p class="text-slate-200 text-xs"><span class="text-sky-400">@복잡한_코드.js</span> 이 파일 SRP 준수해서 리팩토링하고, 모듈화 해줘.</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-start gap-2 w-full px-2 items-center">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-green-400 text-xs"></i></div>
+                            <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[85%] border border-green-400">
+                                 <p class="text-green-300 text-xs"><i class="fas fa-check-circle mr-1"></i>리팩토링 완료!</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
+                        </div>
+                    </div>
                 </div>
                 <p class="explanation themed-text">
                     <strong class="text-green-400">Tip:</strong> 파일 하나만 지정하고 "이 파일 수정해줘"라고 했을 때 커서가 어디를 수정할지 명확히 알 수 있도록 코드를 관리하는 것이 이상적입니다.
@@ -1005,28 +1271,50 @@
             <div class="mistake-section dont-section">
                 <h3><i class="fas fa-times-circle mr-3"></i>Don't: 만족 후 바로 다음 작업 진행</h3>
                 <p class="themed-text description-text">커서가 만족스러운 코드나 결과물을 생성했을 때, 이를 저장하거나 커밋하지 않고 곧바로 다음 작업을 이어갑니다.</p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">만족 후 저장 없이 진행</div>
-                    <div class="bg-slate-700 p-4 h-52 space-y-3">
-                        <div class="bg-green-100 bg-opacity-20 p-3 rounded border border-green-400 flex items-center">
-                            <div class="flex-1">
-                                <div class="text-green-300 text-xs font-mono">커서: function perfectCode() {</div>
-                                <div class="text-green-300 text-xs font-mono ml-4">// 완벽한 로직!</div>
-                                <div class="text-green-300 text-xs font-mono">}</div>
+                <div class="visualization-box flex flex-col">
+                    <!-- Chat Window Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                        </div>
+                        <div class="flex-1 text-center">
+                            <span class="text-slate-400 text-sm">만족 후 저장 없이 진행</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Messages Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-hidden">
+                        <div class="space-y-3">
+                            <div class="bg-green-100 bg-opacity-20 p-3 rounded border border-green-400 flex items-center">
+                                <div class="flex-1">
+                                    <div class="text-green-300 text-xs font-mono">커서: function perfectCode() {</div>
+                                    <div class="text-green-300 text-xs font-mono ml-4">// 완벽한 로직!</div>
+                                    <div class="text-green-300 text-xs font-mono">}</div>
+                                </div>
+                                <div class="text-2xl">
+                                    <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                                    <span class="text-2xl">👏</span>
+                                </div>
                             </div>
-                            <div class="text-2xl">
-                                <i class="fas fa-check-circle text-green-400 mr-2"></i>
-                                <span class="text-2xl">👏</span>
+                            <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">User: 좋아! 그럼 이제 다른 기능 추가해줘.</div>
+                            <div class="bg-red-100 bg-opacity-20 p-3 rounded border border-red-400">
+                                <div class="text-red-300 text-xs font-mono">커서: function messedUp() {</div>
+                                <div class="text-red-300 text-xs font-mono ml-4">// 이전 코드 어디갔지? <span class="text-red-400 font-bold">새로운 오류!</span></div>
+                                <div class="text-red-300 text-xs font-mono">}</div>
+                            </div>
+                            <div class="text-center text-red-400 text-sm font-bold">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>이전 작업 손실!
                             </div>
                         </div>
-                        <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">User: 좋아! 그럼 이제 다른 기능 추가해줘.</div>
-                        <div class="bg-red-100 bg-opacity-20 p-3 rounded border border-red-400">
-                            <div class="text-red-300 text-xs font-mono">커서: function messedUp() {</div>
-                            <div class="text-red-300 text-xs font-mono ml-4">// 이전 코드 어디갔지? <span class="text-red-400 font-bold">새로운 오류!</span></div>
-                            <div class="text-red-300 text-xs font-mono">}</div>
-                        </div>
-                        <div class="text-center text-red-400 text-sm font-bold">
-                            <i class="fas fa-exclamation-triangle mr-2"></i>이전 작업 손실!
+                    </div>
+                    
+                    <!-- Chat Input Area (Dummy) -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
@@ -1034,35 +1322,56 @@
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: 만족스러운 결과물이 나오면 즉시 커밋</h3>
                 <p class="themed-text description-text">만족스러운 결과물이 나왔을 때는 즉시 작업을 커밋(저장)하여 좋은 상태를 보존합니다.</p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">만족 시 즉시 커밋</div>
-                    <div class="bg-slate-700 p-4 h-52 space-y-3">
-                        <div class="bg-green-100 bg-opacity-20 p-3 rounded border border-green-400 flex items-center">
-                            <div class="flex-1">
-                                <div class="text-green-300 text-xs font-mono">커서: function perfectCode() {</div>
-                                <div class="text-green-300 text-xs font-mono ml-4">// 완벽한 로직!</div>
-                                <div class="text-green-300 text-xs font-mono">}</div>
-                            </div>
-                            <i class="fas fa-check-circle text-green-400 text-2xl"></i>
+                <div class="visualization-box flex flex-col">
+                    <!-- Chat Window Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">User: 좋아! 바로 커밋하자.</div>
-                        
-                        <!-- Git commit interface -->
-                        <div class="bg-slate-800 p-3 rounded border-2 border-green-500">
-                            <div class="text-slate-200 text-xs mb-2">Source Control</div>
-                            <div class="flex items-center space-x-2">
-                                <div class="bg-slate-600 p-2 rounded flex-1 font-mono text-xs text-slate-400">
-                                    feat: Implement perfectCode function
+                        <div class="flex-1 text-center">
+                            <span class="text-slate-400 text-sm">만족 시 즉시 커밋</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Messages Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-hidden">
+                        <div class="space-y-3">
+                            <div class="bg-green-100 bg-opacity-20 p-3 rounded border border-green-400 flex items-center">
+                                <div class="flex-1">
+                                    <div class="text-green-300 text-xs font-mono">커서: function perfectCode() {</div>
+                                    <div class="text-green-300 text-xs font-mono ml-4">// 완벽한 로직!</div>
+                                    <div class="text-green-300 text-xs font-mono">}</div>
                                 </div>
-                                <div class="bg-green-500 px-3 py-1 rounded text-slate-900 text-xs font-bold flex items-center">
-                                    Commit
-                                    <span class="ml-1 text-lg">✨</span>
+                                <i class="fas fa-check-circle text-green-400 text-2xl"></i>
+                            </div>
+                            <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">User: 좋아! 바로 커밋하자.</div>
+                            
+                            <!-- Git commit interface -->
+                            <div class="bg-slate-800 p-3 rounded border-2 border-green-500">
+                                <div class="text-slate-200 text-xs mb-2">Source Control</div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="bg-slate-600 p-2 rounded flex-1 font-mono text-xs text-slate-400">
+                                        feat: Implement perfectCode function
+                                    </div>
+                                    <div class="bg-green-500 px-3 py-1 rounded text-slate-900 text-xs font-bold flex items-center">
+                                        Commit
+                                        <span class="ml-1 text-lg">✨</span>
+                                    </div>
                                 </div>
                             </div>
+                            
+                            <div class="text-center text-green-400 text-sm font-bold">
+                                <i class="fas fa-save mr-2"></i>안전하게 저장!
+                            </div>
                         </div>
-                        
-                        <div class="text-center text-green-400 text-sm font-bold">
-                            <i class="fas fa-save mr-2"></i>안전하게 저장!
+                    </div>
+                    <!-- Chat Input Area (Dummy) -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
@@ -1086,46 +1395,49 @@
                 <p class="themed-text description-text">
                     채팅창에 `/`를 입력하여 다양한 커맨드로 반복 작업을 자동화하고 복잡한 지시를 간소화하세요.
                 </p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">`/` 커맨드 활용</div>
-                    <div class="bg-slate-700 p-4 h-72">
-                        <!-- Chat input area -->
-                        <div class="bg-slate-800 p-3 rounded border border-slate-500 mb-4 relative">
-                            <div class="font-mono text-sm text-slate-200">User: /</div>
-                            <div class="absolute right-3 top-3 w-px h-4 bg-blue-400 animate-pulse"></div>
+                <div class="visualization-box flex flex-col h-[320px]">
+                    <!-- Chat Window Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-
-                        <!-- Command popup menu -->
-                        <div class="bg-slate-800 rounded-lg border border-slate-500 shadow-2xl">
-                            <!-- Menu header -->
-                            <div class="bg-slate-700 p-3 rounded-t-lg flex items-center">
-                                <i class="fas fa-terminal text-blue-400 mr-2"></i>
-                                <span class="text-slate-200 font-semibold">/ 커맨드</span>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">`/` 커맨드 활용</span></div>
+                    </div>
+                    <!-- Chat Message & Command Popup Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-3">
+                        <!-- User Input -->
+                        <div class="flex justify-end">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
+                                <p class="text-slate-200 text-xs font-mono flex items-center">/
+                                    <span class="ml-1 w-px h-3 bg-blue-400 animate-pulse"></span>
+                                </p>
                             </div>
-
-                            <!-- Menu items -->
-                            <div class="p-2 space-y-1">
-                                <div class="p-2 rounded hover:bg-slate-600 cursor-pointer flex items-center">
-                                    <i class="fas fa-undo-alt text-sky-400 mr-3 w-4"></i>
-                                    <span class="text-slate-200 text-sm">Reset Context</span>
+                        </div>
+                        <!-- Command Popup Menu (as AI response) -->
+                        <div class="flex justify-start gap-2">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-sky-400 text-xs"></i></div>
+                            <div class="bg-slate-800 rounded-lg border border-slate-600 shadow-lg max-w-[85%]">
+                                <div class="bg-slate-700 p-2 rounded-t-lg flex items-center border-b border-slate-600">
+                                    <i class="fas fa-terminal text-blue-400 mr-1.5 text-xs"></i>
+                                    <span class="text-slate-200 font-semibold text-xs">/ 커맨드</span>
                                 </div>
-                                <div class="p-2 rounded hover:bg-slate-600 cursor-pointer flex items-center">
-                                    <i class="fas fa-magic text-purple-400 mr-3 w-4"></i>
-                                    <span class="text-slate-200 text-sm">Generate Cursor Rules</span>
-                                </div>
-                                <div class="p-2 rounded hover:bg-slate-600 cursor-pointer flex items-center">
-                                    <i class="fas fa-sync-alt text-yellow-500 mr-3 w-4"></i>
-                                    <span class="text-slate-200 text-sm">Enable Iterate on Lints</span>
-                                </div>
-                                <div class="p-2 rounded hover:bg-slate-600 cursor-pointer flex items-center">
-                                    <i class="fas fa-folder-open text-green-400 mr-3 w-4"></i>
-                                    <span class="text-slate-200 text-sm">Add Open Files to Context</span>
-                                </div>
-                                <div class="p-2 rounded hover:bg-slate-600 cursor-pointer flex items-center">
-                                    <i class="fas fa-file-medical text-red-400 mr-3 w-4"></i>
-                                    <span class="text-slate-200 text-sm">Add Active Files to Context</span>
+                                <div class="p-1.5 space-y-1 text-xs">
+                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i class="fas fa-undo-alt text-sky-400 mr-2 w-3.5 text-center"></i><span class="text-slate-200">Reset Context</span></div>
+                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i class="fas fa-magic text-purple-400 mr-2 w-3.5 text-center"></i><span class="text-slate-200">Generate Cursor Rules</span></div>
+                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i class="fas fa-sync-alt text-yellow-500 mr-2 w-3.5 text-center"></i><span class="text-slate-200">Enable Iterate on Lints</span></div>
+                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i class="fas fa-folder-open text-green-400 mr-2 w-3.5 text-center"></i><span class="text-slate-200">Add Open Files to Context</span></div>
+                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i class="fas fa-file-medical text-red-400 mr-2 w-3.5 text-center"></i><span class="text-slate-200">Add Active Files to Context</span></div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <!-- Chat Input Area -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" value="/" class="bg-transparent text-slate-200 text-xs flex-1 outline-none font-mono" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
@@ -1144,29 +1456,51 @@
                 <p class="themed-text description-text">
                     커서가 작성한 코드가 이해되지 않으면, 주저 말고 설명을 요청하세요.
                 </p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">코드 설명 요청</div>
-                    <div class="bg-slate-700 p-4 h-52 space-y-3">
-                        <div class="bg-slate-800 p-3 rounded border border-slate-400">
-                            <div class="font-mono text-xs text-slate-200">커서: const x = data.map(d => d*2).filter(d > 10);</div>
+                <div class="visualization-box flex flex-col h-[280px]">
+                    <!-- Chat Window Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        
-                        <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">
-                            User: 이 코드 왜 이렇게 작성했어? 설명해줘.
-                        </div>
-                        
-                        <div class="bg-blue-100 bg-opacity-20 p-3 rounded border border-blue-400 flex">
-                            <i class="fas fa-comment-dots text-sky-400 text-lg mr-3 mt-1"></i>
-                            <div class="text-blue-200 text-xs space-y-1">
-                                <div>커서: 이 코드는 먼저 data 배열의 각 요소를 2배로</div>
-                                <div>변환한 후, 그 결과 중 10보다 큰 값만 필터링합니다.</div>
-                                <div>가독성과 성능을 고려하여 메서드 체이닝을 사용했습니다.</div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">코드 설명 요청</span></div>
+                    </div>
+                    <!-- Chat Messages Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-auto space-y-2 text-xs">
+                        <!-- AI Generated Code -->
+                        <div class="flex justify-start gap-2">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-sky-400 text-xs"></i></div>
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[85%] border border-slate-600">
+                                <code class="text-slate-200 font-mono">const x = data.map(d => d*2).filter(d > 10);</code>
                             </div>
                         </div>
-                        
-                        <div class="bg-yellow-100 bg-opacity-15 p-3 rounded border border-yellow-400">
-                            <div class="text-yellow-300 text-xs">커서: (또는) 앗, filter 조건에 오류가 있었네요!</div>
-                            <div class="text-yellow-300 text-xs"><span class="text-red-400 font-bold">d => d > 10</span> 으로 수정하는 것이 맞습니다.</div>
+                        <!-- User Question -->
+                        <div class="flex justify-end">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[85%]">
+                                <p class="text-slate-200">이 코드 왜 이렇게 작성했어? 설명해줘.</p>
+                            </div>
+                        </div>
+                        <!-- AI Explanation -->
+                        <div class="flex justify-start gap-2">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-sky-400 text-xs"></i></div>
+                            <div class="bg-blue-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-blue-400">
+                                <p class="text-blue-200">이 코드는 먼저 data 배열의 각 요소를 2배로 변환한 후, 그 결과 중 10보다 큰 값만 필터링합니다. 가독성과 성능을 고려하여 메서드 체이닝을 사용했습니다.</p>
+                            </div>
+                        </div>
+                        <!-- AI Alternative/Correction -->
+                        <div class="flex justify-start gap-2">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-yellow-400 text-xs"></i></div>
+                            <div class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
+                                <p class="text-yellow-300">(또는) 앗, filter 조건에 오류가 있었네요! <code class="font-mono text-red-400 bg-red-900 bg-opacity-50 px-1 rounded">d => d > 10</code> 으로 수정하는 것이 맞습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Chat Input Area -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
@@ -1185,32 +1519,55 @@
                 <p class="themed-text description-text">
                     함수명이나 파일 위치가 기억나지 않으면, 검색 대신 커서에게 자연어로 질문하세요.
                 </p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">자연어 코드 검색</div>
-                    <div class="bg-slate-700 p-4 h-52 space-y-4">
-                        <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">
-                            User: 유저 로그인 처리하는 컨트롤러 코드 찾아줘.
+                <div class="visualization-box flex flex-col h-[300px]"> 
+                    <!-- Chat Window Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        
-                        <div class="flex items-center text-sky-400">
-                            <i class="fas fa-arrow-down text-lg mr-2"></i>
-                            <div class="text-xs">검색 중...</div>
-                        </div>
-                        
-                        <div class="bg-green-100 bg-opacity-20 p-3 rounded border border-green-400 flex">
-                            <i class="fas fa-file-code text-green-400 text-2xl mr-3"></i>
-                            <div class="text-green-300 text-xs space-y-1">
-                                <div>커서: `AuthController.js` 파일의</div>
-                                <div>`handleLoginRequest` 함수를 찾았습니다.</div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">자연어 코드 검색</span></div>
+                    </div>
+                    <!-- Chat Messages Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-auto space-y-2 text-xs">
+                        <!-- User Search Query -->
+                        <div class="flex justify-end">
+                            <div class="bg-slate-700 p-2 rounded-lg max-w-[85%]">
+                                <p class="text-slate-200">유저 로그인 처리하는 컨트롤러 코드 찾아줘.</p>
                             </div>
                         </div>
-                        
-                        <div class="bg-slate-800 p-3 rounded border border-slate-500">
-                            <div class="font-mono text-xs text-slate-400 space-y-1">
-                                <div>function handleLoginRequest(req, res) {</div>
-                                <div>  // ... 로그인 처리 로직 ...</div>
-                                <div>}</div>
+                        <!-- AI Searching Indicator -->
+                        <div class="flex justify-start gap-2 items-center">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-sky-400 text-xs"></i></div>
+                            <div class="text-sky-400 flex items-center">
+                                <i class="fas fa-spinner fa-spin mr-1.5"></i>
+                                <span>검색 중...</span>
                             </div>
+                        </div>
+                        <!-- AI Search Result -->
+                        <div class="flex justify-start gap-2">
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-green-400 text-xs"></i></div>
+                            <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[85%] border border-green-400">
+                                <div class="flex items-center mb-1">
+                                    <i class="fas fa-file-code text-green-400 mr-1.5"></i>
+                                    <p class="text-green-300">
+                                        `AuthController.js` 파일의 `handleLoginRequest` 함수를 찾았습니다.
+                                    </p>
+                                </div>
+                                <div class="bg-slate-800 p-1.5 rounded border border-slate-600 font-mono text-slate-400 text-[0.7rem] leading-tight">
+                                    <div>function handleLoginRequest(req, res) {</div>
+                                    <div>&nbsp;&nbsp;// ... 로그인 처리 로직 ...</div>
+                                    <div>}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Chat Input Area -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
@@ -1229,23 +1586,35 @@
                 <p class="themed-text description-text">
                     커서가 최신 라이브러리 정보를 모를 때, **Context7 MCP** (가칭) 등으로 공식 문서를 제공하여 정확도를 높이세요.
                 </p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">Context7 MCP (문서 참조)</div>
-                    <div class="bg-slate-700 p-4 h-52 space-y-4">
-                        <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">
+                <div class="visualization-box flex flex-col">
+                    <!-- Chat Window Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                        </div>
+                        <div class="flex-1 text-center">
+                            <span class="text-slate-400 text-sm">Context7 MCP (문서 참조)</span>
+                        </div>
+                    </div>
+                    <!-- Chat Messages Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-hidden">
+                        <div class="space-y-4">
+                            <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">
                             User: SwiftUI 최신 API로 이 부분 수정해줘.
                         </div>
-                        
+
                         <div class="bg-red-100 bg-opacity-20 p-2 rounded border border-red-400 flex items-center">
                             <div class="font-mono text-red-300 text-xs flex-1">커서: (오래된 API 사용) ...</div>
-                            <i class="fas fa-times-circle text-red-400"></i>
-                        </div>
-                        
-                        <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs flex items-center">
+                                <i class="fas fa-times-circle text-red-400"></i>
+                    </div>
+                    
+                    <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs flex items-center">
                             User: (Context7 MCP로 SwiftUI 공식 문서 제공)
                             <i class="fas fa-upload text-sky-400 ml-2"></i>
-                        </div>
-                        
+                            </div>
+
                         <div class="bg-green-100 bg-opacity-20 p-2 rounded border border-green-400 flex items-center">
                             <div class="font-mono text-green-300 text-xs flex-1">커서: (최신 API 사용) ...</div>
                             <i class="fas fa-check-circle text-green-400"></i>
@@ -1255,8 +1624,16 @@
                             (할루시네이션 감소, 정확도 향상)
                             <div class="mt-2">
                                 <div class="inline-block w-16 h-1 bg-gradient-to-r from-red-400 via-yellow-400 to-green-400 rounded"></div>
-                                <div class="w-3 h-3 bg-green-400 rounded-full mx-auto mt-1"></div>
-                            </div>
+                                    <div class="w-3 h-3 bg-green-400 rounded-full mx-auto mt-1"></div>
+                                </div>
+                                                        </div>
+                        </div>
+                    </div>
+                    <!-- Chat Input Area (Dummy) -->
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
+                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
@@ -1275,14 +1652,25 @@
                 <p class="themed-text description-text">
                     코드 리뷰나 자체 검토 시, **버그 파인더** (가칭)로 잠재적 버그를 찾아보세요.
                 </p>
-                <div class="visualization-box">
-                    <div class="bg-slate-600 p-2 rounded-t text-center text-slate-200 text-sm">버그 파인더 (Bug Finder)</div>
-                    <div class="bg-slate-700 p-4 h-52">
-                        <div class="bg-slate-600 p-2 rounded border border-slate-500 mb-3 flex items-center">
+                <div class="visualization-box flex flex-col">
+                    <!-- Chat Window Header -->
+                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                        </div>
+                        <div class="flex-1 text-center">
+                            <span class="text-slate-400 text-sm">버그 파인더 (Bug Finder)</span>
+                        </div>
+                    </div>
+                    <!-- Chat Messages Area -->
+                    <div class="bg-slate-900 flex-1 p-4 overflow-hidden">
+                            <div class="bg-slate-600 p-2 rounded border border-slate-500 mb-3 flex items-center">
                             <div class="font-mono text-xs text-slate-200 flex-1">Cmd+Shift+P > Bug Finder</div>
                             <i class="fas fa-search text-sky-400"></i>
                         </div>
-
+                        
                         <div class="bg-slate-600 rounded border border-slate-500 p-3 h-40 overflow-y-auto">
                             <div class="text-slate-200 text-xs mb-3 font-semibold">Branch: main vs feature/new-login</div>
                             
@@ -1292,31 +1680,31 @@
                                         <div class="text-red-300 text-xs flex items-center">
                                             <i class="fas fa-exclamation-triangle mr-2"></i>
                                             Null Pointer Risk (User.java:42)
-                                        </div>
-                                        <div class="text-red-300 text-xs">Confidence: 75%</div>
-                                    </div>
-                                </div>
-
-                                <div class="border-l-4 border-yellow-400 pl-3">
-                                    <div class="flex items-center justify-between">
+                    </div>
+                    <div class="text-red-300 text-xs">Confidence: 75%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="border-l-4 border-yellow-400 pl-3">
+                            <div class="flex items-center justify-between">
                                         <div class="text-yellow-300 text-xs flex items-center">
-                                            <i class="fas fa-exclamation-circle mr-2"></i>
-                                            Logic Error Possible (Payment.js:103)
-                                        </div>
-                                        <div class="text-yellow-300 text-xs">Confidence: 60%</div>
-                                    </div>
+                                    <i class="fas fa-exclamation-circle mr-2"></i>
+                                    Logic Error Possible (Payment.js:103)
                                 </div>
-                                
+                                <div class="text-yellow-300 text-xs">Confidence: 60%</div>
+                                </div>
+                            </div>
+
                                 <div class="border-l-4 border-green-400 pl-3">
                                     <div class="flex items-center justify-between">
                                         <div class="text-green-300 text-xs flex items-center">
                                             <i class="fas fa-check-circle mr-2"></i>
                                             Minor: Off-by-one (LoopUtil.py:22)
-                                        </div>
-                                        <div class="text-green-300 text-xs">Confidence: 40%</div>
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
+<div class="text-green-300 text-xs">Confidence: 40%</div>
+                    </div>
+                    </div>
+                    </div>
                             
                             <div class="text-center text-slate-400 text-xs mt-4">
                                 (잠재적 버그 목록과 신뢰도 점수 제시)
@@ -1346,11 +1734,11 @@
                 <p class="themed-text description-text">명확한 프롬프트와 충분한 컨텍스트(연료)를 제공하고, 올바른 방향(조향)을 제시해야 양질의 결과를 얻을 수 있습니다.</p>
                 
                 <h4 class="themed-text"><i class="fas fa-user-astronaut"></i>Cursor is a Super-Smart Co-Pilot</h4>
-                <p class="themed-text description-text">커서는 매우 똑똑한 공동 조종사이지만, 아직 자율적인 에이전트는 아닙니다. 최종 판단과 책임은 사용자에게 있습니다.</p>
-            </div>
-        </div>
-    </div>
-
+                            <p class="themed-text description-text">커서는 매우 똑똑한 공동 조종사이지만, 아직 자율적인 에이전트는 아닙니다. 최종 판단과 책임은 사용자에게 있습니다.</p>
+                        </div>
+                                            </div>
+                                                </div>
+                        
     <div id="slide17" class="slide"> <div class="text-center max-w-4xl">
             <h2 class="text-4xl sm:text-5xl text-sky-400 mb-8 themed-text">마무리</h2>
             <p class="themed-text description-text">
