@@ -1,149 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You're Not Using Cursor That Way</title>
+    <title>커서 그렇게 쓰는거 아닌데</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Nanum+Gothic:wght@400;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Custom styles */
-        html, body {
-            scroll-behavior: smooth; 
+        html,
+        body {
+            scroll-behavior: smooth;
         }
+
         body {
             font-family: 'Nanum Gothic', 'Fira Code', monospace, sans-serif;
-            position: relative; 
-            overflow-x: hidden; 
-            background-color: #1e293b; /* bg-slate-800 as a fallback */
+            position: relative;
+            overflow-x: hidden;
+            background-color: #1e293b;
+            /* bg-slate-800 as a fallback */
         }
 
         /* Blinking cursor animation */
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
         }
 
         .blinking-cursor {
             animation: blink 1s step-end infinite;
-            background-color: currentColor; 
-            width: 0.15em; 
-            height: 0.9em; 
+            background-color: currentColor;
+            width: 0.15em;
+            height: 0.9em;
             margin-left: 0.1em;
             display: inline-block;
-            vertical-align: middle; 
+            vertical-align: middle;
         }
 
         /* Subtle code snippet background */
         body::before {
             content: "/* Presentation Background Pattern */\n\n// File: main.js\nconst APP_CONFIG = {\n  version: '1.0.0',\n  theme: 'dark-vscode',\n  debugMode: false\n};\n\nfunction initApp(config) {\n  console.log(`Initializing app v${config.version}`);\n  if (config.theme) {\n    document.body.classList.add(config.theme);\n  }\n}\n\nconst debounce = (func, delay) => {\n  let timeoutId;\n  return (...args) => {\n    clearTimeout(timeoutId);\n    timeoutId = setTimeout(() => func.apply(this, args), delay);\n  };\n};\n\nclass SlideDeck {\n  constructor(slides) { this.slides = slides; this.currentSlide = 0; }\n  next() { if (this.currentSlide < this.slides.length - 1) this.currentSlide++; }\n  prev() { if (this.currentSlide > 0) this.currentSlide--; }\n}\n\nconst userSettings = { editorFont: 'Fira Code', fontSize: 14, autoSave: true };\n\n// End of background pattern.\n";
-            position: fixed; 
-            top: 0; left: 0; width: 100%; height: 100%;
-            font-family: 'Fira Code', monospace; 
-            font-size: 10px; 
-            color: rgba(71, 85, 105, 0.15); /* slate-600 @ 15% */
-            white-space: pre-wrap; 
-            overflow: hidden; 
-            pointer-events: none; 
-            z-index: 0; 
-            padding: 1.5rem; 
-            line-height: 1.6; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Fira Code', monospace;
+            font-size: 10px;
+            color: rgba(71, 85, 105, 0.15);
+            /* slate-600 @ 15% */
+            white-space: pre-wrap;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+            padding: 1.5rem;
+            line-height: 1.6;
             text-align: left;
         }
 
         .slide {
-            min-height: 100vh; 
+            min-height: 100vh;
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2rem; /* p-8 */
-            position: relative; 
-            z-index: 1; 
-            text-align: center; 
+            padding: 2rem;
+            /* p-8 */
+            position: relative;
+            z-index: 1;
+            text-align: center;
         }
 
         .themed-text {
             font-family: 'Nanum Gothic', 'Fira Code', monospace, sans-serif;
         }
-        h1.themed-text, h2.themed-text, h3.themed-text { 
-            font-weight: 700; 
+
+        h1.themed-text,
+        h2.themed-text,
+        h3.themed-text {
+            font-weight: 700;
         }
-         p.themed-text, li.themed-text { 
-            font-weight: 400; 
+
+        p.themed-text,
+        li.themed-text {
+            font-weight: 400;
         }
-        
+
         .toc-list {
-            list-style: none; padding: 0; margin-top: 2rem;
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
         }
+
         .toc-list li {
-            font-size: 1.5rem; margin-bottom: 1rem; color: #94a3b8; /* text-slate-400 */
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #94a3b8;
+            /* text-slate-400 */
             transition: color 0.3s ease;
         }
-        .toc-list li:hover { color: #38bdf8; /* text-sky-400 */ }
-        .toc-list li i { margin-right: 0.75rem; color: #64748b; /* text-slate-500 */ }
-        .toc-list li:hover i { color: #38bdf8; /* text-sky-400 */ }
+
+        .toc-list li:hover {
+            color: #38bdf8;
+            /* text-sky-400 */
+        }
+
+        .toc-list li i {
+            margin-right: 0.75rem;
+            color: #64748b;
+            /* text-slate-500 */
+        }
+
+        .toc-list li:hover i {
+            color: #38bdf8;
+            /* text-sky-400 */
+        }
 
         /* Styles for Don't / Do sections in Mistake slides & ProTip slides */
         .mistake-layout {
             display: grid;
-            grid-template-columns: 1fr 1fr; 
-            gap: 2rem; 
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
             width: 100%;
-            max-width: 72rem; /* max-w-6xl */
+            max-width: 72rem;
+            /* max-w-6xl */
             text-align: left;
         }
-        .pro-tip-single-column-layout, .attitude-layout { /* Combined single column layouts */
+
+        .pro-tip-single-column-layout,
+        .attitude-layout {
+            /* Combined single column layouts */
             display: flex;
             justify-content: center;
             width: 100%;
             text-align: left;
         }
 
-        .mistake-section, .pro-tip-section, .attitude-section { 
-            padding: 1.5rem; 
-            border-radius: 0.5rem; 
-            background-color: #334155; /* bg-slate-700 */
-            display: flex; 
-            flex-direction: column; 
+        .mistake-section,
+        .pro-tip-section,
+        .attitude-section {
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background-color: #334155;
+            /* bg-slate-700 */
+            display: flex;
+            flex-direction: column;
         }
-        .pro-tip-single-column-layout .pro-tip-section, .attitude-layout .attitude-section { 
-            max-width: 48rem; /* max-w-3xl, slightly wider for attitude list */
+
+        .pro-tip-single-column-layout .pro-tip-section,
+        .attitude-layout .attitude-section {
+            max-width: 48rem;
+            /* max-w-3xl, slightly wider for attitude list */
             width: 100%;
         }
 
-        .mistake-section h3, .pro-tip-section h3, .attitude-section h4 { 
-            font-size: 1.5rem; 
-            font-weight: 600; 
-            margin-bottom: 1rem; 
+        .mistake-section h3,
+        .pro-tip-section h3,
+        .attitude-section h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
         }
-        .attitude-section h4 { /* Specific for attitude list items */
-             font-size: 1.25rem; /* text-xl */
-             color: #94a3b8; /* text-slate-400 */
-             margin-bottom: 0.5rem;
+
+        .attitude-section h4 {
+            /* Specific for attitude list items */
+            font-size: 1.25rem;
+            /* text-xl */
+            color: #94a3b8;
+            /* text-slate-400 */
+            margin-bottom: 0.5rem;
         }
-         .attitude-section h4 i {
-            margin-right: 0.75rem; /* mr-3 */
-            color: #60a5fa; /* text-blue-400 */
-            width: 1.5em; /* Ensure icon alignment */
+
+        .attitude-section h4 i {
+            margin-right: 0.75rem;
+            /* mr-3 */
+            color: #60a5fa;
+            /* text-blue-400 */
+            width: 1.5em;
+            /* Ensure icon alignment */
             text-align: center;
         }
 
 
-        .mistake-section p.description-text, .pro-tip-section p.description-text, .attitude-section p.description-text {
-            font-size: 1.125rem; 
-            line-height: 1.75; 
-            color: #cbd5e1; /* text-slate-300 */
+        .mistake-section p.description-text,
+        .pro-tip-section p.description-text,
+        .attitude-section p.description-text {
+            font-size: 1.125rem;
+            line-height: 1.75;
+            color: #cbd5e1;
+            /* text-slate-300 */
             margin-bottom: 1rem;
         }
-         .attitude-section p.description-text {
-            font-size: 1rem; /* text-base */
-            color: #94a3b8; /* text-slate-400 */
-            margin-left: calc(1.5em + 0.75rem); /* Align with text after icon */
-            margin-bottom: 1.5rem; /* mb-6 */
+
+        .attitude-section p.description-text {
+            font-size: 1rem;
+            /* text-base */
+            color: #94a3b8;
+            /* text-slate-400 */
+            margin-left: calc(1.5em + 0.75rem);
+            /* Align with text after icon */
+            margin-bottom: 1.5rem;
+            /* mb-6 */
         }
 
         /* New style for separate explanation blocks */
@@ -157,6 +227,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .mistake-explanation::before {
             content: '';
             position: absolute;
@@ -166,20 +237,25 @@
             height: 2px;
             background: linear-gradient(90deg, transparent 0%, rgba(100, 116, 139, 0.5) 50%, transparent 100%);
         }
+
         .mistake-explanation.dont-explanation {
             border-left-color: #ef4444;
             background: linear-gradient(135deg, #1e293b 0%, #1c1917 100%);
         }
+
         .mistake-explanation.dont-explanation::before {
             background: linear-gradient(90deg, transparent 0%, rgba(239, 68, 68, 0.3) 50%, transparent 100%);
         }
+
         .mistake-explanation.do-explanation {
             border-left-color: #22c55e;
             background: linear-gradient(135deg, #1e293b 0%, #14532d 100%);
         }
+
         .mistake-explanation.do-explanation::before {
             background: linear-gradient(90deg, transparent 0%, rgba(34, 197, 94, 0.3) 50%, transparent 100%);
         }
+
         .mistake-explanation p {
             font-size: 1.1rem;
             line-height: 1.7;
@@ -187,88 +263,115 @@
             margin: 0;
             font-weight: 500;
         }
+
         .mistake-explanation p strong {
             font-weight: 700;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
-        .mistake-section .explanation, .pro-tip-section .explanation {
-            font-size: 1rem; 
-            color: #94a3b8; /* text-slate-400 */
-            margin-top: auto; 
-            padding-top: 1rem; 
+        .mistake-section .explanation,
+        .pro-tip-section .explanation {
+            font-size: 1rem;
+            color: #94a3b8;
+            /* text-slate-400 */
+            margin-top: auto;
+            padding-top: 1rem;
         }
 
         .dont-section {
-            border: 2px solid #ef4444; /* border-red-500 */
+            border: 2px solid #ef4444;
+            /* border-red-500 */
         }
+
         .dont-section h3 {
-            color: #f87171; /* text-red-400 */
+            color: #f87171;
+            /* text-red-400 */
         }
-        .do-section, .pro-tip-highlight, .attitude-highlight { 
-            border: 2px solid #22c55e; /* border-green-500 */
+
+        .do-section,
+        .pro-tip-highlight,
+        .attitude-highlight {
+            border: 2px solid #22c55e;
+            /* border-green-500 */
         }
-        .do-section h3, .pro-tip-highlight h3, .attitude-highlight h3 {
-            color: #4ade80; /* text-green-400 */
+
+        .do-section h3,
+        .pro-tip-highlight h3,
+        .attitude-highlight h3 {
+            color: #4ade80;
+            /* text-green-400 */
         }
-        .attitude-highlight { /* Specific border for attitude section */
-             border-color: #38bdf8; /* border-sky-500 */
+
+        .attitude-highlight {
+            /* Specific border for attitude section */
+            border-color: #38bdf8;
+            /* border-sky-500 */
         }
-        .attitude-highlight h3 { /* Main title for attitude slide */
-            color: #38bdf8; /* text-sky-400 */
-            font-size: 1.875rem; /* text-3xl */
-            justify-content: center; /* Center the main title */
+
+        .attitude-highlight h3 {
+            /* Main title for attitude slide */
+            color: #38bdf8;
+            /* text-sky-400 */
+            font-size: 1.875rem;
+            /* text-3xl */
+            justify-content: center;
+            /* Center the main title */
             margin-bottom: 2rem;
         }
-        
-        .shortcut-key { 
-            background-color: #475569; /* bg-slate-600 */
-            color: #e2e8f0; /* text-slate-200 */
+
+        .shortcut-key {
+            background-color: #475569;
+            /* bg-slate-600 */
+            color: #e2e8f0;
+            /* text-slate-200 */
             padding: 0.2em 0.6em;
-            border-radius: 0.25em; 
+            border-radius: 0.25em;
             font-family: 'Fira Code', monospace;
             font-size: 0.9em;
-            border: 1px solid #64748b; /* border-slate-500 */
+            border: 1px solid #64748b;
+            /* border-slate-500 */
         }
 
         .visualization-box {
-            background-color: #293548; 
-            border-radius: 0.375rem; 
-            padding: 0; 
+            background-color: #293548;
+            border-radius: 0.375rem;
+            padding: 0;
             margin-top: 1rem;
-            margin-bottom: 1rem; 
+            margin-bottom: 1rem;
             display: flex;
             flex-direction: column;
-            align-items: stretch; /* Changed from center to stretch */
-            border: 1px solid #475569; 
-            flex-grow: 1; 
-            min-height: 240px; 
-            overflow: hidden; 
-            width: 100%; /* Ensure full width */
+            align-items: stretch;
+            /* Changed from center to stretch */
+            border: 1px solid #475569;
+            flex-grow: 1;
+            min-height: 240px;
+            overflow: hidden;
+            width: 100%;
+            /* Ensure full width */
         }
-        
+
         /* New styles for visualization-box content to utilize full width */
-        .visualization-box > * {
+        .visualization-box>* {
             width: 100%;
             max-width: 100%;
         }
-        
+
         .visualization-box .bg-slate-600,
         .visualization-box .bg-slate-700,
         .visualization-box .bg-slate-800 {
             width: 100%;
             box-sizing: border-box;
         }
-        
+
         /* Ensure chat content uses full width */
-        .visualization-box .space-y-2 > *,
-        .visualization-box .space-y-3 > *,
-        .visualization-box .space-y-4 > * {
+        .visualization-box .space-y-2>*,
+        .visualization-box .space-y-3>*,
+        .visualization-box .space-y-4>* {
             width: 100%;
             max-width: 100%;
             box-sizing: border-box;
         }
-        
+
         /* Fix specific chat message containers */
         .visualization-box .bg-slate-600.bg-opacity-70,
         .visualization-box .bg-red-100.bg-opacity-20,
@@ -281,41 +384,51 @@
         }
 
         .visualization-box svg {
-            width: 100%; 
-            max-width: 100%; 
-            height: 100%; 
-            border-radius: 0.375rem; 
-        }
-        .pro-tip-single-column-layout .visualization-box { 
-             min-height: 260px;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            border-radius: 0.375rem;
         }
 
-
-         /* Responsive adjustments */
-        @media (max-width: 768px) { 
-            .mistake-layout, .pro-tip-single-column-layout, .attitude-layout { 
-                grid-template-columns: 1fr; 
-            }
-            .mistake-section h3, .pro-tip-section h3, .attitude-section h4 {
-                font-size: 1.25rem; 
-            }
-             .attitude-highlight h3 {
-                font-size: 1.5rem; /* text-2xl */
-            }
+        .pro-tip-single-column-layout .visualization-box {
+            min-height: 260px;
         }
 
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+
+            .mistake-layout,
+            .pro-tip-single-column-layout,
+            .attitude-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .mistake-section h3,
+            .pro-tip-section h3,
+            .attitude-section h4 {
+                font-size: 1.25rem;
+            }
+
+            .attitude-highlight h3 {
+                font-size: 1.5rem;
+                /* text-2xl */
+            }
+        }
     </style>
 </head>
+
 <body class="bg-slate-900 text-slate-300 selection:bg-sky-500 selection:text-slate-900">
-    
+
     <div id="slide1" class="slide">
         <div class="text-center">
-            <img src="assets/logos/MG__Logo_Horizontal_Alt_DarkBackground.png" alt="Match Group Logo" class="h-12 sm:h-16 mx-auto mb-8">
+            <img src="assets/logos/MG__Logo_Horizontal_Alt_DarkBackground.png" alt="Match Group Logo"
+                class="h-12 sm:h-16 mx-auto mb-8">
             <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-sky-400 mb-4 themed-text">
-                You're Not Using Cursor That Way<span class="blinking-cursor"></span>
+                That's Not How You Use Cursor<span class="blinking-cursor"></span>
             </h1>
             <p class="text-xl sm:text-2xl md:text-3xl text-slate-400 mb-10 themed-text">
-                Cursor can't code? How to properly utilize AI
+                Cursor can't code, you say? Here's how to properly utilize AI.
             </p>
             <div class="mt-12">
                 <p class="text-2xl text-slate-300 themed-text">Brandon Choi</p>
@@ -326,24 +439,28 @@
     </div>
 
     <div id="slide2" class="slide">
-        <div class="text-center max-w-4xl"> <!-- Increased max-width for a bit more space -->
+        <div class="text-center max-w-4xl">
             <h2 class="text-5xl sm:text-6xl text-sky-400 mb-6 themed-text">
-                Cursor, can it really not code? <span class="inline-block animate-bounce">🤖</span>
+                Can Cursor Really Not Code? <span class="inline-block animate-bounce">🤖</span>
             </h2>
             <p class="text-3xl sm:text-4xl text-slate-300 mb-10 themed-text">
-                "Ugh, what does AI know..." <span class="text-xl">(murmur murmur)</span> "I'll just have to do it all myself..."
+                "Ugh, what does an AI know..." <span class="text-xl">(murmuring)</span> "I'll just have to do it all
+                myself..."
             </p>
             <div class="bg-slate-800 p-6 rounded-xl shadow-2xl inline-block mb-10 border border-sky-500">
                 <p class="text-2xl sm:text-3xl text-yellow-400 themed-text font-semibold">
                     <span class="text-3xl sm:text-4xl mr-2">💥</span> Wait! Could it be... our fault?
                 </p>
                 <p class="text-lg sm:text-xl text-slate-400 mt-3 themed-text">
-                    Machines don't lie. If Cursor is <span class="text-red-400 font-semibold">stumbling</span>,
-                    <br>it's highly likely we're giving it <span class="text-yellow-400 font-semibold">the wrong instructions</span>!
+                    Machines don't lie. If Cursor is <span class="text-red-400 font-semibold">stuttering</span>,
+                    <br>it's highly likely we're giving it the <span class="text-yellow-400 font-semibold">wrong
+                        instructions</span>!
                 </p>
             </div>
             <p class="text-2xl sm:text-3xl text-slate-200 themed-text">
-                <i class="fas fa-search-plus mr-2 text-sky-400"></i>Alright, are you ready to <span class="text-green-400 font-bold">clear up misunderstandings</span> about Cursor and <span class="text-yellow-400 font-bold">unlock its potential</span>?
+                <i class="fas fa-search-plus mr-2 text-sky-400"></i>Now, are you ready to <span
+                    class="text-green-400 font-bold">clear up the misunderstandings</span> and <span
+                    class="text-yellow-400 font-bold">unleash the potential</span> of Cursor?
             </p>
         </div>
     </div>
@@ -352,9 +469,11 @@
         <div class="text-center max-w-3xl">
             <h3 class="text-4xl sm:text-5xl text-sky-400 mb-10 themed-text">Table of Contents</h3>
             <ul class="toc-list">
-                <li class="themed-text"><i class="fas fa-exclamation-triangle"></i>Common Mistakes When Using Cursor</li>
+                <li class="themed-text"><i class="fas fa-exclamation-triangle"></i>Common Mistakes When Using Cursor
+                </li>
                 <li class="themed-text"><i class="fas fa-lightbulb"></i>Cursor Pro Tips</li>
-                <li class="themed-text"><i class="fas fa-user-shield"></i>Attitude Towards AI Tools</li> <li class="themed-text"><i class="fas fa-flag-checkered"></i>Conclusion</li>
+                <li class="themed-text"><i class="fas fa-user-shield"></i>The Right Mindset for Using AI Tools</li>
+                <li class="themed-text"><i class="fas fa-flag-checkered"></i>Conclusion</li>
             </ul>
         </div>
     </div>
@@ -364,10 +483,10 @@
         <div class="mistake-layout">
             <div class="mistake-section dont-section">
                 <h3><i class="fas fa-times-circle mr-3"></i>Don't: Mix all tasks in one chat window</h3>
-                <p class="themed-text description-text">Continuing different tasks on various topics in a single chat window.</p>
+                <p class="themed-text description-text">Continuing different tasks in a single chat window.</p>
                 <div class="visualization-box flex flex-col">
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
@@ -377,46 +496,45 @@
                             <span class="text-slate-400 text-sm">Cursor Chat</span>
                         </div>
                     </div>
-                    
-                    <!-- Chat Messages Area -->
+
                     <div class="bg-slate-900 flex-1 p-4 overflow-hidden">
                         <div class="space-y-2">
-                            <!-- User Message 1 -->
                             <div class="flex justify-end">
-                                <div class="bg-slate-700 p-2 rounded-lg max-w-[70%] border border-red-400 border-opacity-50">
-                                    <p class="text-slate-200 text-xs">Fix this bug</p>
+                                <div
+                                    class="bg-slate-700 p-2 rounded-lg max-w-[70%] border border-red-400 border-opacity-50">
+                                    <p class="text-slate-200 text-xs">Fix this bug.</p>
                                 </div>
                             </div>
-                            
-                            <!-- User Message 2 -->
+
                             <div class="flex justify-end">
-                                <div class="bg-slate-700 p-2 rounded-lg max-w-[70%] border border-yellow-400 border-opacity-50">
-                                    <p class="text-slate-200 text-xs">Actually, add a new feature</p>
+                                <div
+                                    class="bg-slate-700 p-2 rounded-lg max-w-[70%] border border-yellow-400 border-opacity-50">
+                                    <p class="text-slate-200 text-xs">Actually, add a new feature.</p>
                                 </div>
                             </div>
-                            
-                            <!-- User Message 3 -->
+
                             <div class="flex justify-end">
-                                <div class="bg-slate-700 p-2 rounded-lg max-w-[70%] border border-blue-400 border-opacity-50">
-                                    <p class="text-slate-200 text-xs">Wait, the docs need an update too</p>
+                                <div
+                                    class="bg-slate-700 p-2 rounded-lg max-w-[70%] border border-blue-400 border-opacity-50">
+                                    <p class="text-slate-200 text-xs">Wait, the docs need an update too.</p>
                                 </div>
                             </div>
-                            
-                            <!-- User Message 4 -->
+
                             <div class="flex justify-end">
-                                <div class="bg-slate-700 p-2 rounded-lg max-w-[70%] border border-red-400 border-opacity-50">
-                                    <p class="text-slate-200 text-xs">About that bug from earlier...</p>
+                                <div
+                                    class="bg-slate-700 p-2 rounded-lg max-w-[70%] border border-red-400 border-opacity-50">
+                                    <p class="text-slate-200 text-xs">About that bug from before...</p>
                                 </div>
                             </div>
-                            
-                            <!-- AI Confusion Response -->
+
                             <div class="flex justify-start gap-2">
-                                <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                    style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
                                     <i class="fas fa-robot text-slate-400 text-xs"></i>
                                 </div>
-                                <div class="bg-red-900 bg-opacity-30 p-2 rounded-lg max-w-[70%] border border-red-400 relative">
-                                    <p class="text-red-300 text-xs">Which bug...?</p>
-                                    <!-- Confusion indicators -->
+                                <div
+                                    class="bg-red-900 bg-opacity-30 p-2 rounded-lg max-w-[70%] border border-red-400 relative">
+                                    <p class="text-red-300 text-xs">Which bug are you referring to...?</p>
                                     <div class="absolute -top-6 right-0 flex items-center">
                                         <i class="fas fa-brain text-red-400 animate-pulse text-sm"></i>
                                         <span class="text-red-400 text-xs ml-1 font-bold">Confused!</span>
@@ -425,168 +543,177 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Chat Input Area -->
+
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="mistake-section do-section">
-                <h3><i class="fas fa-check-circle mr-3"></i>Do: Use a new chat window for each task</h3>
-                <p class="themed-text description-text">Start new topics or tasks in a new chat window.</p>
+                <h3><i class="fas fa-check-circle mr-3"></i>Do: Use a new chat for each task</h3>
+                <p class="themed-text description-text">Start a new chat for a new topic or task.</p>
                 <div class="visualization-box flex flex-col">
-                    <!-- Browser-like tab bar -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-2 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-2 border-b border-slate-700 flex-shrink-0">
                         <div class="flex items-center space-x-1">
-                            <div id="tab-bugfix" class="tab-button bg-slate-700 px-4 py-1.5 rounded-t-md border-green-400 border-2 border-b-0 text-green-400 text-xs flex items-center cursor-pointer whitespace-nowrap">
+                            <div id="tab-bugfix"
+                                class="tab-button bg-slate-700 px-4 py-1.5 rounded-t-md border-green-400 border-2 border-b-0 text-green-400 text-xs flex items-center cursor-pointer whitespace-nowrap">
                                 <i class="fas fa-bug mr-1.5 text-xs"></i>Bug Fix
                             </div>
-                            <div id="tab-feature" class="tab-button bg-slate-900 px-4 py-1.5 rounded-t-md border-slate-600 border text-slate-400 text-xs flex items-center cursor-pointer whitespace-nowrap">
+                            <div id="tab-feature"
+                                class="tab-button bg-slate-900 px-4 py-1.5 rounded-t-md border-slate-600 border text-slate-400 text-xs flex items-center cursor-pointer whitespace-nowrap">
                                 <i class="fas fa-plus mr-1.5 text-xs"></i>New Feature
                             </div>
-                            <div id="tab-docs" class="tab-button bg-slate-900 px-4 py-1.5 rounded-t-md border-slate-600 border text-slate-400 text-xs flex items-center cursor-pointer whitespace-nowrap">
+                            <div id="tab-docs"
+                                class="tab-button bg-slate-900 px-4 py-1.5 rounded-t-md border-slate-600 border text-slate-400 text-xs flex items-center cursor-pointer whitespace-nowrap">
                                 <i class="fas fa-file-alt mr-1.5 text-xs"></i>Docs
                             </div>
-                            <div class="w-6 h-6 bg-slate-700 rounded-md flex items-center justify-center text-slate-400 cursor-pointer hover:bg-slate-600 ml-1">
+                            <div
+                                class="w-6 h-6 bg-slate-700 rounded-md flex items-center justify-center text-slate-400 cursor-pointer hover:bg-slate-600 ml-1">
                                 <i class="fas fa-plus text-xs"></i>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Chat content area -->
+
                     <div class="bg-slate-900 flex-1 relative overflow-hidden">
-                        <!-- Bug Fix Tab Content -->
                         <div id="content-bugfix" class="tab-content absolute inset-0 p-4">
                             <div class="space-y-2">
-                                <!-- User message -->
                                 <div class="flex justify-end">
                                     <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
-                                        <p class="text-slate-200 text-xs">Fix session error on login</p>
+                                        <p class="text-slate-200 text-xs">Resolve the session error on login.</p>
                                     </div>
                                 </div>
-                                
-                                <!-- AI response -->
+
                                 <div class="flex justify-start gap-2">
-                                    <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                    <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                        style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
                                         <i class="fas fa-robot text-green-400 text-xs"></i>
                                     </div>
-                                    <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-green-500 border-opacity-30">
-                                        <p class="text-green-300 text-xs">I'll check the session management code.</p>
+                                    <div
+                                        class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-green-500 border-opacity-30">
+                                        <p class="text-green-300 text-xs">I will check the session management code.</p>
                                     </div>
                                 </div>
-                                
-                                <!-- User message with @ mention -->
+
                                 <div class="flex justify-end">
                                     <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
-                                        <p class="text-slate-200 text-xs"><span class="text-sky-400">@auth.js</span> this file needs modification</p>
+                                        <p class="text-slate-200 text-xs">Need to modify <span
+                                                class="text-sky-400">@auth.js</span>.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- New Feature Tab Content -->
+
                         <div id="content-feature" class="tab-content absolute inset-0 p-4 hidden">
                             <div class="space-y-2">
                                 <div class="flex justify-end">
                                     <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
-                                        <p class="text-slate-200 text-xs">Add dark mode toggle feature</p>
+                                        <p class="text-slate-200 text-xs">Add a dark mode toggle feature.</p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="flex justify-start gap-2">
-                                    <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                    <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                        style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
                                         <i class="fas fa-robot text-blue-400 text-xs"></i>
                                     </div>
-                                    <div class="bg-blue-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-blue-500 border-opacity-30">
-                                        <p class="text-blue-300 text-xs">I'll implement UI components and a theme management system.</p>
+                                    <div
+                                        class="bg-blue-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-blue-500 border-opacity-30">
+                                        <p class="text-blue-300 text-xs">I will implement the UI components and theme
+                                            management system.</p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="flex justify-end">
                                     <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
-                                        <p class="text-slate-200 text-xs">Save it to user settings too</p>
+                                        <p class="text-slate-200 text-xs">Save it in user settings as well.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Docs Tab Content -->
+
                         <div id="content-docs" class="tab-content absolute inset-0 p-4 hidden">
                             <div class="space-y-2">
                                 <div class="flex justify-end">
                                     <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
-                                        <p class="text-slate-200 text-xs">Update API documentation</p>
+                                        <p class="text-slate-200 text-xs">Update the API documentation.</p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="flex justify-start gap-2">
-                                    <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                    <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                        style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
                                         <i class="fas fa-robot text-purple-400 text-xs"></i>
                                     </div>
-                                    <div class="bg-purple-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-purple-500 border-opacity-30">
-                                        <p class="text-purple-300 text-xs">I'll reflect the latest endpoint changes.</p>
+                                    <div
+                                        class="bg-purple-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-purple-500 border-opacity-30">
+                                        <p class="text-purple-300 text-xs">I will reflect the latest endpoint changes.
+                                        </p>
                                     </div>
                                 </div>
-                                
+
                                 <div class="flex justify-end">
                                     <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
-                                        <p class="text-slate-200 text-xs">Add example code too</p>
+                                        <p class="text-slate-200 text-xs">Add example code, too.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Chat Input Area -->
+
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">Tip:</strong> New chat is <code class="shortcut-key">CMD+Shift+I</code>. Refer to previous content using <code class="shortcut-key">@</code>.
+                    <strong class="text-green-400">Tip:</strong> New chat is <code
+                        class="shortcut-key">CMD+Shift+I</code>. To refer to previous content, use <code
+                        class="shortcut-key">@</code>.
                 </p>
             </div>
         </div>
         <div class="mistake-explanation dont-explanation">
             <p class="themed-text">
-                <strong class="text-red-400">Why?</strong> Cursor remembers conversation context. Mixing topics can tangle the context, cause confusion, and increase the likelihood of inaccurate answers.
+                <strong class="text-red-400">Why?</strong> Cursor remembers the conversation context. If topics are
+                mixed, the context gets tangled, leading to confusion and a higher chance of incorrect answers.
             </p>
         </div>
     </div>
 
     <script>
         // Tab functionality
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabContents = document.querySelectorAll('.tab-content');
-            
+
             tabButtons.forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const tabId = this.id.replace('tab-', '');
-                    
+
                     // Deactivate all tab buttons
                     tabButtons.forEach(btn => {
                         btn.classList.remove('border-green-400', 'text-green-400', 'bg-slate-700', 'border-2');
                         btn.classList.add('border-slate-600', 'text-slate-400', 'bg-slate-900', 'border');
                     });
-                    
-                    // Activate clicked tab button
+
+                    // Activate the clicked tab
                     this.classList.remove('border-slate-600', 'text-slate-400', 'bg-slate-900', 'border');
                     this.classList.add('border-green-400', 'text-green-400', 'bg-slate-700', 'border-2');
-                    
-                    // Hide all tab contents
+
+                    // Hide all tab content
                     tabContents.forEach(content => {
                         content.classList.add('hidden');
                     });
-                    
-                    // Show selected tab content
+
+                    // Show the selected tab content
                     document.getElementById('content-' + tabId).classList.remove('hidden');
                 });
             });
@@ -594,57 +721,63 @@
     </script>
 
     <div id="slide5" class="slide">
-        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Mistake #2: Directly Asking LLM to Fix Its Own Mistakes</h2>
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Mistake #2: Asking the LLM to Fix Its Own
+            Mistakes Directly</h2>
         <div class="mistake-layout">
             <div class="mistake-section dont-section">
-                <h3><i class="fas fa-times-circle mr-3"></i>Don't: Directly ask LLM to fix its mistakes</h3>
-                <p class="themed-text description-text">When Cursor generates erroneous code or content, simply asking "This is wrong, fix it" again.</p>
+                <h3><i class="fas fa-times-circle mr-3"></i>Don't: Ask the LLM to fix its own mistake</h3>
+                <p class="themed-text description-text">When the code or content generated by Cursor has an error, you
+                    simply ask, "This is wrong, fix it."</p>
                 <div class="visualization-box flex flex-col">
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Error Correction Request (Wrong Way)</span></div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Error Correction Request
+                                (Wrong Way)</span></div>
                     </div>
-                    <!-- Chat Messages Area -->
                     <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-2">
-                        <!-- User Message 1 -->
                         <div class="flex justify-end">
                             <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
-                                <p class="text-slate-200 text-xs">Create a specific function</p>
+                                <p class="text-slate-200 text-xs">Create a specific function for me.</p>
                             </div>
                         </div>
-                        <!-- AI Error Response 1 -->
                         <div class="flex justify-start gap-2">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-red-400 text-xs"></i></div>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-red-400 text-xs"></i>
+                            </div>
                             <div class="bg-red-900 bg-opacity-30 p-2 rounded-lg max-w-[70%] border border-red-400">
-                                <code class="text-red-300 text-xs font-mono">function myFunction() {<br>&nbsp;&nbsp;// <span class="text-red-400 font-bold">Erroneous code part</span><br>}</code>
+                                <code
+                                    class="text-red-300 text-xs font-mono">function myFunction() {<br>&nbsp;&nbsp;// <span class="text-red-400 font-bold">Code with an error</span><br>}</code>
                             </div>
                         </div>
-                        <!-- User Message 2 -->
                         <div class="flex justify-end">
                             <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
                                 <p class="text-slate-200 text-xs">This is wrong, fix it!</p>
                             </div>
                         </div>
-                        <!-- AI Error Response 2 -->
                         <div class="flex justify-start gap-2 relative">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-red-400 text-xs"></i></div>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-red-400 text-xs"></i>
+                            </div>
                             <div class="bg-red-900 bg-opacity-30 p-2 rounded-lg max-w-[70%] border border-red-400">
-                                <code class="text-red-300 text-xs font-mono">function myFunctionFixed() {<br>&nbsp;&nbsp;// <span class="text-red-400 font-bold">Another error occurred</span><br>}</code>
+                                <code
+                                    class="text-red-300 text-xs font-mono">function myFunctionFixed() {<br>&nbsp;&nbsp;// <span class="text-red-400 font-bold">Generates another error</span><br>}</code>
                             </div>
                             <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
                                 <i class="fas fa-sync-alt text-xl text-red-400 animate-spin"></i>
                             </div>
                         </div>
                     </div>
-                     <!-- Chat Input Area -->
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
@@ -652,198 +785,227 @@
             </div>
             <div class="mistake-section do-section">
                 <h3><i class="fas fa-check-circle mr-3"></i>Do: Correct the original prompt and request again</h3>
-                <p class="themed-text description-text">Find the prompt that caused Cursor's mistake, clarify it, and then request again.</p>
+                <p class="themed-text description-text">Find the prompt that caused the error, correct it with more
+                    clarity, and then request again.</p>
                 <div class="visualization-box flex flex-col">
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Prompt Correction (Correct Way)</span></div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Prompt Correction (Correct
+                                Way)</span></div>
                     </div>
-                    <!-- Chat Messages Area -->
                     <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-2">
-                        <!-- User Message 1 (Initial) -->
                         <div class="flex justify-end">
                             <div class="bg-slate-700 p-2 rounded-lg max-w-[80%]">
                                 <p class="text-slate-200 text-xs flex items-center">
-                                    Create a specific function (initial)
+                                    Create a specific function (Initial)
                                     <i class="fas fa-pencil-alt text-sky-400 ml-2 text-xs"></i>
                                 </p>
                             </div>
                         </div>
-                        <!-- AI Error Response -->
                         <div class="flex justify-start gap-2">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-yellow-400 text-xs"></i></div>
-                            <div class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[70%] border border-yellow-400">
-                                <code class="text-yellow-300 text-xs font-mono">function myFunction() {<br>&nbsp;&nbsp;// <span class="text-yellow-400 font-bold">Error found!</span><br>}</code>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-yellow-400 text-xs"></i>
+                            </div>
+                            <div
+                                class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[70%] border border-yellow-400">
+                                <code
+                                    class="text-yellow-300 text-xs font-mono">function myFunction() {<br>&nbsp;&nbsp;// <span class="text-yellow-400 font-bold">Error found!</span><br>}</code>
                             </div>
                         </div>
-                        <!-- System Message -->
                         <div class="text-center my-1">
-                            <span class="bg-green-700 text-green-200 text-xs px-2 py-0.5 rounded-full">(Code rolled back & prompt corrected)</span>
+                            <span class="bg-green-700 text-green-200 text-xs px-2 py-0.5 rounded-full">(Code rolled back
+                                & prompt edited)</span>
                         </div>
-                        <!-- User Message 2 (Corrected) -->
                         <div class="flex justify-end">
                             <div class="bg-slate-700 p-2 rounded-lg max-w-[80%]">
                                 <p class="text-slate-200 text-xs">
-                                    Function <span class="text-green-400">with correct parameters</span> (corrected)
+                                    Function with <span class="text-green-400">correct parameters</span> (Corrected)
                                 </p>
                             </div>
                         </div>
-                        <!-- AI Correct Response -->
                         <div class="flex justify-start gap-2">
-                             <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-green-400 text-xs"></i></div>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-green-400 text-xs"></i>
+                            </div>
                             <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-green-400">
-                                <code class="text-green-300 text-xs font-mono">function myFunction(param1, param2) {<br>&nbsp;&nbsp;// <span class="text-green-400 font-bold">Correctly working code</span><br>}</code>
+                                <code
+                                    class="text-green-300 text-xs font-mono">function myFunction(param1, param2) {<br>&nbsp;&nbsp;// <span class="text-green-400 font-bold">Correctly working code</span><br>}</code>
                             </div>
                         </div>
                     </div>
-                     <!-- Chat Input Area -->
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">Tip:</strong> In most Cursor interfaces, correcting a previous prompt conveniently rolls back the code to that point. Fixing the root cause is effective.
+                    <strong class="text-green-400">Tip:</strong> In most Cursor interfaces, editing a previous prompt
+                    conveniently rolls back the code to that point. Correcting the root cause is most effective.
                 </p>
             </div>
         </div>
         <div class="mistake-explanation dont-explanation">
             <p class="themed-text">
-                <strong class="text-red-400">Why?</strong> LLMs are next-token predictors. Cursor may repeat mistakes in the wrong context or find it hard to understand the correction intent.
+                <strong class="text-red-400">Why?</strong> An LLM is a next-token predictor. Cursor may repeat its
+                mistake in a flawed context or struggle to understand the intention behind the correction.
             </p>
         </div>
     </div>
 
     <div id="slide6" class="slide">
-        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Mistake #3: Giving Instructions Without Specifying Target</h2>
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Mistake #3: Giving Instructions Without
+            Specifying the Target</h2>
         <div class="mistake-layout">
             <div class="mistake-section dont-section">
-                <h3><i class="fas fa-times-circle mr-3"></i>Don't: Give instructions without specifying target</h3>
-                <p class="themed-text description-text">Vaguely requesting tasks like "Add a loading spinner" or "Improve API error handling" without specifying which part of the codebase to modify.</p>
+                <h3><i class="fas fa-times-circle mr-3"></i>Don't: Give instructions without specifying a target</h3>
+                <p class="themed-text description-text">Vaguely asking "Add a loading spinner" or "Improve API error
+                    handling" without specifying which part of the codebase to modify.</p>
                 <div class="visualization-box flex flex-col">
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Vague Instruction</span></div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Vague Instruction</span>
+                        </div>
                     </div>
-                    <!-- Chat Messages Area -->
                     <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-2">
-                        <!-- User Message -->
                         <div class="flex justify-end">
                             <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
                                 <p class="text-slate-200 text-xs">Add a loading spinner.</p>
                             </div>
                         </div>
-                        <!-- AI Question -->
                         <div class="flex justify-start gap-2">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-yellow-400 text-xs"></i></div>
-                            <div class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
-                                <p class="text-yellow-300 text-xs">Which component should I add the loading spinner to? Please specify if it's during data loading or a button click.</p>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-yellow-400 text-xs"></i>
+                            </div>
+                            <div
+                                class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
+                                <p class="text-yellow-300 text-xs">To which component should I add the loading spinner?
+                                    Please specify if it's during data loading, on a button click, etc.</p>
                             </div>
                         </div>
-                         <!-- Confusion Illustration -->
                         <div class="flex justify-center items-center pt-3">
                             <div class="relative flex flex-col items-center">
                                 <div class="text-6xl text-red-400">?</div>
                                 <div class="inline-block relative mt-2">
-                                    <div class="w-10 h-10 border-4 border-slate-500 border-t-transparent rounded-full animate-spin opacity-50"></div>
-                                    <div class="w-6 h-6 border-2 border-slate-400 border-t-transparent rounded-full animate-spin absolute top-2 left-2 opacity-30" style="animation-delay: -0.2s;"></div>
+                                    <div
+                                        class="w-10 h-10 border-4 border-slate-500 border-t-transparent rounded-full animate-spin opacity-50">
+                                    </div>
+                                    <div class="w-6 h-6 border-2 border-slate-400 border-t-transparent rounded-full animate-spin absolute top-2 left-2 opacity-30"
+                                        style="animation-delay: -0.2s;"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Chat Input Area -->
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="mistake-section do-section">
-                <h3><i class="fas fa-check-circle mr-3"></i>Do: Specify target code (attach file)</h3>
-                <p class="themed-text description-text">Provide context by clearly indicating the code section or related files to be modified.</p>
+                <h3><i class="fas fa-check-circle mr-3"></i>Do: Specify the target code (attach files)</h3>
+                <p class="themed-text description-text">Clearly provide the relevant code or files to give context for
+                    the modification.</p>
                 <div class="visualization-box flex flex-col">
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Provide Context by Attaching File</span></div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Providing Context with File
+                                Attachment</span></div>
                     </div>
-                    <!-- Content Area -->
                     <div class="bg-slate-900 flex-1 p-4 overflow-hidden flex flex-col justify-between">
-                        <!-- Code Snippet -->
-                        <div class="bg-slate-800 p-2 rounded border border-slate-600 font-mono text-xs mb-2 flex-shrink-0">
-                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">1</span><span class="text-slate-400">const [loading, setLoading] = useState(false);</span></div>
-                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">2</span><span class="text-slate-400">const fetchData = async () => {</span></div>
-                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">3</span><span class="text-slate-400 ml-4">setLoading(true);</span></div>
-                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">4</span><span class="text-slate-400 ml-4">// API call...</span></div>
-                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">5</span><span class="text-slate-400">};</span></div>
+                        <div
+                            class="bg-slate-800 p-2 rounded border border-slate-600 font-mono text-xs mb-2 flex-shrink-0">
+                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">1</span><span
+                                    class="text-slate-400">const [loading, setLoading] = useState(false);</span></div>
+                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">2</span><span
+                                    class="text-slate-400">const fetchData = async () => {</span></div>
+                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">3</span><span
+                                    class="text-slate-400 ml-4">setLoading(true);</span></div>
+                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">4</span><span
+                                    class="text-slate-400 ml-4">// API call...</span></div>
+                            <div class="flex"><span class="text-slate-500 w-6 mr-1 text-right">5</span><span
+                                    class="text-slate-400">};</span></div>
                         </div>
 
-                        <!-- Drag and Drop Area -->
-                        <div id="drag-drop-container" class="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-slate-600 rounded-md relative py-3">
-                            <div id="file-icon-drag" class="bg-blue-500 p-2 rounded text-white text-xs flex flex-col items-center absolute cursor-grab" style="left: 20%; top: 20%;">
+                        <div id="drag-drop-container"
+                            class="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-slate-600 rounded-md relative py-3">
+                            <div id="file-icon-drag"
+                                class="bg-blue-500 p-2 rounded text-white text-xs flex flex-col items-center absolute cursor-grab"
+                                style="left: 20%; top: 20%;">
                                 <i class="fas fa-file-code mb-0.5 text-base"></i>
                                 <div>UserList.jsx</div>
                             </div>
                             <div id="drop-target" class="w-full h-full flex flex-col items-center justify-center">
                                 <i class="fas fa-bullseye text-3xl text-slate-500 mb-1"></i>
-                                <p class="text-slate-500 text-xs">Drag file here</p>
+                                <p class="text-slate-500 text-xs">Drag files here</p>
                             </div>
                         </div>
-                        
-                        <!-- User Message with File Attached -->
+
                         <div class="mt-2 flex justify-end">
-                             <div id="user-message-with-file" class="bg-slate-700 p-2 rounded-lg max-w-[90%] hidden">
+                            <div id="user-message-with-file" class="bg-slate-700 p-2 rounded-lg max-w-[90%] hidden">
                                 <div class="flex items-center mb-1">
                                     <div class="bg-blue-500 p-1.5 rounded text-white text-xs flex items-center mr-2">
                                         <i class="fas fa-file-code mr-1"></i>
                                         <span>UserList.jsx</span>
                                     </div>
-                                    <p class="text-slate-200 text-xs">Add loading spinner UI to this component</p>
+                                    <p class="text-slate-200 text-xs">Add a loading spinner UI to this component.</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- AI Response -->
                         <div class="mt-1 flex justify-start gap-2">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-green-400 text-xs"></i></div>
-                            <div id="ai-response-file" class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-green-500 border-opacity-30 hidden">
-                                <p class="text-green-300 text-xs"><i class="fas fa-check-circle mr-1"></i>Okay! I'll add a loading spinner to UserList.jsx.</p>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-green-400 text-xs"></i>
+                            </div>
+                            <div id="ai-response-file"
+                                class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[70%] border border-green-500 border-opacity-30 hidden">
+                                <p class="text-green-300 text-xs"><i class="fas fa-check-circle mr-1"></i>Got it! I'll
+                                    add a loading spinner to UserList.jsx.</p>
                             </div>
                         </div>
                     </div>
-                     <!-- Chat Input Area (Dummy) -->
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">Tip:</strong> Accurately convey context via file drag-and-drop or <code class="shortcut-key">@filename</code>. Selecting a code block and pressing <code class="shortcut-key">Cmd+L</code> is also useful.
+                    <strong class="text-green-400">Tip:</strong> Accurately provide context by dragging and dropping
+                    files or using <code class="shortcut-key">@filename</code>. Selecting a code block and pressing
+                    <code class="shortcut-key">Cmd+L</code> is also useful.
                 </p>
             </div>
         </div>
         <div class="mistake-explanation dont-explanation">
             <p class="themed-text">
-                <strong class="text-red-400">Why?</strong> Cursor's output depends on input information. Without modification location or context, Cursor struggles to guess and may produce incorrect results.
+                <strong class="text-red-400">Why?</strong> Cursor's output depends on its input. Without a specific
+                location or context, it's hard for Cursor to guess, which can lead to incorrect results.
             </p>
         </div>
     </div>
@@ -871,7 +1033,7 @@
 
                 document.addEventListener('mousemove', (e) => {
                     if (!isDragging) return;
-                    
+
                     let newX = e.clientX - offsetX - dragContainer.getBoundingClientRect().left;
                     let newY = e.clientY - offsetY - dragContainer.getBoundingClientRect().top;
 
@@ -898,13 +1060,13 @@
 
                     if (fileCenterX > targetRect.left && fileCenterX < targetRect.right &&
                         fileCenterY > targetRect.top && fileCenterY < targetRect.bottom) {
-                        
+
                         // Simulate file drop
                         fileIcon.style.opacity = '0';
                         fileIcon.style.transform = 'scale(0.5)';
-                        
+
                         setTimeout(() => {
-                            dragContainer.innerHTML = '<div class="flex flex-col items-center justify-center h-full"><i class="fas fa-check-circle text-4xl text-green-400 mb-2"></i><p class="text-green-400 text-sm">File attached successfully!</p></div>';
+                            dragContainer.innerHTML = '<div class="flex flex-col items-center justify-center h-full"><i class="fas fa-check-circle text-4xl text-green-400 mb-2"></i><p class="text-green-400 text-sm">File attached!</p></div>';
                             userMessageWithFile.classList.remove('hidden');
                             userMessageWithFile.classList.add('flex');
                             aiResponseFile.classList.remove('hidden');
@@ -921,232 +1083,123 @@
     </script>
 
     <div id="slide7" class="slide">
-        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Mistake #4: Requesting with Linter Errors Present</h2>
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Mistake #4: Making Requests with Linter Errors
+            Present</h2>
         <div class="mistake-layout">
             <div class="mistake-section dont-section">
-                <h3><i class="fas fa-times-circle mr-3"></i>Don't: Request while ignoring linter errors</h3>
-                <p class="themed-text description-text">Requesting Cursor to generate or modify code when linter errors are present in the code.</p>
+                <h3><i class="fas fa-times-circle mr-3"></i>Don't: Ignore linter errors and make a request</h3>
+                <p class="themed-text description-text">Requesting code generation or modification from Cursor while
+                    there are visible linter errors in the code.</p>
                 <div class="visualization-box flex flex-col">
-                    <!-- Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Linter Error + Request</span></div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Linter Error +
+                                Request</span></div>
                     </div>
-                    <!-- Code Area with Linter Error -->
                     <div class="bg-slate-850 p-3 flex-shrink-0 border-b border-slate-700 relative">
                         <div class="font-mono text-xs text-slate-200">function greet() {</div>
                         <div class="font-mono text-xs text-slate-200 relative pl-2">
                             <span>console.log("Hello")</span>
                             <span class="text-red-400 font-bold ml-2">// Missing semicolon</span>
-                            <div class="absolute bottom-0 left-2 h-px bg-red-400 w-[calc(100%-1rem)] border-b-2 border-dotted border-red-400"></div>
+                            <div
+                                class="absolute bottom-0 left-2 h-px bg-red-400 w-[calc(100%-1rem)] border-b-2 border-dotted border-red-400">
+                            </div>
                         </div>
                         <div class="font-mono text-xs text-slate-200">}</div>
                         <i class="fas fa-exclamation-circle text-red-500 absolute top-2 right-2 text-sm"></i>
                     </div>
-                    <!-- Chat Messages Area -->
                     <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-2">
-                        <!-- User Message -->
                         <div class="flex justify-end">
                             <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
                                 <p class="text-slate-200 text-xs">Add a parameter to this function.</p>
                             </div>
                         </div>
-                        <!-- AI Warning -->
                         <div class="flex justify-start gap-2">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-yellow-400 text-xs"></i></div>
-                            <div class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
-                                <p class="text-yellow-300 text-xs">It looks like a semicolon is missing. How about fixing the lint error first? Then I can add the parameter for you.</p>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-yellow-400 text-xs"></i>
+                            </div>
+                            <div
+                                class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
+                                <p class="text-yellow-300 text-xs">It looks like a semicolon is missing. How about
+                                    fixing the lint error first? I can add the parameter for you after that.</p>
                             </div>
                         </div>
                     </div>
-                    <!-- Chat Input Area -->
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="mistake-section do-section">
-                <h3><i class="fas fa-check-circle mr-3"></i>Do: Resolve linter errors before requesting</h3>
-                <p class="themed-text description-text">Resolve linter errors before making a request. If Cursor modifies code unintendedly, check formatter settings.</p>
+                <h3><i class="fas fa-check-circle mr-3"></i>Do: Fix linter errors before making a request</h3>
+                <p class="themed-text description-text">Fix linter errors first. If Cursor modifies code in an
+                    unintended way, check your formatter settings.</p>
                 <div class="visualization-box flex flex-col">
-                    <!-- Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Resolve Linter Error + Request</span></div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Linter Error Fixed +
+                                Request</span></div>
                     </div>
-                    <!-- Code Area - Corrected -->
                     <div class="bg-slate-850 p-3 flex-shrink-0 border-b border-slate-700 relative">
                         <div class="font-mono text-xs text-slate-200">function greet() {</div>
                         <div class="font-mono text-xs text-slate-200 pl-2">console.log("Hello");</div>
                         <div class="font-mono text-xs text-slate-200">}</div>
                         <i class="fas fa-check-circle text-green-500 absolute top-2 right-2 text-sm"></i>
                     </div>
-                     <!-- System Message -->
                     <div class="text-center py-1 bg-slate-850 border-b border-slate-700 flex-shrink-0">
                         <span class="text-green-400 text-xs font-medium">(Format on Save: ON)</span>
                     </div>
-                    <!-- Chat Messages Area -->
                     <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-2">
-                        <!-- User Message -->
                         <div class="flex justify-end">
                             <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
                                 <p class="text-slate-200 text-xs">Add a parameter to this function.</p>
                             </div>
                         </div>
-                        <!-- AI Response -->
                         <div class="flex justify-start gap-2">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-green-400 text-xs"></i></div>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-green-400 text-xs"></i>
+                            </div>
                             <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[85%] border border-green-400">
-                                <code class="text-green-300 text-xs font-mono">function greet(name) {<br>&nbsp;&nbsp;console.log(`Hello, ${name}`);<br>}</code>
+                                <code
+                                    class="text-green-300 text-xs font-mono">function greet(name) {<br>&nbsp;&nbsp;console.log(`Hello, ${name}`);<br>}</code>
                             </div>
                         </div>
                     </div>
-                    <!-- Chat Input Area -->
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">Tip:</strong> Maintain consistent code style with 'Default Formatter' and 'Format on Save' settings. It's better than confusing Cursor with minor errors.
+                    <strong class="text-green-400">Tip:</strong> Keep your code style consistent with 'Default
+                    Formatter' and 'Format on Save' settings. It's better than confusing Cursor with minor errors.
                 </p>
             </div>
         </div>
         <div class="mistake-explanation dont-explanation">
             <p class="themed-text">
-                <strong class="text-red-400">Why?</strong> Linter errors are included in Cursor's context. Cursor reacts sensitively even to minor errors, potentially focusing on errors rather than the core task or making incorrect inferences.
-            </p>
-        </div>
-    </div>
-
-    <div id="slide8" class="slide">
-        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Mistake #5: Requesting Large Tasks Without Design Direction</h2>
-        <div class="mistake-layout">
-            <div class="mistake-section dont-section">
-                <h3><i class="fas fa-times-circle mr-3"></i>Don't: Request large tasks without design direction</h3>
-                <p class="themed-text description-text">Requesting broad tasks like "Build a cool SNS" from Cursor without a clear design plan or purpose.</p>
-                <div class="visualization-box flex flex-col">
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
-                        <div class="flex space-x-2">
-                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
-                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
-                        </div>
-                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Broad Request</span></div>
-                    </div>
-                    <!-- Chat Messages Area -->
-                    <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-2">
-                        <!-- User Message -->
-                        <div class="flex justify-end">
-                            <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
-                                <p class="text-slate-200 text-xs">Build a cool SNS service!</p>
-                            </div>
-                        </div>
-                        <!-- AI Question -->
-                        <div class="flex justify-start gap-2">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-yellow-400 text-xs"></i></div>
-                            <div class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
-                                <p class="text-yellow-300 text-xs">(Confused) What features do you want? What about user flow, data model?</p>
-                            </div>
-                        </div>
-                        <!-- Confusion Illustration -->
-                        <div class="flex flex-col items-center justify-center pt-3">
-                            <div class="flex items-center space-x-3 mb-2">
-                                <div class="w-7 h-7 bg-red-400 rounded-full opacity-70 animate-bounce" style="animation-delay: -0.3s;"></div>
-                                <div class="w-7 h-7 bg-blue-400 rounded-lg opacity-70 transform rotate-12 animate-spin"></div>
-                                <div class="w-10 h-3 bg-yellow-400 rounded-full opacity-70 animate-pulse"></div>
-                            </div>
-                            <div class="text-6xl text-red-400">???</div>
-                        </div>
-                    </div>
-                    <!-- Chat Input Area -->
-                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
-                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
-                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mistake-section do-section">
-                <h3><i class="fas fa-check-circle mr-3"></i>Do: Design first, then request step-by-step tasks</h3>
-                <p class="themed-text description-text">First, request a design (requirements, rules, markdown docs, etc.) from Cursor, review/modify it, then assign tasks in specific units.</p>
-                <div class="visualization-box flex flex-col h-[280px]">
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
-                        <div class="flex space-x-2">
-                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
-                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
-                        </div>
-                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Step-by-Step Approach</span></div>
-                    </div>
-                    <!-- Chat Messages Area -->
-                    <div class="bg-slate-900 flex-1 p-4 overflow-auto space-y-2 text-xs">
-                        <!-- Step 1: Request Design Doc -->
-                        <div class="flex justify-end">
-                            <div class="bg-slate-700 p-2 rounded-lg max-w-[85%]">
-                                <p class="text-slate-200">1. User: Create SNS design document (MD)</p>
-                                <p class="text-slate-400 ml-4">(Features: Posting, Comments)</p>
-                            </div>
-                        </div>
-                        <!-- AI Response: Design Doc -->
-                        <div class="flex justify-start gap-2 items-center">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fab fa-markdown text-green-400"></i></div>
-                            <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[85%] border border-green-400">
-                                <p class="text-green-300">Cursor: Here's the design document. (Review/Modify)</p>
-                            </div>
-                        </div>
-                        <!-- Step 2: Request API Implementation -->
-                        <div class="flex justify-end">
-                            <div class="bg-slate-700 p-2 rounded-lg max-w-[85%]">
-                                <p class="text-slate-200">2. User: (After review/modification)</p>
-                                <p class="text-slate-200 ml-4">Implement posting API based on <span class="text-sky-400">@SNS_Design_Document</span></p>
-                            </div>
-                        </div>
-                        <!-- AI Response: API Implementation -->
-                        <div class="flex justify-start gap-2 items-center">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-code text-green-400"></i></div>
-                            <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[85%] border border-green-400">
-                                <p class="text-green-300">Cursor: Implementing posting API...</p>
-                            </div>
-                        </div>
-                         <!-- Deep Research Tip -->
-                        <div class="flex justify-center items-center text-slate-400 pt-1">
-                            <i class="fas fa-search mr-1.5"></i>
-                            <span>If unsure: Use Deep Research</span>
-                        </div>
-                    </div>
-                    <!-- Chat Input Area -->
-                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
-                        <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
-                            <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
-                        </div>
-                    </div>
-                </div>
-                <p class="explanation themed-text">
-                    <strong class="text-green-400">Tip:</strong> Knowledge of APIs to use, system flow, and design decisions should precede. If unsure about a large task, using Gemini/OpenAI Deep Research for best practices can be helpful.
-                </p>
-            </div>
-        </div>
-        <div class="mistake-explanation dont-explanation">
-            <p class="themed-text">
-                <strong class="text-red-400">Why?</strong> Without a clear purpose, large tasks are more likely to deviate from user intent or project structure, leading to unsatisfactory results.
+                <strong class="text-red-400">Why?</strong> Linter errors are included in Cursor's context. Cursor is
+                sensitive to even minor errors, which can cause it to focus on them instead of the main task, or to make
+                incorrect inferences.
             </p>
         </div>
     </div>
@@ -1155,30 +1208,42 @@
         <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Mistake #6: Neglecting Technical Debt</h2>
         <div class="mistake-layout">
             <div class="mistake-section dont-section">
-                <h3><i class="fas fa-times-circle mr-3"></i>Don't: Neglect technical debt</h3>
-                <p class="themed-text description-text">Requesting Cursor to work on code with accumulated technical debt, such as unclear file/variable/function names or poor modularization.</p>
-                <div class="visualization-box flex flex-col p-0"> 
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                <h3><i class="fas fa-times-circle mr-3"></i>Don't: Neglect Technical Debt</h3>
+                <p class="themed-text description-text">You ask Cursor to work on code with accumulated technical debt,
+                    such as unclear file/variable/function names and poor modularization.
+                </p>
+                <div class="visualization-box flex flex-col p-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Technical Debt + Request</span></div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Technical Debt +
+                                Request</span>
+                        </div>
                     </div>
                     <div class="flex-1 bg-slate-900 flex flex-col items-center justify-center p-2 space-y-2">
-                        <svg viewBox="0 0 280 150" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto max-h-[150px]">
-                            <path d="M30 30 C 80 10, 120 70, 150 40 S 220 10, 250 60" stroke="#f59e0b" stroke-width="1.5" fill="none" opacity="0.7"/>
-                            <path d="M40 50 C 90 90, 50 120, 100 100 S 180 150, 200 110" stroke="#ef4444" stroke-width="1.5" fill="none" opacity="0.7"/>
-                            <path d="M60 20 C 10 50, 100 80, 130 70 S 250 100, 240 40" stroke="#3b82f6" stroke-width="1.5" fill="none" opacity="0.7"/>
-                            <text x="140" y="80" text-anchor="middle" font-family="Fira Code, monospace" font-size="9" fill="#9ca3af">
+                        <svg viewBox="0 0 280 150" xmlns="http://www.w3.org/2000/svg"
+                            class="w-full h-auto max-h-[150px]">
+                            <path d="M30 30 C 80 10, 120 70, 150 40 S 220 10, 250 60" stroke="#f59e0b"
+                                stroke-width="1.5" fill="none" opacity="0.7" />
+                            <path d="M40 50 C 90 90, 50 120, 100 100 S 180 150, 200 110" stroke="#ef4444"
+                                stroke-width="1.5" fill="none" opacity="0.7" />
+                            <path d="M60 20 C 10 50, 100 80, 130 70 S 250 100, 240 40" stroke="#3b82f6"
+                                stroke-width="1.5" fill="none" opacity="0.7" />
+                            <text x="140" y="80" text-anchor="middle" font-family="Fira Code, monospace" font-size="9"
+                                fill="#9ca3af">
                                 function a(b,c,d,e,f,g) { /* ... */ }
                             </text>
-                            <text x="140" y="95" text-anchor="middle" font-family="Fira Code, monospace" font-size="9" fill="#9ca3af">
+                            <text x="140" y="95" text-anchor="middle" font-family="Fira Code, monospace" font-size="9"
+                                fill="#9ca3af">
                                 // data_processor_util_final_v2.js
                             </text>
                             <foreignObject x="122" y="68" width="36" height="36">
-                               <i xmlns="http://www.w3.org/1999/xhtml" class="fas fa-exclamation-triangle fa-lg text-amber-400"></i>
+                                <i xmlns="http://www.w3.org/1999/xhtml"
+                                    class="fas fa-exclamation-triangle fa-lg text-amber-400"></i>
                             </foreignObject>
                         </svg>
                         <div class="flex justify-end w-full px-2">
@@ -1187,108 +1252,141 @@
                             </div>
                         </div>
                         <div class="flex justify-start gap-2 w-full px-2">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-yellow-400 text-xs"></i></div>
-                            <div class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
-                                <p class="text-yellow-300 text-xs">(Confused) The code is complex, I don't know where to modify...</p>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-yellow-400 text-xs"></i>
+                            </div>
+                            <div
+                                class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
+                                <p class="text-yellow-300 text-xs">(Confused) The code is too complex, I don't know
+                                    where to modify it...</p>
                             </div>
                         </div>
                     </div>
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="mistake-section do-section">
-                <h3><i class="fas fa-check-circle mr-3"></i>Do: Request Cursor to refactor code</h3>
-                <p class="themed-text description-text">Maintain code quality by requesting Cursor to refactor.</p>
+                <h3><i class="fas fa-check-circle mr-3"></i>Do: Ask Cursor to Refactor Code</h3>
+                <p class="themed-text description-text">Request refactoring from Cursor to maintain code quality.</p>
                 <div class="visualization-box flex flex-col p-0">
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Refactoring Request</span></div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Refactor Request</span>
+                        </div>
                     </div>
                     <div class="flex-1 bg-slate-900 flex flex-col items-center justify-center p-2 space-y-2">
-                        <svg viewBox="0 0 280 150" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto max-h-[150px]">
-                            <!-- Before: Messy Code Section -->
-                            <text x="65" y="20" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#ef4444" font-weight="bold">Before</text>
-                            <rect x="10" y="30" width="110" height="70" rx="5" fill="#1e1b1b" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="2,2"/>
+                        <svg viewBox="0 0 280 150" xmlns="http://www.w3.org/2000/svg"
+                            class="w-full h-auto max-h-[150px]">
+                            <text x="65" y="20" text-anchor="middle" font-family="sans-serif" font-size="10"
+                                fill="#ef4444" font-weight="bold">Before</text>
+                            <rect x="10" y="30" width="110" height="70" rx="5" fill="#1e1b1b" stroke="#ef4444"
+                                stroke-width="1.5" stroke-dasharray="2,2" />
                             <g transform="translate(65 65)">
-                                <path d="M-40 -20 Q -20 -30, 0 -15 Q 20 0, 40 -10 Q 30 10, 10 20 Q -10 15, -30 5 Q -45 -5, -40 -20" stroke="#f59e0b" stroke-width="1.5" fill="none"/>
-                                <path d="M-35 -10 Q -15 -25, 5 -5 Q 25 10, 35 0 Q 20 25, 0 15 Q -20 20, -35 -10" stroke="#ef4444" stroke-width="1.5" fill="none"/>
-                                <path d="M-30 0 Q -10 -15, 10 5 Q 30 -5, 40 15 Q 15 30, -5 25 Q -25 10, -30 0" stroke="#3b82f6" stroke-width="1.5" fill="none"/>
+                                <path
+                                    d="M-40 -20 Q -20 -30, 0 -15 Q 20 0, 40 -10 Q 30 10, 10 20 Q -10 15, -30 5 Q -45 -5, -40 -20"
+                                    stroke="#f59e0b" stroke-width="1.5" fill="none" />
+                                <path d="M-35 -10 Q -15 -25, 5 -5 Q 25 10, 35 0 Q 20 25, 0 15 Q -20 20, -35 -10"
+                                    stroke="#ef4444" stroke-width="1.5" fill="none" />
+                                <path d="M-30 0 Q -10 -15, 10 5 Q 30 -5, 40 15 Q 15 30, -5 25 Q -25 10, -30 0"
+                                    stroke="#3b82f6" stroke-width="1.5" fill="none" />
                             </g>
-                            <text x="65" y="115" text-anchor="middle" font-family="Fira Code, monospace" font-size="7" fill="#9ca3af">Complex and tangled code</text>
+                            <text x="65" y="115" text-anchor="middle" font-family="Fira Code, monospace" font-size="7"
+                                fill="#9ca3af">Complicated and tangled code</text>
 
-                            <!-- Arrow -->
                             <g transform="translate(130 65)">
-                                <path d="M0 0 L20 0" stroke="#38bdf8" stroke-width="2" fill="none"/>
-                                <path d="M15 -3 L20 0 L15 3" stroke="#38bdf8" stroke-width="2" fill="none"/>
+                                <path d="M0 0 L20 0" stroke="#38bdf8" stroke-width="2" fill="none" />
+                                <path d="M15 -3 L20 0 L15 3" stroke="#38bdf8" stroke-width="2" fill="none" />
                             </g>
-                            
-                            <!-- After: Clean Modules Section -->
-                            <text x="215" y="20" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#22c55e" font-weight="bold">After</text>
-                            <rect x="160" y="30" width="110" height="70" rx="5" fill="#0f1419" stroke="#22c55e" stroke-width="1.5"/>
+
+                            <text x="215" y="20" text-anchor="middle" font-family="sans-serif" font-size="10"
+                                fill="#22c55e" font-weight="bold">After</text>
+                            <rect x="160" y="30" width="110" height="70" rx="5" fill="#0f1419" stroke="#22c55e"
+                                stroke-width="1.5" />
                             <g transform="translate(215 65)">
-                                <rect x="-40" y="-20" width="20" height="12" rx="2" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
+                                <rect x="-40" y="-20" width="20" height="12" rx="2" fill="#22c55e" fill-opacity="0.3"
+                                    stroke="#4ade80" stroke-width="1" />
                                 <text x="-30" y="-11.5" text-anchor="middle" font-size="5" fill="#a7f3d0">Auth</text>
-                                <rect x="-10" y="-20" width="20" height="12" rx="2" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
+                                <rect x="-10" y="-20" width="20" height="12" rx="2" fill="#22c55e" fill-opacity="0.3"
+                                    stroke="#4ade80" stroke-width="1" />
                                 <text x="0" y="-11.5" text-anchor="middle" font-size="5" fill="#a7f3d0">Data</text>
-                                <rect x="20" y="-20" width="20" height="12" rx="2" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
+                                <rect x="20" y="-20" width="20" height="12" rx="2" fill="#22c55e" fill-opacity="0.3"
+                                    stroke="#4ade80" stroke-width="1" />
                                 <text x="30" y="-11.5" text-anchor="middle" font-size="5" fill="#a7f3d0">UI</text>
-                                <line x1="-10" y1="-14" x2="-20" y2="-14" stroke="#4ade80" stroke-width="0.5"/>
-                                <line x1="10" y1="-14" x2="20" y2="-14" stroke="#4ade80" stroke-width="0.5"/>
-                                <rect x="-10" y="5" width="20" height="12" rx="2" fill="#22c55e" fill-opacity="0.3" stroke="#4ade80" stroke-width="1"/>
+                                <line x1="-10" y1="-14" x2="-20" y2="-14" stroke="#4ade80" stroke-width="0.5" />
+                                <line x1="10" y1="-14" x2="20" y2="-14" stroke="#4ade80" stroke-width="0.5" />
+                                <rect x="-10" y="5" width="20" height="12" rx="2" fill="#22c55e" fill-opacity="0.3"
+                                    stroke="#4ade80" stroke-width="1" />
                                 <text x="0" y="13.5" text-anchor="middle" font-size="5" fill="#a7f3d0">Utils</text>
-                                <line x1="0" y1="-8" x2="0" y2="5" stroke="#4ade80" stroke-width="0.5"/>
+                                <line x1="0" y1="-8" x2="0" y2="5" stroke="#4ade80" stroke-width="0.5" />
                             </g>
-                            <text x="215" y="115" text-anchor="middle" font-family="Fira Code, monospace" font-size="7" fill="#a7f3d0">Modularized clean structure</text>
+                            <text x="215" y="115" text-anchor="middle" font-family="Fira Code, monospace" font-size="7"
+                                fill="#a7f3d0">Clean and modularized structure</text>
                         </svg>
                         <div class="flex justify-end w-full px-2">
                             <div class="bg-slate-700 p-2 rounded-lg max-w-[85%]">
-                                <p class="text-slate-200 text-xs"><span class="text-sky-400">@complex_code.js</span> Refactor this file to adhere to SRP and modularize it.</p>
+                                <p class="text-slate-200 text-xs"><span class="text-sky-400">@complex_code.js</span>
+                                    Please refactor this file by following SRP and modularize it.</p>
                             </div>
                         </div>
                         <div class="flex justify-start gap-2 w-full px-2 items-center">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-green-400 text-xs"></i></div>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-green-400 text-xs"></i>
+                            </div>
                             <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[85%] border border-green-400">
-                                 <p class="text-green-300 text-xs"><i class="fas fa-check-circle mr-1"></i>Refactoring complete!</p>
+                                <p class="text-green-300 text-xs"><i class="fas fa-check-circle mr-1"></i>Refactoring
+                                    complete!</p>
                             </div>
                         </div>
                     </div>
-                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
+                    <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">Tip:</strong> Ideally, manage code so Cursor knows exactly where to modify when you specify a single file and say "Modify this file."
+                    <strong class="text-green-400">Tip:</strong> It's ideal to maintain your code in a way that makes it
+                    clear what to change when you say "modify this file".
                 </p>
             </div>
         </div>
         <div class="mistake-explanation dont-explanation">
             <p class="themed-text">
-                <strong class="text-red-400">Why?</strong> Cursor understands code through file names, variable/function names, and module structure. Code with accumulated technical debt confuses Cursor, reducing work efficiency.
+                <strong class="text-red-400">Why?</strong> Cursor understands code through file names, variable/function
+                names, and module structure. Code with technical debt confuses Cursor and reduces its productivity.
             </p>
         </div>
     </div>
 
+
     <div id="slide10" class="slide">
-        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Mistake #7: Continuing Work After Satisfactory Results Without Saving</h2>
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Mistake #7: Continuing to Work After Getting a
+            Satisfactory Result</h2>
         <div class="mistake-layout">
             <div class="mistake-section dont-section">
-                <h3><i class="fas fa-times-circle mr-3"></i>Don't: Proceed to next task after satisfaction without saving</h3>
-                <p class="themed-text description-text">When Cursor generates satisfactory code or results, continuing to the next task without saving or committing it.</p>
+                <h3><i class="fas fa-times-circle mr-3"></i>Don't: Proceed to the next task immediately after getting a
+                    satisfactory result</h3>
+                <p class="themed-text description-text">When Cursor generates satisfactory code or results, you continue
+                    with the next task without saving or committing.
+                </p>
                 <div class="visualization-box flex flex-col">
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
@@ -1298,11 +1396,11 @@
                             <span class="text-slate-400 text-sm">Proceeding without saving after satisfaction</span>
                         </div>
                     </div>
-                    
-                    <!-- Chat Messages Area -->
+
                     <div class="bg-slate-900 flex-1 p-4 overflow-hidden">
                         <div class="space-y-3">
-                            <div class="bg-green-100 bg-opacity-20 p-3 rounded border border-green-400 flex items-center">
+                            <div
+                                class="bg-green-100 bg-opacity-20 p-3 rounded border border-green-400 flex items-center">
                                 <div class="flex-1">
                                     <div class="text-green-300 text-xs font-mono">Cursor: function perfectCode() {</div>
                                     <div class="text-green-300 text-xs font-mono ml-4">// Perfect logic!</div>
@@ -1313,10 +1411,13 @@
                                     <span class="text-2xl">👏</span>
                                 </div>
                             </div>
-                            <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">User: Great! Now add another feature.</div>
+                            <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">User: Great! Now
+                                add another feature.</div>
                             <div class="bg-red-100 bg-opacity-20 p-3 rounded border border-red-400">
                                 <div class="text-red-300 text-xs font-mono">Cursor: function messedUp() {</div>
-                                <div class="text-red-300 text-xs font-mono ml-4">// Where did the previous code go? <span class="text-red-400 font-bold">New error!</span></div>
+                                <div class="text-red-300 text-xs font-mono ml-4">// Where did the previous code go?
+                                    <span class="text-red-400 font-bold">New error!</span>
+                                </div>
                                 <div class="text-red-300 text-xs font-mono">}</div>
                             </div>
                             <div class="text-center text-red-400 text-sm font-bold">
@@ -1324,36 +1425,38 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Chat Input Area (Dummy) -->
+
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="mistake-section do-section">
-                <h3><i class="fas fa-check-circle mr-3"></i>Do: Commit immediately upon satisfactory results</h3>
-                <p class="themed-text description-text">When satisfactory results are achieved, commit (save) the work immediately to preserve the good state.</p>
+                <h3><i class="fas fa-check-circle mr-3"></i>Do: Commit immediately when you get a satisfactory result
+                </h3>
+                <p class="themed-text description-text">When you get a satisfactory result, commit the work immediately
+                    to preserve the good state.</p>
                 <div class="visualization-box flex flex-col">
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
                         <div class="flex-1 text-center">
-                            <span class="text-slate-400 text-sm">Commit immediately upon satisfaction</span>
+                            <span class="text-slate-400 text-sm">Commit Immediately on Satisfaction</span>
                         </div>
                     </div>
-                    
-                    <!-- Chat Messages Area -->
+
                     <div class="bg-slate-900 flex-1 p-4 overflow-hidden">
                         <div class="space-y-3">
-                            <div class="bg-green-100 bg-opacity-20 p-3 rounded border border-green-400 flex items-center">
+                            <div
+                                class="bg-green-100 bg-opacity-20 p-3 rounded border border-green-400 flex items-center">
                                 <div class="flex-1">
                                     <div class="text-green-300 text-xs font-mono">Cursor: function perfectCode() {</div>
                                     <div class="text-green-300 text-xs font-mono ml-4">// Perfect logic!</div>
@@ -1361,43 +1464,48 @@
                                 </div>
                                 <i class="fas fa-check-circle text-green-400 text-2xl"></i>
                             </div>
-                            <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">User: Great! Let's commit this right away.</div>
-                            
-                            <!-- Git commit interface -->
+                            <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">User: Great!
+                                Let's commit right away.</div>
+
                             <div class="bg-slate-800 p-3 rounded border-2 border-green-500">
                                 <div class="text-slate-200 text-xs mb-2">Source Control</div>
                                 <div class="flex items-center space-x-2">
                                     <div class="bg-slate-600 p-2 rounded flex-1 font-mono text-xs text-slate-400">
                                         feat: Implement perfectCode function
                                     </div>
-                                    <div class="bg-green-500 px-3 py-1 rounded text-slate-900 text-xs font-bold flex items-center">
+                                    <div
+                                        class="bg-green-500 px-3 py-1 rounded text-slate-900 text-xs font-bold flex items-center">
                                         Commit
                                         <span class="ml-1 text-lg">✨</span>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="text-center text-green-400 text-sm font-bold">
                                 <i class="fas fa-save mr-2"></i>Saved safely!
                             </div>
                         </div>
                     </div>
-                    <!-- Chat Input Area (Dummy) -->
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">Tip:</strong> Commit messages are auto-generated by clicking the <span style="color: #fbbf24;">✨ sparkle button</span> in the Source Control panel. Don't lose a good state, save it immediately.
+                    <strong class="text-green-400">Tip:</strong> A commit message can be auto-generated by clicking the
+                    <span style="color: #fbbf24;">✨ sparkle button</span> in the Source Control panel. Don't lose a good
+                    state; save it immediately.
                 </p>
             </div>
         </div>
         <div class="mistake-explanation dont-explanation">
             <p class="themed-text">
-                <strong class="text-red-400">Why?</strong> If you don't save good results, you might lose the previously perfect state. Cursor's checkpoint feature doesn't always work perfectly, and there's a risk of messing up originally well-functioning code with unexpected changes during new tasks.
+                <strong class="text-red-400">Why?</strong> If you don't save a good result, you can lose the previously
+                perfect state. Cursor's checkpoint feature doesn't always work perfectly, and there's a risk of breaking
+                previously working code with unexpected changes during a new task.
             </p>
         </div>
     </div>
@@ -1408,31 +1516,45 @@
                 Mistake Types Conquered! <i class='fas fa-check-double text-green-400'></i> Now Level Up with Pro Tips!
             </h2>
             <p class="text-2xl sm:text-3xl text-slate-300 mb-8 themed-text">
-                So far, we've looked at various mistake types that can occur when communicating with Cursor. Avoiding these mistakes alone will enable much smoother work.
+                So far, we've looked at various types of mistakes that can happen when communicating with Cursor. Just
+                avoiding these mistakes will make your work much smoother.
             </p>
             <p class="text-2xl sm:text-3xl text-slate-300 mb-12 themed-text">
-                But we can't be satisfied here, right? Introducing key Pro Tips that will take your <span class='text-yellow-400 font-bold'>Cursor utilization skills</span> to the next level and make you a <span class='text-sky-400 font-bold'>true 'Cursor Master'</span>!
+                But we can't stop here, right? We'll introduce key Pro Tips that will take your <span
+                    class='text-yellow-400 font-bold'>Cursor skills</span> to the next level and make you a <span
+                    class='text-sky-400 font-bold'>true 'Cursor Master'</span>!
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                <div class="bg-slate-800 p-6 rounded-lg border border-sky-500 hover:border-sky-400 transition-all duration-300 transform hover:scale-105">
-                    <h3 class="text-2xl text-sky-400 mb-3 themed-text"><i class="fas fa-terminal mr-2 text-pink-400"></i>Command Utilization</h3>
-                    <p class="text-slate-400 themed-text">Automate repetitive tasks with `/` command</p>
+                <div
+                    class="bg-slate-800 p-6 rounded-lg border border-sky-500 hover:border-sky-400 transition-all duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl text-sky-400 mb-3 themed-text"><i
+                            class="fas fa-terminal mr-2 text-pink-400"></i>Using Commands</h3>
+                    <p class="text-slate-400 themed-text">Automate repetitive tasks with `/` commands</p>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-lg border border-sky-500 hover:border-sky-400 transition-all duration-300 transform hover:scale-105">
-                    <h3 class="text-2xl text-sky-400 mb-3 themed-text"><i class="fas fa-question-circle mr-2 text-indigo-400"></i>Request Code Explanation</h3>
-                    <p class="text-slate-400 themed-text">Ask immediately if you don't understand</p>
+                <div
+                    class="bg-slate-800 p-6 rounded-lg border border-sky-500 hover:border-sky-400 transition-all duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl text-sky-400 mb-3 themed-text"><i
+                            class="fas fa-question-circle mr-2 text-indigo-400"></i>Requesting Code Explanations</h3>
+                    <p class="text-slate-400 themed-text">If you don't understand, ask right away</p>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-lg border border-sky-500 hover:border-sky-400 transition-all duration-300 transform hover:scale-105">
-                    <h3 class="text-2xl text-sky-400 mb-3 themed-text"><i class="fas fa-search-location mr-2 text-teal-400"></i>Natural Language Code Search</h3>
+                <div
+                    class="bg-slate-800 p-6 rounded-lg border border-sky-500 hover:border-sky-400 transition-all duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl text-sky-400 mb-3 themed-text"><i
+                            class="fas fa-search-location mr-2 text-teal-400"></i>Natural Language Code Search</h3>
                     <p class="text-slate-400 themed-text">"Where was that function again?"</p>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-lg border border-sky-500 hover:border-sky-400 transition-all duration-300 transform hover:scale-105">
-                    <h3 class="text-2xl text-sky-400 mb-3 themed-text"><i class="fas fa-book-reader mr-2"></i>Utilize Context7 MCP</h3>
-                    <p class="text-slate-400 themed-text">Provide up-to-date library information</p>
+                <div
+                    class="bg-slate-800 p-6 rounded-lg border border-sky-500 hover:border-sky-400 transition-all duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl text-sky-400 mb-3 themed-text"><i class="fas fa-book-reader mr-2"></i>Using
+                        Context7
+                        MCP</h3>
+                    <p class="text-slate-400 themed-text">Provide the latest library information</p>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-lg border border-sky-500 hover:border-sky-400 transition-all duration-300 transform hover:scale-105">
-                    <h3 class="text-2xl text-sky-400 mb-3 themed-text"><i class="fas fa-search-plus mr-2"></i>Bug Finder</h3>
-                    <p class="text-slate-400 themed-text">Explore potential bugs during team code reviews</p>
+                <div
+                    class="bg-slate-800 p-6 rounded-lg border border-sky-500 hover:border-sky-400 transition-all duration-300 transform hover:scale-105">
+                    <h3 class="text-2xl text-sky-400 mb-3 themed-text"><i class="fas fa-search-plus mr-2"></i>Bug Finder
+                    </h3>
+                    <p class="text-slate-400 themed-text">Find potential bugs during team code reviews</p>
                 </div>
             </div>
         </div>
@@ -1444,21 +1566,21 @@
             <div class="pro-tip-section pro-tip-highlight">
                 <h3><i class="fas fa-terminal mr-3"></i>Boost Productivity with `/` Commands!</h3>
                 <p class="themed-text description-text">
-                    Automate repetitive tasks and simplify complex instructions with various commands by typing `/` in the chat window.
+                    Type `/` in the chat window to automate repetitive tasks and simplify complex instructions with
+                    various commands.
                 </p>
                 <div class="visualization-box flex flex-col h-[320px]">
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Using `/` Commands</span></div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Using `/` Commands</span>
+                        </div>
                     </div>
-                    <!-- Chat Message & Command Popup Area -->
                     <div class="bg-slate-900 flex-1 p-4 overflow-hidden space-y-3">
-                        <!-- User Input -->
                         <div class="flex justify-end">
                             <div class="bg-slate-700 p-2 rounded-lg max-w-[70%]">
                                 <p class="text-slate-200 text-xs font-mono flex items-center">/
@@ -1466,138 +1588,171 @@
                                 </p>
                             </div>
                         </div>
-                        <!-- Command Popup Menu (as AI response) -->
                         <div class="flex justify-start gap-2">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-sky-400 text-xs"></i></div>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-sky-400 text-xs"></i>
+                            </div>
                             <div class="bg-slate-800 rounded-lg border border-slate-600 shadow-lg max-w-[85%]">
                                 <div class="bg-slate-700 p-2 rounded-t-lg flex items-center border-b border-slate-600">
                                     <i class="fas fa-terminal text-blue-400 mr-1.5 text-xs"></i>
                                     <span class="text-slate-200 font-semibold text-xs">/ Commands</span>
                                 </div>
                                 <div class="p-1.5 space-y-1 text-xs">
-                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i class="fas fa-undo-alt text-sky-400 mr-2 w-3.5 text-center"></i><span class="text-slate-200">Reset Context</span></div>
-                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i class="fas fa-magic text-purple-400 mr-2 w-3.5 text-center"></i><span class="text-slate-200">Generate Cursor Rules</span></div>
-                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i class="fas fa-sync-alt text-yellow-500 mr-2 w-3.5 text-center"></i><span class="text-slate-200">Enable Iterate on Lints</span></div>
-                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i class="fas fa-folder-open text-green-400 mr-2 w-3.5 text-center"></i><span class="text-slate-200">Add Open Files to Context</span></div>
-                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i class="fas fa-file-medical text-red-400 mr-2 w-3.5 text-center"></i><span class="text-slate-200">Add Active Files to Context</span></div>
+                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i
+                                            class="fas fa-undo-alt text-sky-400 mr-2 w-3.5 text-center"></i><span
+                                            class="text-slate-200">Reset Context</span></div>
+                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i
+                                            class="fas fa-magic text-purple-400 mr-2 w-3.5 text-center"></i><span
+                                            class="text-slate-200">Generate Cursor Rules</span></div>
+                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i
+                                            class="fas fa-sync-alt text-yellow-500 mr-2 w-3.5 text-center"></i><span
+                                            class="text-slate-200">Enable Iterate on Lints</span></div>
+                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i
+                                            class="fas fa-folder-open text-green-400 mr-2 w-3.5 text-center"></i><span
+                                            class="text-slate-200">Add Open Files to Context</span></div>
+                                    <div class="p-1.5 rounded hover:bg-slate-700 cursor-pointer flex items-center"><i
+                                            class="fas fa-file-medical text-red-400 mr-2 w-3.5 text-center"></i><span
+                                            class="text-slate-200">Add Active Files to Context</span></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Chat Input Area -->
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" value="/" class="bg-transparent text-slate-200 text-xs flex-1 outline-none font-mono" disabled>
+                            <input type="text" value="/"
+                                class="bg-transparent text-slate-200 text-xs flex-1 outline-none font-mono" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">Especially useful feature:</strong> `/generate_cursor_rules` automatically generates Cursor rules based on the work content, useful for maintaining consistent style and conveying project requirements.
+                    <strong class="text-green-400">Especially useful feature:</strong> `/generate_cursor_rules`
+                    automatically generates Cursor rules based on your work, which is useful for maintaining a
+                    consistent style and conveying project requirements.
                 </p>
             </div>
         </div>
     </div>
+
     <div id="slide12" class="slide">
-        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #2: Ask Cursor for Code Explanations</h2>
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #2: Ask Cursor for Code Explanations
+        </h2>
         <div class="pro-tip-single-column-layout">
             <div class="pro-tip-section pro-tip-highlight">
-                <h3><i class="fas fa-question-circle mr-3"></i>If you don't understand, ask immediately!</h3>
+                <h3><i class="fas fa-question-circle mr-3"></i>If you don't understand, ask right away!</h3>
                 <p class="themed-text description-text">
-                    If you don't understand the code Cursor wrote, don't hesitate to ask for an explanation.
+                    If you don't understand the code Cursor has written, don't hesitate to ask for an explanation.
                 </p>
                 <div class="visualization-box flex flex-col h-[280px]">
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Request Code Explanation</span></div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Requesting Code
+                                Explanation</span></div>
                     </div>
-                    <!-- Chat Messages Area -->
                     <div class="bg-slate-900 flex-1 p-4 overflow-auto space-y-2 text-xs">
-                        <!-- AI Generated Code -->
                         <div class="flex justify-start gap-2">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-sky-400 text-xs"></i></div>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-sky-400 text-xs"></i>
+                            </div>
                             <div class="bg-slate-700 p-2 rounded-lg max-w-[85%] border border-slate-600">
-                                <code class="text-slate-200 font-mono">const x = data.map(d => d*2).filter(d > 10);</code>
+                                <code
+                                    class="text-slate-200 font-mono">const x = data.map(d => d*2).filter(d > 10);</code>
                             </div>
                         </div>
-                        <!-- User Question -->
                         <div class="flex justify-end">
                             <div class="bg-slate-700 p-2 rounded-lg max-w-[85%]">
-                                <p class="text-slate-200">Why did you write this code like this? Explain.</p>
+                                <p class="text-slate-200">Why did you write the code this way? Explain it to me.</p>
                             </div>
                         </div>
-                        <!-- AI Explanation -->
                         <div class="flex justify-start gap-2">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-sky-400 text-xs"></i></div>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-sky-400 text-xs"></i>
+                            </div>
                             <div class="bg-blue-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-blue-400">
-                                <p class="text-blue-200">This code first transforms each element of the data array by doubling it, then filters out values greater than 10 from the result. Method chaining was used for readability and performance.</p>
+                                <p class="text-blue-200">This code first transforms each element of the data array by
+                                    doubling it, and then filters for values greater than 10. I used method chaining for
+                                    readability and performance.</p>
                             </div>
                         </div>
-                        <!-- AI Alternative/Correction -->
                         <div class="flex justify-start gap-2">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-yellow-400 text-xs"></i></div>
-                            <div class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
-                                <p class="text-yellow-300">(Or) Oops, there was an error in the filter condition! It should be corrected to <code class="font-mono text-red-400 bg-red-900 bg-opacity-50 px-1 rounded">d => d > 10</code>.</p>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-yellow-400 text-xs"></i>
+                            </div>
+                            <div
+                                class="bg-yellow-900 bg-opacity-30 p-2 rounded-lg max-w-[85%] border border-yellow-400">
+                                <p class="text-yellow-300">(Or) Oops, there was an error in the filter condition! It
+                                    should be corrected to <code
+                                        class="font-mono text-red-400 bg-red-900 bg-opacity-50 px-1 rounded">d => d > 10</code>.
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <!-- Chat Input Area -->
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">Expected effect:</strong> You get a clear explanation, or Cursor might even correct its own mistake. You can learn more deeply through conversation.
+                    <strong class="text-green-400">Expected Effect:</strong> You might get a clear explanation, or
+                    Cursor might even correct its own mistake. You can learn more deeply through conversation.
                 </p>
             </div>
         </div>
     </div>
-    
+
     <div id="slide13" class="slide">
-        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #3: Search Code with Natural Language</h2>
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #3: Natural Language Code Search</h2>
         <div class="pro-tip-single-column-layout">
             <div class="pro-tip-section pro-tip-highlight">
-                <h3><i class="fas fa-search-location mr-3"></i>"Where was that function again?" Ask Cursor!</h3>
+                <h3><i class="fas fa-search-location mr-3"></i>"Where was that function again?" Just ask Cursor!</h3>
                 <p class="themed-text description-text">
-                    If you can't remember a function name or file location, ask Cursor in natural language instead of searching.
+                    If you can't remember a function name or file location, ask Cursor in natural language instead of
+                    searching.
                 </p>
-                <div class="visualization-box flex flex-col h-[300px]"> 
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                <div class="visualization-box flex flex-col h-[300px]">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
-                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Natural Language Code Search</span></div>
+                        <div class="flex-1 text-center"><span class="text-slate-400 text-sm">Natural Language Code
+                                Search</span></div>
                     </div>
-                    <!-- Chat Messages Area -->
                     <div class="bg-slate-900 flex-1 p-4 overflow-auto space-y-2 text-xs">
-                        <!-- User Search Query -->
                         <div class="flex justify-end">
                             <div class="bg-slate-700 p-2 rounded-lg max-w-[85%]">
                                 <p class="text-slate-200">Find the controller code that handles user login.</p>
                             </div>
                         </div>
-                        <!-- AI Searching Indicator -->
                         <div class="flex justify-start gap-2 items-center">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-sky-400 text-xs"></i></div>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-sky-400 text-xs"></i>
+                            </div>
                             <div class="text-sky-400 flex items-center">
                                 <i class="fas fa-spinner fa-spin mr-1.5"></i>
                                 <span>Searching...</span>
                             </div>
                         </div>
-                        <!-- AI Search Result -->
                         <div class="flex justify-start gap-2">
-                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden" style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;"><i class="fas fa-robot text-green-400 text-xs"></i></div>
+                            <div class="flex-none bg-slate-700 rounded-full flex items-center justify-center overflow-hidden"
+                                style="width:1.5rem; min-width:1.5rem; max-width:1.5rem; height:1.5rem; min-height:1.5rem; max-height:1.5rem;">
+                                <i class="fas fa-robot text-green-400 text-xs"></i>
+                            </div>
                             <div class="bg-green-900 bg-opacity-20 p-2 rounded-lg max-w-[85%] border border-green-400">
                                 <div class="flex items-center mb-1">
                                     <i class="fas fa-file-code text-green-400 mr-1.5"></i>
@@ -1605,106 +1760,116 @@
                                         Found the `handleLoginRequest` function in the `AuthController.js` file.
                                     </p>
                                 </div>
-                                <div class="bg-slate-800 p-1.5 rounded border border-slate-600 font-mono text-slate-400 text-[0.7rem] leading-tight">
+                                <div
+                                    class="bg-slate-800 p-1.5 rounded border border-slate-600 font-mono text-slate-400 text-[0.7rem] leading-tight">
                                     <div>function handleLoginRequest(req, res) {</div>
-                                    <div>&nbsp;&nbsp;// ... login handling logic ...</div>
+                                    <div>&nbsp;&nbsp;// ... login processing logic ...</div>
                                     <div>}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Chat Input Area -->
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">Advantage:</strong> You can find code as if asking a colleague, even if you don't know keywords, which is especially useful in large, complex projects.
+                    <strong class="text-green-400">Advantage:</strong> You can find code as if asking a colleague, even
+                    without knowing the keywords, which is especially useful in large, complex projects.
                 </p>
             </div>
         </div>
     </div>
 
     <div id="slide14" class="slide">
-        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #4: New Library? Boost Accuracy with Context7 MCP!</h2>
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #4: New Library? Boost Accuracy with
+            Context7 MCP!</h2>
         <div class="pro-tip-single-column-layout">
             <div class="pro-tip-section pro-tip-highlight">
-                <h3><i class="fas fa-book-reader mr-3"></i>Have Cursor Read the Official Docs!</h3>
+                <h3><i class="fas fa-book-reader mr-3"></i>Let Cursor read the official docs!</h3>
                 <p class="themed-text description-text">
-                    When Cursor doesn't know the latest library information, provide official documentation via Context7 MCP, etc., to improve accuracy.
+                    When Cursor doesn't know the latest library information, provide the official documentation using
+                    tools like Context7 MCP to improve accuracy.
                 </p>
                 <div class="visualization-box flex flex-col">
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                         </div>
                         <div class="flex-1 text-center">
-                            <span class="text-slate-400 text-sm">Context7 MCP (Doc Reference)</span>
+                            <span class="text-slate-400 text-sm">Context7 MCP (Doc Referencing)</span>
                         </div>
                     </div>
-                    <!-- Chat Messages Area -->
                     <div class="bg-slate-900 flex-1 p-4 overflow-hidden">
                         <div class="space-y-4">
                             <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs">
-                            User: Modify this part with the latest SwiftUI API.
-                        </div>
-
-                        <div class="bg-red-100 bg-opacity-20 p-2 rounded border border-red-400 flex items-center">
-                            <div class="font-mono text-red-300 text-xs flex-1">Cursor: (Uses outdated API) ...</div>
-                                <i class="fas fa-times-circle text-red-400"></i>
-                    </div>
-                    
-                    <div class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs flex items-center">
-                            User: (Provides SwiftUI official docs via Context7 MCP)
-                            <i class="fas fa-upload text-sky-400 ml-2"></i>
+                                User: Modify this part with the latest SwiftUI API.
                             </div>
 
-                        <div class="bg-green-100 bg-opacity-20 p-2 rounded border border-green-400 flex items-center">
-                            <div class="font-mono text-green-300 text-xs flex-1">Cursor: (Uses latest API) ...</div>
-                            <i class="fas fa-check-circle text-green-400"></i>
-                        </div>
-                        
-                        <div class="text-center text-slate-400 text-xs">
-                            (Hallucination reduced, accuracy improved)
-                            <div class="mt-2">
-                                <div class="inline-block w-16 h-1 bg-gradient-to-r from-red-400 via-yellow-400 to-green-400 rounded"></div>
+                            <div class="bg-red-100 bg-opacity-20 p-2 rounded border border-red-400 flex items-center">
+                                <div class="font-mono text-red-300 text-xs flex-1">Cursor: (Uses outdated API) ...</div>
+                                <i class="fas fa-times-circle text-red-400"></i>
+                            </div>
+
+                            <div
+                                class="bg-slate-600 bg-opacity-70 p-2 rounded text-slate-200 text-xs flex items-center">
+                                User: (Provides SwiftUI official docs via Context7 MCP)
+                                <i class="fas fa-upload text-sky-400 ml-2"></i>
+                            </div>
+
+                            <div
+                                class="bg-green-100 bg-opacity-20 p-2 rounded border border-green-400 flex items-center">
+                                <div class="font-mono text-green-300 text-xs flex-1">Cursor: (Uses latest API) ...</div>
+                                <i class="fas fa-check-circle text-green-400"></i>
+                            </div>
+
+                            <div class="text-center text-slate-400 text-xs">
+                                (Reduced hallucination, improved accuracy)
+                                <div class="mt-2">
+                                    <div
+                                        class="inline-block w-16 h-1 bg-gradient-to-r from-red-400 via-yellow-400 to-green-400 rounded">
+                                    </div>
                                     <div class="w-3 h-3 bg-green-400 rounded-full mx-auto mt-1"></div>
                                 </div>
-                                                        </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Chat Input Area (Dummy) -->
                     <div class="bg-slate-800 p-3 rounded-b-md border-t border-slate-700 flex-shrink-0">
                         <div class="bg-slate-700 rounded-md p-2 flex items-center">
-                            <input type="text" placeholder="Message Cursor..." class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
+                            <input type="text" placeholder="Message Cursor..."
+                                class="bg-transparent text-slate-400 text-xs flex-1 outline-none" disabled>
                             <i class="fas fa-paper-plane text-slate-500 text-xs"></i>
                         </div>
                     </div>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">Effect:</strong> Induces accurate code generation based on latest information, reduces hallucinations, and improves answer quality (e.g., responding to Swift UI API changes).
+                    <strong class="text-green-400">Effect:</strong> It guides Cursor to generate accurate code based on
+                    the latest information, reducing hallucinations and improving the quality of answers (e.g.,
+                    responding to SwiftUI API changes).
                 </p>
             </div>
         </div>
     </div>
 
     <div id="slide15" class="slide">
-        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #5: Bug Finder for Team Code Reviews!</h2>
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Pro Tip #5: Bug Finder for Team Code Reviews!
+        </h2>
         <div class="pro-tip-single-column-layout">
             <div class="pro-tip-section pro-tip-highlight">
-                <h3><i class="fas fa-search-plus mr-3"></i>Cursor Finds Potential Bugs!</h3>
+                <h3><i class="fas fa-search-plus mr-3"></i>Cursor will find potential bugs for you!</h3>
                 <p class="themed-text description-text">
-                    During code reviews or self-checks, use Bug Finder to find potential bugs.
+                    During code reviews or self-checks, use Bug Finder to discover potential bugs.
                 </p>
                 <div class="visualization-box flex flex-col">
-                    <!-- Chat Window Header -->
-                    <div class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
+                    <div
+                        class="bg-slate-800 h-10 rounded-t-md flex items-center px-4 border-b border-slate-700 flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 bg-red-400 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
@@ -1714,56 +1879,58 @@
                             <span class="text-slate-400 text-sm">Bug Finder</span>
                         </div>
                     </div>
-                    <!-- Chat Messages Area -->
                     <div class="bg-slate-900 flex-1 p-4 overflow-hidden">
-                            <div class="bg-slate-600 p-2 rounded border border-slate-500 mb-3 flex items-center">
+                        <div class="bg-slate-600 p-2 rounded border border-slate-500 mb-3 flex items-center">
                             <div class="font-mono text-xs text-slate-200 flex-1">Cmd+Shift+P > Bug Finder</div>
                             <i class="fas fa-search text-sky-400"></i>
                         </div>
-                        
+
                         <div class="bg-slate-600 rounded border border-slate-500 p-3 h-40 overflow-y-auto">
-                            <div class="text-slate-200 text-xs mb-3 font-semibold">Branch: main vs feature/new-login</div>
-                            
+                            <div class="text-slate-200 text-xs mb-3 font-semibold">Branch: main vs feature/new-login
+                            </div>
+
                             <div class="space-y-3">
                                 <div class="border-l-4 border-red-400 pl-3">
                                     <div class="flex items-center justify-between">
                                         <div class="text-red-300 text-xs flex items-center">
                                             <i class="fas fa-exclamation-triangle mr-2"></i>
                                             Null Pointer Risk (User.java:42)
-                    </div>
-                    <div class="text-red-300 text-xs">Confidence: 75%</div>
-                            </div>
-                        </div>
-                        
-                        <div class="border-l-4 border-yellow-400 pl-3">
-                            <div class="flex items-center justify-between">
+                                        </div>
+                                        <div class="text-red-300 text-xs">Confidence: 75%</div>
+                                    </div>
+                                </div>
+
+                                <div class="border-l-4 border-yellow-400 pl-3">
+                                    <div class="flex items-center justify-between">
                                         <div class="text-yellow-300 text-xs flex items-center">
-                                    <i class="fas fa-exclamation-circle mr-2"></i>
-                                    Logic Error Possible (Payment.js:103)
+                                            <i class="fas fa-exclamation-circle mr-2"></i>
+                                            Logic Error Possible (Payment.js:103)
+                                        </div>
+                                        <div class="text-yellow-300 text-xs">Confidence: 60%</div>
+                                    </div>
                                 </div>
-                                <div class="text-yellow-300 text-xs">Confidence: 60%</div>
-                                </div>
-                            </div>
 
                                 <div class="border-l-4 border-green-400 pl-3">
                                     <div class="flex items-center justify-between">
                                         <div class="text-green-300 text-xs flex items-center">
                                             <i class="fas fa-check-circle mr-2"></i>
                                             Minor: Off-by-one (LoopUtil.py:22)
-                        </div>
-<div class="text-green-300 text-xs">Confidence: 40%</div>
-                    </div>
-</div>
-                    </div>
-                            
+                                        </div>
+                                        <div class="text-green-300 text-xs">Confidence: 40%</div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="text-center text-slate-400 text-xs mt-4">
-                                (Lists potential bugs and confidence scores)
+                                (Presents a list of potential bugs and confidence scores)
                             </div>
                         </div>
                     </div>
                 </div>
                 <p class="explanation themed-text">
-                    <strong class="text-green-400">How to use:</strong> Compare code changes between branches to check potential bugs and confidence scores (e.g., <code class="shortcut-key">Cmd+Shift+P</code> > Bug Finder).
+                    <strong class="text-green-400">How to use:</strong> It compares code changes between branches to
+                    identify potential bugs and their confidence scores (e.g., <code
+                        class="shortcut-key">Cmd+Shift+P</code> > Bug Finder).
                 </p>
             </div>
         </div>
@@ -1772,33 +1939,41 @@
     <div id="slide16" class="slide">
         <div class="attitude-layout">
             <div class="attitude-section attitude-highlight">
-                <h3 class="themed-text"><i class="fas fa-user-cog mr-3"></i>Attitude Towards AI Tools</h3>
-                
-                <h4 class="themed-text"><i class="fas fa-code-compare"></i>Code Review is NON-NEGOTIABLE!</h4>
-                <p class="themed-text description-text">Even if Cursor generated the code, you must review and understand it yourself. Don't blindly trust auto-generated code.</p>
+                <h3 class="themed-text"><i class="fas fa-user-cog mr-3"></i>Mindset for Handling AI Tools</h3>
 
-                <h4 class="themed-text"><i class="fas fa-brain"></i>Don't let skills get rusty!</h4>
-                <p class="themed-text description-text">AI is a learning tool, not just a task replacement. Strive to understand core logic and learn through AI.</p>
+                <h4 class="themed-text"><i class="fas fa-code-compare"></i>Code Review is NON-NEGOTIABLE!</h4>
+                <p class="themed-text description-text">Even if Cursor generated the code, you must review and
+                    understand it yourself. Do not blindly trust auto-generated code.</p>
+
+                <h4 class="themed-text"><i class="fas fa-brain"></i>Don't let your skills get rusty!</h4>
+                <p class="themed-text description-text">AI is a learning tool, not just a replacement for simple tasks.
+                    Strive to understand the core logic and learn through AI.</p>
 
                 <h4 class="themed-text"><i class="fas fa-gas-pump"></i>Quality in = Quality out.</h4>
-                <p class="themed-text description-text">Provide clear prompts and sufficient context (fuel), and guide it in the right direction (steering) to get quality results.</p>
-                
+                <p class="themed-text description-text">You can only get high-quality results by providing clear prompts
+                    and sufficient context (the fuel) and giving the right direction (the steering).</p>
+
                 <h4 class="themed-text"><i class="fas fa-user-astronaut"></i>Cursor is a Super-Smart Co-Pilot</h4>
-                            <p class="themed-text description-text">Cursor is a very smart co-pilot, but not yet an autonomous agent. Final judgment and responsibility lie with the user.</p>
-                        </div>
-                                            </div>
-                                                </div>
-                        
-    <div id="slide17" class="slide"> <div class="text-center max-w-4xl">
+                <p class="themed-text description-text">Cursor is a very smart co-pilot, but it is not yet an autonomous
+                    agent. The final judgment and responsibility lie with the user.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="slide17" class="slide">
+        <div class="text-center max-w-4xl">
             <h2 class="text-4xl sm:text-5xl text-sky-400 mb-8 themed-text">Conclusion</h2>
             <p class="themed-text description-text mb-12">
-                We hope this guide has helped clear up misunderstandings about using Cursor and boosted your productivity.<br>
-                Cursor is a powerful AI companion, and when used correctly, it can revolutionize your coding experience.<br>
+                We hope this guide has helped clear up misunderstandings about using Cursor and will take your
+                productivity to the next level.<br>
+                Cursor is a powerful AI companion that can revolutionize your coding experience if used correctly.<br>
                 The key is clear communication and consistent practice. Code smarter with Cursor!
             </p>
 
             <div class="mt-16">
-                <img src="assets/logos/MG__Logo_Horizontal_Alt_DarkBackground.png" alt="Match Group Logo" class="h-16 mx-auto mb-6">
+                <img src="assets/logos/MG__Logo_Horizontal_Alt_DarkBackground.png" alt="Match Group Logo"
+                    class="h-16 mx-auto mb-6">
                 <p class="text-2xl text-slate-300 themed-text">Brandon Choi</p>
                 <p class="text-lg text-slate-400 themed-text">brandon.choi@match.com</p>
                 <p class="text-lg text-slate-400 themed-text">MG AI Team</p>
@@ -1808,4 +1983,5 @@
     </div>
 
 </body>
+
 </html>
