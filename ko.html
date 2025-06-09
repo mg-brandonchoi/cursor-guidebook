@@ -58,7 +58,10 @@
             flex-direction: column; 
             align-items: center;
             justify-content: center;
-            padding: 2rem; /* p-8 */
+            padding: 4rem 2rem;
+            /* Increased vertical padding for better spacing between slides */
+            margin-bottom: 2rem;
+            /* Added margin bottom for extra space between slides */
             position: relative; 
             z-index: 1; 
             text-align: center; 
@@ -89,10 +92,13 @@
         .mistake-layout {
             display: grid;
             grid-template-columns: 1fr 1fr; 
-            gap: 2rem; 
+            gap: 3rem;
+            /* Increased gap to match pro-tip spacing */
             width: 100%;
             max-width: 72rem; /* max-w-6xl */
             text-align: left;
+            margin-bottom: 2rem;
+            /* Added margin bottom for better spacing within mistake sections */
         }
         .pro-tip-single-column-layout, .attitude-layout { /* Combined single column layouts */
             display: flex;
@@ -148,7 +154,8 @@
 
         /* New style for separate explanation blocks */
         .mistake-explanation {
-            margin-top: 1.5rem;
+            margin-top: 2.5rem;
+            /* Increased top margin for better spacing */
             padding: 1.25rem 1.5rem;
             border-radius: 0.75rem;
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
