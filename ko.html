@@ -359,10 +359,76 @@
         <div class="text-center max-w-3xl">
             <h3 class="text-4xl sm:text-5xl text-sky-400 mb-10 themed-text">목차</h3>
             <ul class="toc-list">
-                <li class="themed-text"><i class="fas fa-exclamation-triangle"></i>커서를 쓸 때 주로 하는 실수들</li>
-                <li class="themed-text"><i class="fas fa-lightbulb"></i>Cursor Pro Tip</li>
-                <li class="themed-text"><i class="fas fa-user-shield"></i>AI 도구를 다루는 자세</li> <li class="themed-text"><i class="fas fa-flag-checkered"></i>마무리</li>
+                <li class="themed-text cursor-pointer" onclick="scrollToSlide('slide-summary')"><i class="fas fa-list-alt"></i>한눈에 보는 핵심 요약</li>
+                <li class="themed-text cursor-pointer" onclick="scrollToSlide('slide4')"><i class="fas fa-exclamation-triangle"></i>커서를 쓸 때 주로 하는 실수들</li>
+                <li class="themed-text cursor-pointer" onclick="scrollToSlide('slide11')"><i class="fas fa-lightbulb"></i>Cursor Pro Tip</li>
+                <li class="themed-text cursor-pointer" onclick="scrollToSlide('slide16')"><i class="fas fa-user-shield"></i>AI 도구를 다루는 자세</li>
+                <li class="themed-text cursor-pointer" onclick="scrollToSlide('slide17')"><i class="fas fa-flag-checkered"></i>마무리</li>
             </ul>
+        </div>
+    </div>
+
+    <div id="slide-summary" class="slide">
+        <div class="text-center max-w-6xl">
+            <h2 class="text-4xl sm:text-5xl text-sky-400 mb-10 themed-text">
+                <i class="fas fa-list-alt mr-3"></i>한눈에 보는 핵심 요약
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 text-left">
+                <!-- 실수 요약 -->
+                <div class="bg-slate-800 p-6 rounded-lg border border-red-400">
+                    <h3 class="text-2xl text-red-400 mb-4 themed-text flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-3"></i>주요 실수들
+                    </h3>
+                    <ul class="space-y-2 text-slate-300">
+                        <li class="themed-text text-sm"><strong>#1:</strong> 컨텍스트 관리 소홀 → 새 채팅창 사용</li>
+                        <li class="themed-text text-sm"><strong>#2:</strong> LLM에게 직접 수정 요청 → 원래 프롬프트 수정</li>
+                        <li class="themed-text text-sm"><strong>#3:</strong> 대상 미지정 지시 → 파일 첨부로 명확화</li>
+                        <li class="themed-text text-sm"><strong>#4:</strong> 린터 에러 방치 → 에러 먼저 수정</li>
+                        <li class="themed-text text-sm"><strong>#6:</strong> 기술 부채 방치 → 리팩토링 요청</li>
+                        <li class="themed-text text-sm"><strong>#7:</strong> 버전 관리 소홀 → 좋은 결과 즉시 커밋</li>
+                    </ul>
+                </div>
+
+                <!-- Pro Tips 요약 -->
+                <div class="bg-slate-800 p-6 rounded-lg border border-green-400">
+                    <h3 class="text-2xl text-green-400 mb-4 themed-text flex items-center">
+                        <i class="fas fa-lightbulb mr-3"></i>Pro Tips
+                    </h3>
+                    <ul class="space-y-2 text-slate-300">
+                        <li class="themed-text text-sm"><strong>#1:</strong> <code class="text-blue-400">/</code> 명령어 적극 활용</li>
+                        <li class="themed-text text-sm"><strong>#2:</strong> 모르면 바로 설명 요청</li>
+                        <li class="themed-text text-sm"><strong>#3:</strong> 자연어로 코드 검색</li>
+                        <li class="themed-text text-sm"><strong>#4:</strong> Context7 MCP로 최신 문서 제공</li>
+                        <li class="themed-text text-sm"><strong>#5:</strong> Bug Finder로 잠재적 버그 찾기</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 핵심 마인드셋 -->
+            <div class="mt-8 bg-slate-800 p-6 rounded-lg border border-sky-400">
+                <h3 class="text-2xl text-sky-400 mb-4 themed-text flex items-center justify-center">
+                    <i class="fas fa-user-cog mr-3"></i>핵심 마인드셋
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-code-compare text-blue-400 text-2xl mb-2"></i>
+                        <p class="text-slate-300 text-sm themed-text">코드 리뷰<br>필수!</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-brain text-purple-400 text-2xl mb-2"></i>
+                        <p class="text-slate-300 text-sm themed-text">스킬 녹슬지<br>않게!</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-gas-pump text-yellow-400 text-2xl mb-2"></i>
+                        <p class="text-slate-300 text-sm themed-text">Quality in<br>= Quality out</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-user-astronaut text-green-400 text-2xl mb-2"></i>
+                        <p class="text-slate-300 text-sm themed-text">Cursor는<br>Co-Pilot</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -723,7 +789,7 @@
         </div>
         <div class="mistake-explanation dont-explanation">
             <p class="themed-text">
-                <strong class="text-red-400">Why?</strong> LLM은 다음 토큰 생성기이며, 커서는 잘못된 맥락에서 실수를 반복하거나 수정 의도를 파악하기 어렵습니다.
+                <strong class="text-red-400">Why?</strong> 커서는 LLM에 기반하고 있으므로 잘못된 맥락에서는 같은 실수를 반복하기 쉽고, 사용자의 수정 의도를 파악하기 어려워합니다.
             </p>
         </div>
     </div>
@@ -1288,7 +1354,7 @@
     </div>
 
     <div id="slide10" class="slide">
-        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">실수 #7: 만족스러운 결과물에 안주하고 계속 작업</h2>
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">실수 #7: 버전 관리 소홀히 하고 계속 작업</h2>
         <div class="mistake-layout">
             <div class="mistake-section dont-section">
                 <h3><i class="fas fa-times-circle mr-3"></i>Don't: 만족 후 바로 다음 작업 진행</h3>
@@ -1814,6 +1880,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // 목차 클릭 시 해당 슬라이드로 이동하는 함수
+        function scrollToSlide(slideId) {
+            const slide = document.getElementById(slideId);
+            if (slide) {
+                slide.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    </script>
 
 </body>
 </html>

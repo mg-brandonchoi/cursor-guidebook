@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>That's Not How You Use Cursor - Redirecting...</title>
+    <script>
+        // Automatically redirect to English version
+        window.location.href = "en.html";
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #1e293b;
+            color: #cbd5e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .redirect-message {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 8px;
+            background-color: #334155;
+            border: 1px solid #475569;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #475569;
+            border-top: 4px solid #38bdf8;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="redirect-message">
+        <h1>That's Not How You Use Cursor</h1>
+        <div class="spinner"></div>
+        <p>Redirecting to English version...</p>
+        <p><a href="en.html">Click here if you are not redirected automatically</a></p>
+        <p><a href="ko.html">한국어 버전으로 이동</a></p>
+    </div>
+</body>
+
+</html> 

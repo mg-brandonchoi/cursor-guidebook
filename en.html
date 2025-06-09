@@ -473,12 +473,76 @@
         <div class="text-center max-w-3xl">
             <h3 class="text-4xl sm:text-5xl text-sky-400 mb-10 themed-text">Table of Contents</h3>
             <ul class="toc-list">
-                <li class="themed-text"><i class="fas fa-exclamation-triangle"></i>Common Mistakes When Using Cursor
-                </li>
-                <li class="themed-text"><i class="fas fa-lightbulb"></i>Cursor Pro Tips</li>
-                <li class="themed-text"><i class="fas fa-user-shield"></i>The Right Mindset for Using AI Tools</li>
-                <li class="themed-text"><i class="fas fa-flag-checkered"></i>Conclusion</li>
+                <li class="themed-text cursor-pointer" onclick="scrollToSlide('slide-summary')"><i class="fas fa-list-alt"></i>Key Summary at a Glance</li>
+                <li class="themed-text cursor-pointer" onclick="scrollToSlide('slide4')"><i class="fas fa-exclamation-triangle"></i>Common Mistakes When Using Cursor</li>
+                <li class="themed-text cursor-pointer" onclick="scrollToSlide('slide11')"><i class="fas fa-lightbulb"></i>Cursor Pro Tips</li>
+                <li class="themed-text cursor-pointer" onclick="scrollToSlide('slide16')"><i class="fas fa-user-shield"></i>The Right Mindset for Using AI Tools</li>
+                <li class="themed-text cursor-pointer" onclick="scrollToSlide('slide17')"><i class="fas fa-flag-checkered"></i>Conclusion</li>
             </ul>
+        </div>
+    </div>
+
+    <div id="slide-summary" class="slide">
+        <div class="text-center max-w-6xl">
+            <h2 class="text-4xl sm:text-5xl text-sky-400 mb-10 themed-text">
+                <i class="fas fa-list-alt mr-3"></i>Key Summary at a Glance
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 text-left">
+                <!-- Mistakes Summary -->
+                <div class="bg-slate-800 p-6 rounded-lg border border-red-400">
+                    <h3 class="text-2xl text-red-400 mb-4 themed-text flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-3"></i>Key Mistakes
+                    </h3>
+                    <ul class="space-y-2 text-slate-300">
+                        <li class="themed-text text-sm"><strong>#1:</strong> Neglecting context management → Use new chat</li>
+                        <li class="themed-text text-sm"><strong>#2:</strong> Asking LLM to fix directly → Edit original prompt</li>
+                        <li class="themed-text text-sm"><strong>#3:</strong> Vague instructions → Attach specific files</li>
+                        <li class="themed-text text-sm"><strong>#4:</strong> Ignoring linter errors → Fix errors first</li>
+                        <li class="themed-text text-sm"><strong>#6:</strong> Neglecting technical debt → Request refactoring</li>
+                        <li class="themed-text text-sm"><strong>#7:</strong> Neglecting version control → Commit good results immediately</li>
+                    </ul>
+                </div>
+
+                <!-- Pro Tips Summary -->
+                <div class="bg-slate-800 p-6 rounded-lg border border-green-400">
+                    <h3 class="text-2xl text-green-400 mb-4 themed-text flex items-center">
+                        <i class="fas fa-lightbulb mr-3"></i>Pro Tips
+                    </h3>
+                    <ul class="space-y-2 text-slate-300">
+                        <li class="themed-text text-sm"><strong>#1:</strong> Actively use <code class="text-blue-400">/</code> commands</li>
+                        <li class="themed-text text-sm"><strong>#2:</strong> Ask for explanations immediately</li>
+                        <li class="themed-text text-sm"><strong>#3:</strong> Natural language code search</li>
+                        <li class="themed-text text-sm"><strong>#4:</strong> Provide latest docs with Context7 MCP</li>
+                        <li class="themed-text text-sm"><strong>#5:</strong> Find potential bugs with Bug Finder</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Core Mindset -->
+            <div class="mt-8 bg-slate-800 p-6 rounded-lg border border-sky-400">
+                <h3 class="text-2xl text-sky-400 mb-4 themed-text flex items-center justify-center">
+                    <i class="fas fa-user-cog mr-3"></i>Core Mindset
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-code-compare text-blue-400 text-2xl mb-2"></i>
+                        <p class="text-slate-300 text-sm themed-text">Code Review<br>is Essential!</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-brain text-purple-400 text-2xl mb-2"></i>
+                        <p class="text-slate-300 text-sm themed-text">Don't Let Skills<br>Get Rusty!</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-gas-pump text-yellow-400 text-2xl mb-2"></i>
+                        <p class="text-slate-300 text-sm themed-text">Quality in<br>= Quality out</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-user-astronaut text-green-400 text-2xl mb-2"></i>
+                        <p class="text-slate-300 text-sm themed-text">Cursor is a<br>Co-Pilot</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -859,8 +923,7 @@
         </div>
         <div class="mistake-explanation dont-explanation">
             <p class="themed-text">
-                <strong class="text-red-400">Why?</strong> An LLM is a next-token predictor. Cursor may repeat its
-                mistake in a flawed context or struggle to understand the intention behind the correction.
+                <strong class="text-red-400">Why?</strong> Since Cursor is based on LLM, it's easy to repeat the same mistakes in flawed contexts and has difficulty understanding the user's intention for correction.
             </p>
         </div>
     </div>
@@ -1374,8 +1437,7 @@
 
 
     <div id="slide10" class="slide">
-        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Mistake #7: Continuing to Work After Getting a
-            Satisfactory Result</h2>
+        <h2 class="text-4xl sm:text-5xl text-sky-400 mb-12 themed-text">Mistake #7: Neglecting Version Control and Continuing Work</h2>
         <div class="mistake-layout">
             <div class="mistake-section dont-section">
                 <h3><i class="fas fa-times-circle mr-3"></i>Don't: Proceed to the next task immediately after getting a
@@ -1980,6 +2042,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Function to scroll to a specific slide when table of contents is clicked
+        function scrollToSlide(slideId) {
+            const slide = document.getElementById(slideId);
+            if (slide) {
+                slide.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    </script>
 
 </body>
 
